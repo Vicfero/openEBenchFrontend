@@ -1,0 +1,1893 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<title>
+
+    Navbar · Bootstrap
+
+</title>
+
+<!-- Twitter -->
+<meta name="twitter:site" content="@getbootstrap">
+<meta name="twitter:creator" content="@getbootstrap">
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Navbar">
+  <meta name="twitter:description" content="Documentation and examples for Bootstrap's powerful, responsive navigation header.">
+  <meta name="twitter:image" content="https://v4-alpha.getbootstrap.com/assets/brand/bootstrap-social-logo.png">
+
+
+<!-- Facebook -->
+
+  <meta property="og:url" content="https://v4-alpha.getbootstrap.com/components/navbar/">
+  <meta property="og:title" content="Navbar">
+  <meta property="og:description" content="Documentation and examples for Bootstrap's powerful, responsive navigation header.">
+
+<meta property="og:image" content="https://v4-alpha.getbootstrap.com/assets/brand/bootstrap-social.png">
+
+<!-- Meta -->
+<meta name="description" content="The most popular HTML, CSS, and JS framework in the world.">
+<meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+
+
+<!-- Bootstrap core CSS -->
+
+  <style class="anchorjs"></style><link href="Navbar%20%C2%B7%20Bootstrap_files/bootstrap.css" rel="stylesheet">
+
+
+<!-- Documentation extras -->
+<link href="Navbar%20%C2%B7%20Bootstrap_files/docs.css" rel="stylesheet">
+
+<!-- Favicons -->
+<link rel="apple-touch-icon" href="https://v4-alpha.getbootstrap.com/apple-touch-icon.png">
+<link rel="icon" href="https://v4-alpha.getbootstrap.com/favicon.ico">
+
+<script async="" src="Navbar%20%C2%B7%20Bootstrap_files/analytics.js"></script><script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-146052-10', 'getbootstrap.com');
+  ga('send', 'pageview');
+</script>
+
+  <script id="_carbonads_projs" type="text/javascript" src="Navbar%20%C2%B7%20Bootstrap_files/C6AILKT.js"></script></head>
+  <body class="bd-docs" data-spy="scroll" data-target=".bd-sidenav-active">
+    <a id="skippy" class="sr-only sr-only-focusable" href="#content">
+      <div class="container">
+        <span class="skiplink-text">Skip to main content</span>
+      </div>
+    </a>
+
+    <a href="https://getbootstrap.com/" class="d-block p-3 text-center text-white bg-primary" style="text-decoration: none">Bootstrap 4 Beta is here!</a><header class="navbar navbar-light navbar-toggleable-md bd-navbar">
+  <nav class="container">
+
+
+    <div class="d-flex justify-content-between hidden-lg-up">
+      <a class="navbar-brand" href="https://v4-alpha.getbootstrap.com/">
+        Bootstrap
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bd-main-nav" aria-controls="bd-main-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bd-main-nav">
+      <ul class="nav navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-item nav-link " href="https://v4-alpha.getbootstrap.com/" onclick="ga('send', 'event', 'Navbar', 'Community links', 'Bootstrap');">Bootstrap</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-item nav-link active" href="https://v4-alpha.getbootstrap.com/getting-started/introduction/" onclick="ga('send', 'event', 'Navbar', 'Community links', 'Docs');">Documentation</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-item nav-link " href="https://v4-alpha.getbootstrap.com/examples/" onclick="ga('send', 'event', 'Navbar', 'Community links', 'Examples');">Examples</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-item nav-link" href="https://themes.getbootstrap.com/" onclick="ga('send', 'event', 'Navbar', 'Community links', 'Themes');">Themes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-item nav-link" href="https://jobs.getbootstrap.com/" onclick="ga('send', 'event', 'Navbar', 'Community links', 'Jobs');">Jobs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-item nav-link" href="https://expo.getbootstrap.com/" onclick="ga('send', 'event', 'Navbar', 'Community links', 'Expo');">Expo</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-item nav-link" href="https://blog.getbootstrap.com/" onclick="ga('send', 'event', 'Navbar', 'Community links', 'Blog');">Blog</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+
+    <div class="bd-pageheader">
+      <div class="container">
+
+  <h1>Components</h1>
+  <p class="lead">
+    Over a dozen reusable components built to provide buttons, dropdowns, input groups, navigation, alerts, and much more.
+  </p>
+
+
+        <script async="" type="text/javascript" src="Navbar%20%C2%B7%20Bootstrap_files/carbon.js" id="_carbonads_js"></script><div id="carbonads"><span><span class="carbon-wrap"><a href="https://srv.carbonads.net/ads/click/x/GTND42QECWAIE27JCAB4YKQMCTBILKJMFT7I4Z3JCWYDP53UCTSDV27KC6BIT2Q7FTADTK3EHJNCLSIZ?segment=placement:getbootstrapcom;" class="carbon-img" target="_blank" rel="noopener"><img src="Navbar%20%C2%B7%20Bootstrap_files/37972.jpeg" alt="" style="max-width: 130px;" width="130" height="100" border="0"></a><a href="https://srv.carbonads.net/ads/click/x/GTND42QECWAIE27JCAB4YKQMCTBILKJMFT7I4Z3JCWYDP53UCTSDV27KC6BIT2Q7FTADTK3EHJNCLSIZ?segment=placement:getbootstrapcom;" class="carbon-text" target="_blank" rel="noopener">New and Awesome Tool: See How Your Visitors are Really Using Your Site</a></span><a href="http://carbonads.net/?utm_source=getbootstrapcom&amp;utm_medium=ad_via_link&amp;utm_campaign=in_unit&amp;utm_term=carbon" class="carbon-poweredby" target="_blank">ads via Carbon</a></span></div>
+
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-3 push-md-9 bd-sidebar">
+          <form class="bd-search hidden-sm-down">
+  <input class="form-control" id="search-input" placeholder="Search..." autocomplete="off" type="text">
+  <div class="dropdown-menu bd-search-results" id="search-results"></div>
+</form>
+
+<nav class="bd-links" id="docsNavbarContent">
+
+
+
+
+
+
+
+
+
+  <div class="bd-toc-item ">
+      <a class="bd-toc-link" href="https://v4-alpha.getbootstrap.com/getting-started/introduction/">
+        Getting started
+      </a>
+
+      <ul class="nav bd-sidenav">
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/getting-started/introduction/">
+              Introduction
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/getting-started/download/">
+              Download
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/getting-started/contents/">
+              Contents
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/getting-started/browsers-devices/">
+              Browsers &amp; devices
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/getting-started/javascript/">
+              JavaScript
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/getting-started/options/">
+              Options
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/getting-started/build-tools/">
+              Build tools
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/getting-started/best-practices/">
+              Best practices
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/getting-started/accessibility/">
+              Accessibility
+            </a>
+
+
+          </li>
+
+      </ul>
+    </div>
+
+
+
+
+
+
+
+
+  <div class="bd-toc-item ">
+      <a class="bd-toc-link" href="https://v4-alpha.getbootstrap.com/layout/overview/">
+        Layout
+      </a>
+
+      <ul class="nav bd-sidenav">
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/layout/overview/">
+              Overview
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/layout/grid/">
+              Grid
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/layout/media-object/">
+              Media object
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/layout/responsive-utilities/">
+              Responsive utilities
+            </a>
+
+
+          </li>
+
+      </ul>
+    </div>
+
+
+
+
+
+
+
+
+  <div class="bd-toc-item ">
+      <a class="bd-toc-link" href="https://v4-alpha.getbootstrap.com/content/reboot/">
+        Content
+      </a>
+
+      <ul class="nav bd-sidenav">
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/content/reboot/">
+              Reboot
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/content/typography/">
+              Typography
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/content/code/">
+              Code
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/content/images/">
+              Images
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/content/tables/">
+              Tables
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/content/figures/">
+              Figures
+            </a>
+
+
+          </li>
+
+      </ul>
+    </div>
+
+
+
+
+
+
+
+
+  <div class="bd-toc-item active">
+      <a class="bd-toc-link" href="https://v4-alpha.getbootstrap.com/components/alerts/">
+        Components
+      </a>
+
+      <ul class="nav bd-sidenav">
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/components/alerts/">
+              Alerts
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/components/badge/">
+              Badge
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/components/breadcrumb/">
+              Breadcrumb
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/components/buttons/">
+              Buttons
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/components/button-group/">
+              Button group
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/components/card/">
+              Card
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/components/carousel/">
+              Carousel
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/components/collapse/">
+              Collapse
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/components/dropdowns/">
+              Dropdowns
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/components/forms/">
+              Forms
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/components/input-group/">
+              Input group
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/components/jumbotron/">
+              Jumbotron
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/components/list-group/">
+              List group
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/components/modal/">
+              Modal
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/components/navs/">
+              Navs
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="active bd-sidenav-active">
+            <a href="https://v4-alpha.getbootstrap.com/components/navbar/">
+              Navbar
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/components/pagination/">
+              Pagination
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/components/popovers/">
+              Popovers
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/components/progress/">
+              Progress
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/components/scrollspy/">
+              Scrollspy
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/components/tooltips/">
+              Tooltips
+            </a>
+
+
+          </li>
+
+      </ul>
+    </div>
+
+
+
+
+
+
+
+
+  <div class="bd-toc-item ">
+      <a class="bd-toc-link" href="https://v4-alpha.getbootstrap.com/utilities/borders/">
+        Utilities
+      </a>
+
+      <ul class="nav bd-sidenav">
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/utilities/borders/">
+              Borders
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/utilities/clearfix/">
+              Clearfix
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/utilities/close-icon/">
+              Close icon
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/utilities/colors/">
+              Colors
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/utilities/flexbox/">
+              Flexbox
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/utilities/display-property/">
+              Display property
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/utilities/image-replacement/">
+              Image replacement
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/utilities/invisible-content/">
+              Invisible content
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/utilities/position/">
+              Position
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/utilities/responsive-helpers/">
+              Responsive helpers
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/utilities/screenreaders/">
+              Screenreaders
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/utilities/sizing/">
+              Sizing
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/utilities/spacing/">
+              Spacing
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/utilities/typography/">
+              Typography
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/utilities/vertical-align/">
+              Vertical align
+            </a>
+
+
+          </li>
+
+      </ul>
+    </div>
+
+
+
+
+
+
+
+
+  <div class="bd-toc-item ">
+      <a class="bd-toc-link" href="https://v4-alpha.getbootstrap.com/about/history/">
+        About
+      </a>
+
+      <ul class="nav bd-sidenav">
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/about/history/">
+              History
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/about/team/">
+              Team
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/about/brand/">
+              Brand
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/about/license/">
+              License
+            </a>
+
+
+          </li>
+
+
+
+
+
+
+          <li class="">
+            <a href="https://v4-alpha.getbootstrap.com/about/translations/">
+              Translations
+            </a>
+
+
+          </li>
+
+      </ul>
+    </div>
+
+
+
+
+
+
+
+
+  <div class="bd-toc-item ">
+      <a class="bd-toc-link" href="https://v4-alpha.getbootstrap.com/migration/">
+        Migration
+      </a>
+
+      <ul class="nav bd-sidenav">
+
+      </ul>
+    </div>
+
+</nav>
+
+        </div>
+        <div class="col-12 col-md-9 pull-md-3 bd-content">
+          <h1 class="bd-title" id="content"><a class="anchorjs-link " href="#content" aria-label="Anchor link for: content" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-weight: normal; font-size: 1em; line-height: inherit; font-size-adjust: none; font-stretch: normal; font-feature-settings: normal; font-language-override: normal; font-kerning: auto; font-variant: normal; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>Navbar</h1>
+          <p>The navbar is a wrapper that positions branding, 
+navigation, and other elements in a concise header. It’s easily 
+extensible and, thanks to our Collapse plugin, can easily integrate 
+responsive behaviors.</p>
+
+<h2 id="contents"><a class="anchorjs-link " href="#contents" aria-label="Anchor link for: contents" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-weight: normal; font-size: 1em; line-height: inherit; font-size-adjust: none; font-stretch: normal; font-feature-settings: normal; font-language-override: normal; font-kerning: auto; font-variant: normal; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>Contents</h2>
+
+<ul id="markdown-toc">
+  <li><a href="#contents" id="markdown-toc-contents">Contents</a></li>
+  <li><a href="#how-it-works" id="markdown-toc-how-it-works">How it works</a></li>
+  <li><a href="#supported-content" id="markdown-toc-supported-content">Supported content</a>    <ul>
+      <li><a href="#brand" id="markdown-toc-brand">Brand</a></li>
+      <li><a href="#nav" id="markdown-toc-nav">Nav</a></li>
+      <li><a href="#forms" id="markdown-toc-forms">Forms</a></li>
+      <li><a href="#text" id="markdown-toc-text">Text</a></li>
+    </ul>
+  </li>
+  <li><a href="#color-schemes" id="markdown-toc-color-schemes">Color schemes</a></li>
+  <li><a href="#containers" id="markdown-toc-containers">Containers</a></li>
+  <li><a href="#placement" id="markdown-toc-placement">Placement</a></li>
+  <li><a href="#responsive-behaviors" id="markdown-toc-responsive-behaviors">Responsive behaviors</a>    <ul>
+      <li><a href="#toggler" id="markdown-toc-toggler">Toggler</a></li>
+      <li><a href="#external-content" id="markdown-toc-external-content">External content</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="how-it-works"><a class="anchorjs-link " href="#how-it-works" aria-label="Anchor link for: how it works" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-weight: normal; font-size: 1em; line-height: inherit; font-size-adjust: none; font-stretch: normal; font-feature-settings: normal; font-language-override: normal; font-kerning: auto; font-variant: normal; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>How it works</h2>
+
+<p>Here’s what you need to know before getting started with the navbar:</p>
+
+<ul>
+  <li>Navbars require a wrapping <code class="highlighter-rouge">.navbar</code> with <code class="highlighter-rouge">.navbar-toggleable-*</code> for responsive collapsing and <a href="#color-schemes">color scheme</a> classes.</li>
+  <li>Navbars and their contents are fluid by default. Use <a href="#containers">optional containers</a> to limit their horizontal width.</li>
+  <li>Navbars and their contents are built with flexbox, providing easy alignment options via utility classes.</li>
+  <li>Navbars are responsive by default, but you can easily modify them 
+to change that. Responsive behavior depends on our Collapse JavaScript 
+plugin.</li>
+  <li>Ensure accessibility by using a <code class="highlighter-rouge">&lt;nav&gt;</code> element or, if using a more generic element such as a <code class="highlighter-rouge">&lt;div&gt;</code>, add a <code class="highlighter-rouge">role="navigation"</code> to every navbar to explicitly identify it as a landmark region for users of assistive technologies.</li>
+</ul>
+
+<p>Read on for an example and list of supported sub-components.</p>
+
+<h2 id="supported-content"><a class="anchorjs-link " href="#supported-content" aria-label="Anchor link for: supported content" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-weight: normal; font-size: 1em; line-height: inherit; font-size-adjust: none; font-stretch: normal; font-feature-settings: normal; font-language-override: normal; font-kerning: auto; font-variant: normal; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>Supported content</h2>
+
+<p>Navbars come with built-in support for a handful of sub-components. Choose from the following as needed:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">.navbar-brand</code> for your company, product, or project name.</li>
+  <li><code class="highlighter-rouge">.navbar-nav</code> for a full-height and lightweight navigation (including support for dropdowns).</li>
+  <li><code class="highlighter-rouge">.navbar-toggler</code> for use with our collapse plugin and other <a href="#responsive-behaviors">navigation toggling</a> behaviors.</li>
+  <li><code class="highlighter-rouge">.form-inline</code> for any form controls and actions.</li>
+  <li><code class="highlighter-rouge">.navbar-text</code> for adding vertically centered strings of text.</li>
+  <li><code class="highlighter-rouge">.collapse.navbar-collapse</code> for grouping and hiding navbar contents by a parent breakpoint.</li>
+</ul>
+
+<p>Here’s an example of all the sub-components included in a responsive light-themed navbar that automatically collapses at the <code class="highlighter-rouge">md</code> (medium) breakpoint.</p>
+
+<div class="bd-example" data-example-id="">
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">Navbar</a>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" placeholder="Search" type="text">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+</div>
+<div class="bd-clipboard"><span class="btn-clipboard" title="" data-original-title="Copy to clipboard">Copy</span></div><div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"navbar navbar-toggleable-md navbar-light bg-faded"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"navbar-toggler navbar-toggler-right"</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">data-toggle=</span><span class="s">"collapse"</span> <span class="na">data-target=</span><span class="s">"#navbarSupportedContent"</span> <span class="na">aria-controls=</span><span class="s">"navbarSupportedContent"</span> <span class="na">aria-expanded=</span><span class="s">"false"</span> <span class="na">aria-label=</span><span class="s">"Toggle navigation"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"navbar-toggler-icon"</span><span class="nt">&gt;&lt;/span&gt;</span>
+  <span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"navbar-brand"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Navbar<span class="nt">&lt;/a&gt;</span>
+
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"collapse navbar-collapse"</span> <span class="na">id=</span><span class="s">"navbarSupportedContent"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"navbar-nav mr-auto"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item active"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-link"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Home <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"sr-only"</span><span class="nt">&gt;</span>(current)<span class="nt">&lt;/span&gt;&lt;/a&gt;</span>
+      <span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-link"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Link<span class="nt">&lt;/a&gt;</span>
+      <span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-link disabled"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Disabled<span class="nt">&lt;/a&gt;</span>
+      <span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>
+    <span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">"form-inline my-2 my-lg-0"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">"form-control mr-sm-2"</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">placeholder=</span><span class="s">"Search"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"btn btn-outline-success my-2 my-sm-0"</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>Search<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;/form&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/nav&gt;</span></code></pre></div>
+
+<h3 id="brand"><a class="anchorjs-link " href="#brand" aria-label="Anchor link for: brand" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-weight: normal; font-size: 1em; line-height: inherit; font-size-adjust: none; font-stretch: normal; font-feature-settings: normal; font-language-override: normal; font-kerning: auto; font-variant: normal; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>Brand</h3>
+
+<p>The <code class="highlighter-rouge">.navbar-brand</code> can be applied to most elements, but an anchor works best as some elements might require utility classes or custom styles.</p>
+
+<div class="bd-example" data-example-id="">
+<!-- As a link -->
+<nav class="navbar navbar-light bg-faded">
+  <a class="navbar-brand" href="#">Navbar</a>
+</nav>
+
+<!-- As a heading -->
+<nav class="navbar navbar-light bg-faded">
+  <h1 class="navbar-brand mb-0">Navbar</h1>
+</nav>
+</div>
+<div class="bd-clipboard"><span class="btn-clipboard" title="" data-original-title="Copy to clipboard">Copy</span></div><div class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- As a link --&gt;</span>
+<span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"navbar navbar-light bg-faded"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"navbar-brand"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Navbar<span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;/nav&gt;</span>
+
+<span class="c">&lt;!-- As a heading --&gt;</span>
+<span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"navbar navbar-light bg-faded"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h1</span> <span class="na">class=</span><span class="s">"navbar-brand mb-0"</span><span class="nt">&gt;</span>Navbar<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;/nav&gt;</span></code></pre></div>
+
+<p>Adding images to the <code class="highlighter-rouge">.navbar-brand</code> will likely always require custom styles or utilities to properly size. Here are some examples to demonstrate.</p>
+
+<div class="bd-example" data-example-id="">
+<!-- Just an image -->
+<nav class="navbar navbar-light bg-faded">
+  <a class="navbar-brand" href="#">
+    <img src="Navbar%20%C2%B7%20Bootstrap_files/bootstrap-solid.svg" alt="" width="30" height="30">
+  </a>
+</nav>
+</div>
+<div class="bd-clipboard"><span class="btn-clipboard" title="" data-original-title="Copy to clipboard">Copy</span></div><div class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- Just an image --&gt;</span>
+<span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"navbar navbar-light bg-faded"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"navbar-brand"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"/assets/brand/bootstrap-solid.svg"</span> <span class="na">width=</span><span class="s">"30"</span> <span class="na">height=</span><span class="s">"30"</span> <span class="na">alt=</span><span class="s">""</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;/nav&gt;</span></code></pre></div>
+
+<div class="bd-example" data-example-id="">
+<!-- Image and text -->
+<nav class="navbar navbar-light bg-faded">
+  <a class="navbar-brand" href="#">
+    <img src="Navbar%20%C2%B7%20Bootstrap_files/bootstrap-solid.svg" class="d-inline-block align-top" alt="" width="30" height="30">
+    Bootstrap
+  </a>
+</nav>
+</div>
+<div class="bd-clipboard"><span class="btn-clipboard" title="" data-original-title="Copy to clipboard">Copy</span></div><div class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- Image and text --&gt;</span>
+<span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"navbar navbar-light bg-faded"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"navbar-brand"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"/assets/brand/bootstrap-solid.svg"</span> <span class="na">width=</span><span class="s">"30"</span> <span class="na">height=</span><span class="s">"30"</span> <span class="na">class=</span><span class="s">"d-inline-block align-top"</span> <span class="na">alt=</span><span class="s">""</span><span class="nt">&gt;</span>
+    Bootstrap
+  <span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;/nav&gt;</span></code></pre></div>
+
+<h3 id="nav"><a class="anchorjs-link " href="#nav" aria-label="Anchor link for: nav" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-weight: normal; font-size: 1em; line-height: inherit; font-size-adjust: none; font-stretch: normal; font-feature-settings: normal; font-language-override: normal; font-kerning: auto; font-variant: normal; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>Nav</h3>
+
+<p>Navbar navigation links build on our <code class="highlighter-rouge">.nav</code> options with their own modifier class and require the use of <a href="#toggler">toggler classes</a> for proper responsive styling. <strong>Navigation in navbars will also grow to occupy as much horizontal space as possible</strong> to keep your navbar contents securely aligned.</p>
+
+<p>Active states—with <code class="highlighter-rouge">.active</code>—to indicate the current page can be applied directly to <code class="highlighter-rouge">.nav-link</code>s or their immediate parent <code class="highlighter-rouge">.nav-item</code>s.</p>
+
+<div class="bd-example" data-example-id="">
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">Navbar</a>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Features</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Pricing</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+</div>
+<div class="bd-clipboard"><span class="btn-clipboard" title="" data-original-title="Copy to clipboard">Copy</span></div><div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"navbar navbar-toggleable-md navbar-light bg-faded"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"navbar-toggler navbar-toggler-right"</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">data-toggle=</span><span class="s">"collapse"</span> <span class="na">data-target=</span><span class="s">"#navbarNav"</span> <span class="na">aria-controls=</span><span class="s">"navbarNav"</span> <span class="na">aria-expanded=</span><span class="s">"false"</span> <span class="na">aria-label=</span><span class="s">"Toggle navigation"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"navbar-toggler-icon"</span><span class="nt">&gt;&lt;/span&gt;</span>
+  <span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"navbar-brand"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Navbar<span class="nt">&lt;/a&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"collapse navbar-collapse"</span> <span class="na">id=</span><span class="s">"navbarNav"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"navbar-nav"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item active"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-link"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Home <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"sr-only"</span><span class="nt">&gt;</span>(current)<span class="nt">&lt;/span&gt;&lt;/a&gt;</span>
+      <span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-link"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Features<span class="nt">&lt;/a&gt;</span>
+      <span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-link"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Pricing<span class="nt">&lt;/a&gt;</span>
+      <span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-link disabled"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Disabled<span class="nt">&lt;/a&gt;</span>
+      <span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/nav&gt;</span></code></pre></div>
+
+<p>And because we use classes for our navs, you can avoid the list-based approach entirely if you like.</p>
+
+<div class="bd-example" data-example-id="">
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">Navbar</a>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+      <a class="nav-item nav-link" href="#">Features</a>
+      <a class="nav-item nav-link" href="#">Pricing</a>
+      <a class="nav-item nav-link disabled" href="#">Disabled</a>
+    </div>
+  </div>
+</nav>
+</div>
+<div class="bd-clipboard"><span class="btn-clipboard" title="" data-original-title="Copy to clipboard">Copy</span></div><div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"navbar navbar-toggleable-md navbar-light bg-faded"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"navbar-toggler navbar-toggler-right"</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">data-toggle=</span><span class="s">"collapse"</span> <span class="na">data-target=</span><span class="s">"#navbarNavAltMarkup"</span> <span class="na">aria-controls=</span><span class="s">"navbarNavAltMarkup"</span> <span class="na">aria-expanded=</span><span class="s">"false"</span> <span class="na">aria-label=</span><span class="s">"Toggle navigation"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"navbar-toggler-icon"</span><span class="nt">&gt;&lt;/span&gt;</span>
+  <span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"navbar-brand"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Navbar<span class="nt">&lt;/a&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"collapse navbar-collapse"</span> <span class="na">id=</span><span class="s">"navbarNavAltMarkup"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"navbar-nav"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-item nav-link active"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Home <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"sr-only"</span><span class="nt">&gt;</span>(current)<span class="nt">&lt;/span&gt;&lt;/a&gt;</span>
+      <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-item nav-link"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Features<span class="nt">&lt;/a&gt;</span>
+      <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-item nav-link"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Pricing<span class="nt">&lt;/a&gt;</span>
+      <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-item nav-link disabled"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Disabled<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/nav&gt;</span></code></pre></div>
+
+<p>You may also utilize dropdowns in your navbar nav. Dropdown menus 
+require a wrapping element for positioning, so be sure to use separate 
+and nested elements for <code class="highlighter-rouge">.nav-item</code> and <code class="highlighter-rouge">.nav-link</code> as shown below.</p>
+
+<div class="bd-example" data-example-id="">
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">Navbar</a>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Features</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Pricing</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="http://example.com/" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown link
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+</div>
+<div class="bd-clipboard"><span class="btn-clipboard" title="" data-original-title="Copy to clipboard">Copy</span></div><div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"navbar navbar-toggleable-md navbar-light bg-faded"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"navbar-toggler navbar-toggler-right"</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">data-toggle=</span><span class="s">"collapse"</span> <span class="na">data-target=</span><span class="s">"#navbarNavDropdown"</span> <span class="na">aria-controls=</span><span class="s">"navbarNavDropdown"</span> <span class="na">aria-expanded=</span><span class="s">"false"</span> <span class="na">aria-label=</span><span class="s">"Toggle navigation"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"navbar-toggler-icon"</span><span class="nt">&gt;&lt;/span&gt;</span>
+  <span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"navbar-brand"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Navbar<span class="nt">&lt;/a&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"collapse navbar-collapse"</span> <span class="na">id=</span><span class="s">"navbarNavDropdown"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"navbar-nav"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item active"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-link"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Home <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"sr-only"</span><span class="nt">&gt;</span>(current)<span class="nt">&lt;/span&gt;&lt;/a&gt;</span>
+      <span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-link"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Features<span class="nt">&lt;/a&gt;</span>
+      <span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-link"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Pricing<span class="nt">&lt;/a&gt;</span>
+      <span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item dropdown"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-link dropdown-toggle"</span> <span class="na">href=</span><span class="s">"http://example.com"</span> <span class="na">id=</span><span class="s">"navbarDropdownMenuLink"</span> <span class="na">data-toggle=</span><span class="s">"dropdown"</span> <span class="na">aria-haspopup=</span><span class="s">"true"</span> <span class="na">aria-expanded=</span><span class="s">"false"</span><span class="nt">&gt;</span>
+          Dropdown link
+        <span class="nt">&lt;/a&gt;</span>
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"dropdown-menu"</span> <span class="na">aria-labelledby=</span><span class="s">"navbarDropdownMenuLink"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"dropdown-item"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Action<span class="nt">&lt;/a&gt;</span>
+          <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"dropdown-item"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Another action<span class="nt">&lt;/a&gt;</span>
+          <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"dropdown-item"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Something else here<span class="nt">&lt;/a&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+      <span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/nav&gt;</span></code></pre></div>
+
+<h3 id="forms"><a class="anchorjs-link " href="#forms" aria-label="Anchor link for: forms" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-weight: normal; font-size: 1em; line-height: inherit; font-size-adjust: none; font-stretch: normal; font-feature-settings: normal; font-language-override: normal; font-kerning: auto; font-variant: normal; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>Forms</h3>
+
+<p>Place various form controls and components within a navbar with <code class="highlighter-rouge">.form-inline</code>.</p>
+
+<div class="bd-example" data-example-id="">
+<nav class="navbar navbar-light bg-faded">
+  <form class="form-inline">
+    <input class="form-control mr-sm-2" placeholder="Search" type="text">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+</nav>
+</div>
+<div class="bd-clipboard"><span class="btn-clipboard" title="" data-original-title="Copy to clipboard">Copy</span></div><div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"navbar navbar-light bg-faded"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">"form-inline"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">"form-control mr-sm-2"</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">placeholder=</span><span class="s">"Search"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"btn btn-outline-success my-2 my-sm-0"</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>Search<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;/form&gt;</span>
+<span class="nt">&lt;/nav&gt;</span></code></pre></div>
+
+<p>Align the contents of your inline forms with utilities as needed.</p>
+
+<div class="bd-example" data-example-id="">
+<nav class="navbar navbar-light bg-faded justify-content-between">
+  <a class="navbar-brand">Navbar</a>
+  <form class="form-inline">
+    <input class="form-control mr-sm-2" placeholder="Search" type="text">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+</nav>
+</div>
+<div class="bd-clipboard"><span class="btn-clipboard" title="" data-original-title="Copy to clipboard">Copy</span></div><div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"navbar navbar-light bg-faded justify-content-between"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"navbar-brand"</span><span class="nt">&gt;</span>Navbar<span class="nt">&lt;/a&gt;</span>
+  <span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">"form-inline"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">"form-control mr-sm-2"</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">placeholder=</span><span class="s">"Search"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"btn btn-outline-success my-2 my-sm-0"</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>Search<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;/form&gt;</span>
+<span class="nt">&lt;/nav&gt;</span></code></pre></div>
+
+<p>Input groups work, too:</p>
+
+<div class="bd-example" data-example-id="">
+<nav class="navbar navbar-light bg-faded">
+  <form class="form-inline">
+    <div class="input-group">
+      <span class="input-group-addon" id="basic-addon1">@</span>
+      <input class="form-control" placeholder="Username" aria-describedby="basic-addon1" type="text">
+    </div>
+  </form>
+</nav>
+</div>
+<div class="bd-clipboard"><span class="btn-clipboard" title="" data-original-title="Copy to clipboard">Copy</span></div><div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"navbar navbar-light bg-faded"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">"form-inline"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"input-group"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"input-group-addon"</span> <span class="na">id=</span><span class="s">"basic-addon1"</span><span class="nt">&gt;</span>@<span class="nt">&lt;/span&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">class=</span><span class="s">"form-control"</span> <span class="na">placeholder=</span><span class="s">"Username"</span> <span class="na">aria-describedby=</span><span class="s">"basic-addon1"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/form&gt;</span>
+<span class="nt">&lt;/nav&gt;</span></code></pre></div>
+
+<p>Various buttons are supported as part of these navbar forms, too. 
+This is also a great reminder that vertical alignment utilities can be 
+used to align different sized elements.</p>
+
+<div class="bd-example" data-example-id="">
+<nav class="navbar navbar-light bg-faded">
+  <form class="form-inline">
+    <button class="btn btn-outline-success" type="button">Main button</button>
+    <button class="btn btn-sm align-middle btn-outline-secondary" type="button">Smaller button</button>
+  </form>
+</nav>
+</div>
+<div class="bd-clipboard"><span class="btn-clipboard" title="" data-original-title="Copy to clipboard">Copy</span></div><div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"navbar navbar-light bg-faded"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">"form-inline"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"btn btn-outline-success"</span> <span class="na">type=</span><span class="s">"button"</span><span class="nt">&gt;</span>Main button<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"btn btn-sm align-middle btn-outline-secondary"</span> <span class="na">type=</span><span class="s">"button"</span><span class="nt">&gt;</span>Smaller button<span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;/form&gt;</span>
+<span class="nt">&lt;/nav&gt;</span></code></pre></div>
+
+<h3 id="text"><a class="anchorjs-link " href="#text" aria-label="Anchor link for: text" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-weight: normal; font-size: 1em; line-height: inherit; font-size-adjust: none; font-stretch: normal; font-feature-settings: normal; font-language-override: normal; font-kerning: auto; font-variant: normal; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>Text</h3>
+
+<p>Navbars may contain bits of text with the help of <code class="highlighter-rouge">.navbar-text</code>. This class adjusts vertical alignment and horizontal spacing for strings of text.</p>
+
+<div class="bd-example" data-example-id="">
+<nav class="navbar navbar-light bg-faded">
+  <span class="navbar-text">
+    Navbar text with an inline element
+  </span>
+</nav>
+</div>
+<div class="bd-clipboard"><span class="btn-clipboard" title="" data-original-title="Copy to clipboard">Copy</span></div><div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"navbar navbar-light bg-faded"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"navbar-text"</span><span class="nt">&gt;</span>
+    Navbar text with an inline element
+  <span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/nav&gt;</span></code></pre></div>
+
+<p>Mix and match with other components and utilities as needed.</p>
+
+<div class="bd-example" data-example-id="">
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">Navbar w/ text</a>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Features</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Pricing</a>
+      </li>
+    </ul>
+    <span class="navbar-text">
+      Navbar text with an inline element
+    </span>
+  </div>
+</nav>
+</div>
+<div class="bd-clipboard"><span class="btn-clipboard" title="" data-original-title="Copy to clipboard">Copy</span></div><div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"navbar navbar-toggleable-md navbar-light bg-faded"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"navbar-toggler navbar-toggler-right"</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">data-toggle=</span><span class="s">"collapse"</span> <span class="na">data-target=</span><span class="s">"#navbarText"</span> <span class="na">aria-controls=</span><span class="s">"navbarText"</span> <span class="na">aria-expanded=</span><span class="s">"false"</span> <span class="na">aria-label=</span><span class="s">"Toggle navigation"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"navbar-toggler-icon"</span><span class="nt">&gt;&lt;/span&gt;</span>
+  <span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"navbar-brand"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Navbar w/ text<span class="nt">&lt;/a&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"collapse navbar-collapse"</span> <span class="na">id=</span><span class="s">"navbarText"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"navbar-nav mr-auto"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item active"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-link"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Home <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"sr-only"</span><span class="nt">&gt;</span>(current)<span class="nt">&lt;/span&gt;&lt;/a&gt;</span>
+      <span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-link"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Features<span class="nt">&lt;/a&gt;</span>
+      <span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-link"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Pricing<span class="nt">&lt;/a&gt;</span>
+      <span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"navbar-text"</span><span class="nt">&gt;</span>
+      Navbar text with an inline element
+    <span class="nt">&lt;/span&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/nav&gt;</span></code></pre></div>
+
+<h2 id="color-schemes"><a class="anchorjs-link " href="#color-schemes" aria-label="Anchor link for: color schemes" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-weight: normal; font-size: 1em; line-height: inherit; font-size-adjust: none; font-stretch: normal; font-feature-settings: normal; font-language-override: normal; font-kerning: auto; font-variant: normal; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>Color schemes</h2>
+
+<p>Theming the navbar has never been easier thanks to the combination of theming classes and <code class="highlighter-rouge">background-color</code> utilities. Choose from <code class="highlighter-rouge">.navbar-light</code> for use with light background colors, or <code class="highlighter-rouge">.navbar-inverse</code> for dark background colors. Then, customize with <code class="highlighter-rouge">.bg-*</code> utilities.</p>
+
+<div class="bd-example">
+  <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+    <a class="navbar-brand" href="#">Navbar</a>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+      </ul>
+      <form class="form-inline">
+        <input class="form-control mr-sm-2" placeholder="Search" type="text">
+        <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+
+  <nav class="navbar navbar-toggleable-md navbar-inverse bg-primary">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">Navbar</a>
+
+    <div class="collapse navbar-collapse" id="navbarColor02">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+      </ul>
+      <form class="form-inline">
+        <input class="form-control mr-sm-2" placeholder="Search" type="text">
+        <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+
+  <nav class="navbar navbar-toggleable-md navbar-light" style="background-color: #e3f2fd;">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">Navbar</a>
+
+    <div class="collapse navbar-collapse" id="navbarColor03">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+      </ul>
+      <form class="form-inline">
+        <input class="form-control mr-sm-2" placeholder="Search" type="text">
+        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+</div>
+
+<div class="bd-clipboard"><span class="btn-clipboard" title="" data-original-title="Copy to clipboard">Copy</span></div><figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"navbar navbar-inverse bg-inverse"</span><span class="nt">&gt;</span>
+  <span class="c">&lt;!-- Navbar content --&gt;</span>
+<span class="nt">&lt;/nav&gt;</span>
+
+<span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"navbar navbar-inverse bg-primary"</span><span class="nt">&gt;</span>
+  <span class="c">&lt;!-- Navbar content --&gt;</span>
+<span class="nt">&lt;/nav&gt;</span>
+
+<span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"navbar navbar-light"</span> <span class="na">style=</span><span class="s">"background-color: #e3f2fd;"</span><span class="nt">&gt;</span>
+  <span class="c">&lt;!-- Navbar content --&gt;</span>
+<span class="nt">&lt;/nav&gt;</span></code></pre></figure>
+
+<h2 id="containers"><a class="anchorjs-link " href="#containers" aria-label="Anchor link for: containers" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-weight: normal; font-size: 1em; line-height: inherit; font-size-adjust: none; font-stretch: normal; font-feature-settings: normal; font-language-override: normal; font-kerning: auto; font-variant: normal; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>Containers</h2>
+
+<p>Although it’s not required, you can wrap a navbar in a <code class="highlighter-rouge">.container</code> to center it on a page or add one within to only center the contents of a <a href="#placement">fixed or static top navbar</a>.</p>
+
+<div class="bd-example" data-example-id="">
+<div class="container">
+  <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+    <a class="navbar-brand" href="#">Navbar</a>
+  </nav>
+</div>
+</div>
+<div class="bd-clipboard"><span class="btn-clipboard" title="" data-original-title="Copy to clipboard">Copy</span></div><div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"navbar navbar-toggleable-md navbar-light bg-faded"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"navbar-brand"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Navbar<span class="nt">&lt;/a&gt;</span>
+  <span class="nt">&lt;/nav&gt;</span>
+<span class="nt">&lt;/div&gt;</span></code></pre></div>
+
+<p>When the container is within your navbar, its horizontal padding is removed at breakpoints lower than your specified <code class="highlighter-rouge">.navbar-toggleable-*</code> class. This ensures we’re not doubling up on padding unnecessarily on lower viewports when your navbar is collapsed.</p>
+
+<div class="bd-example" data-example-id="">
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+  <div class="container">
+    <a class="navbar-brand" href="#">Navbar</a>
+  </div>
+</nav>
+</div>
+<div class="bd-clipboard"><span class="btn-clipboard" title="" data-original-title="Copy to clipboard">Copy</span></div><div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"navbar navbar-toggleable-md navbar-light bg-faded"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"navbar-brand"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Navbar<span class="nt">&lt;/a&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/nav&gt;</span></code></pre></div>
+
+<h2 id="placement"><a class="anchorjs-link " href="#placement" aria-label="Anchor link for: placement" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-weight: normal; font-size: 1em; line-height: inherit; font-size-adjust: none; font-stretch: normal; font-feature-settings: normal; font-language-override: normal; font-kerning: auto; font-variant: normal; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>Placement</h2>
+
+<p>Use our position utilities to place navbars in non-static positions. 
+Choose from fixed to the top, fixed to the bottom, or stickied to the 
+top. <strong>Note that <code class="highlighter-rouge">position: sticky</code>, used for <code class="highlighter-rouge">.sticky-top</code>, isn’t fully supported in every browser.</strong></p>
+
+<div class="bd-example" data-example-id="">
+<nav class="navbar navbar-light bg-faded">
+  <a class="navbar-brand" href="#">Full width</a>
+</nav>
+</div>
+<div class="bd-clipboard"><span class="btn-clipboard" title="" data-original-title="Copy to clipboard">Copy</span></div><div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"navbar navbar-light bg-faded"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"navbar-brand"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Full width<span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;/nav&gt;</span></code></pre></div>
+
+<div class="bd-example" data-example-id="">
+<nav class="navbar fixed-top navbar-light bg-faded">
+  <a class="navbar-brand" href="#">Fixed top</a>
+</nav>
+</div>
+<div class="bd-clipboard"><span class="btn-clipboard" title="" data-original-title="Copy to clipboard">Copy</span></div><div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"navbar fixed-top navbar-light bg-faded"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"navbar-brand"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Fixed top<span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;/nav&gt;</span></code></pre></div>
+
+<div class="bd-example" data-example-id="">
+<nav class="navbar fixed-bottom navbar-light bg-faded">
+  <a class="navbar-brand" href="#">Fixed bottom</a>
+</nav>
+</div>
+<div class="bd-clipboard"><span class="btn-clipboard" title="" data-original-title="Copy to clipboard">Copy</span></div><div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"navbar fixed-bottom navbar-light bg-faded"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"navbar-brand"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Fixed bottom<span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;/nav&gt;</span></code></pre></div>
+
+<div class="bd-example" data-example-id="">
+<nav class="navbar sticky-top navbar-light bg-faded">
+  <a class="navbar-brand" href="#">Sticky top</a>
+</nav>
+</div>
+<div class="bd-clipboard"><span class="btn-clipboard" title="" data-original-title="Copy to clipboard">Copy</span></div><div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"navbar sticky-top navbar-light bg-faded"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"navbar-brand"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Sticky top<span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;/nav&gt;</span></code></pre></div>
+
+<h2 id="responsive-behaviors"><a class="anchorjs-link " href="#responsive-behaviors" aria-label="Anchor link for: responsive behaviors" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-weight: normal; font-size: 1em; line-height: inherit; font-size-adjust: none; font-stretch: normal; font-feature-settings: normal; font-language-override: normal; font-kerning: auto; font-variant: normal; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>Responsive behaviors</h2>
+
+<p>Navbars can utilize <code class="highlighter-rouge">.navbar-toggler</code>, <code class="highlighter-rouge">.navbar-collapse</code>, and <code class="highlighter-rouge">.navbar-toggleable-*</code>
+ classes to change when their content collapses behind a button. In 
+combination with other utilities, you can easily choose when to show or 
+hide particular elements.</p>
+
+<h3 id="toggler"><a class="anchorjs-link " href="#toggler" aria-label="Anchor link for: toggler" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-weight: normal; font-size: 1em; line-height: inherit; font-size-adjust: none; font-stretch: normal; font-feature-settings: normal; font-language-override: normal; font-kerning: auto; font-variant: normal; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>Toggler</h3>
+
+<p>Navbar togglers can be left or right aligned with <code class="highlighter-rouge">.navbar-toggler-left</code> or <code class="highlighter-rouge">.navbar-toggler-right</code>
+ modifiers. These are absolutely positioned within the navbar to avoid 
+interference with the collapsed state. You can also use your own styles 
+to position togglers. Below are examples of different toggle styles.</p>
+
+<p>With no <code class="highlighter-rouge">.navbar-brand</code> shown in lowest breakpoint:</p>
+
+<div class="bd-example" data-example-id="">
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <a class="navbar-brand" href="#">Hidden brand</a>
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" placeholder="Search" type="text">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+</div>
+<div class="bd-clipboard"><span class="btn-clipboard" title="" data-original-title="Copy to clipboard">Copy</span></div><div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"navbar navbar-toggleable-md navbar-light bg-faded"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"navbar-toggler"</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">data-toggle=</span><span class="s">"collapse"</span> <span class="na">data-target=</span><span class="s">"#navbarTogglerDemo01"</span> <span class="na">aria-controls=</span><span class="s">"navbarTogglerDemo01"</span> <span class="na">aria-expanded=</span><span class="s">"false"</span> <span class="na">aria-label=</span><span class="s">"Toggle navigation"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"navbar-toggler-icon"</span><span class="nt">&gt;&lt;/span&gt;</span>
+  <span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"collapse navbar-collapse"</span> <span class="na">id=</span><span class="s">"navbarTogglerDemo01"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"navbar-brand"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Hidden brand<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"navbar-nav mr-auto mt-2 mt-lg-0"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item active"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-link"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Home <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"sr-only"</span><span class="nt">&gt;</span>(current)<span class="nt">&lt;/span&gt;&lt;/a&gt;</span>
+      <span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-link"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Link<span class="nt">&lt;/a&gt;</span>
+      <span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-link disabled"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Disabled<span class="nt">&lt;/a&gt;</span>
+      <span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>
+    <span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">"form-inline my-2 my-lg-0"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">"form-control mr-sm-2"</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">placeholder=</span><span class="s">"Search"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"btn btn-outline-success my-2 my-sm-0"</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>Search<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;/form&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/nav&gt;</span></code></pre></div>
+
+<p>With a brand name shown on the left and toggler on the right:</p>
+
+<div class="bd-example" data-example-id="">
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">Navbar</a>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav mr-auto mt-2 mt-md-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" placeholder="Search" type="text">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+</div>
+<div class="bd-clipboard"><span class="btn-clipboard" title="" data-original-title="Copy to clipboard">Copy</span></div><div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"navbar navbar-toggleable-md navbar-light bg-faded"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"navbar-toggler navbar-toggler-right"</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">data-toggle=</span><span class="s">"collapse"</span> <span class="na">data-target=</span><span class="s">"#navbarTogglerDemo02"</span> <span class="na">aria-controls=</span><span class="s">"navbarTogglerDemo02"</span> <span class="na">aria-expanded=</span><span class="s">"false"</span> <span class="na">aria-label=</span><span class="s">"Toggle navigation"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"navbar-toggler-icon"</span><span class="nt">&gt;&lt;/span&gt;</span>
+  <span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"navbar-brand"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Navbar<span class="nt">&lt;/a&gt;</span>
+
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"collapse navbar-collapse"</span> <span class="na">id=</span><span class="s">"navbarTogglerDemo02"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"navbar-nav mr-auto mt-2 mt-md-0"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item active"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-link"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Home <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"sr-only"</span><span class="nt">&gt;</span>(current)<span class="nt">&lt;/span&gt;&lt;/a&gt;</span>
+      <span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-link"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Link<span class="nt">&lt;/a&gt;</span>
+      <span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-link disabled"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Disabled<span class="nt">&lt;/a&gt;</span>
+      <span class="nt">&lt;/li&gt;</span>
+    <span class="nt">&lt;/ul&gt;</span>
+    <span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">"form-inline my-2 my-lg-0"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">"form-control mr-sm-2"</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">placeholder=</span><span class="s">"Search"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"btn btn-outline-success my-2 my-sm-0"</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>Search<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;/form&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/nav&gt;</span></code></pre></div>
+
+<h3 id="external-content"><a class="anchorjs-link " href="#external-content" aria-label="Anchor link for: external content" data-anchorjs-icon="" style="font-family: anchorjs-icons; font-style: normal; font-weight: normal; font-size: 1em; line-height: inherit; font-size-adjust: none; font-stretch: normal; font-feature-settings: normal; font-language-override: normal; font-kerning: auto; font-variant: normal; position: absolute; margin-left: -1em; padding-right: 0.5em;"></a>External content</h3>
+
+<p>Sometimes you want to use the collapse plugin to trigger hidden content elsewhere on the page. Because our plugin works on the <code class="highlighter-rouge">id</code> and <code class="highlighter-rouge">data-target</code> matching, that’s easily done!</p>
+
+<div class="bd-example" data-example-id="">
+<div class="pos-f-t">
+  <div class="collapse" id="navbarToggleExternalContent">
+    <div class="bg-inverse p-4">
+      <h4 class="text-white">Collapsed content</h4>
+      <span class="text-muted">Toggleable via the navbar brand.</span>
+    </div>
+  </div>
+  <nav class="navbar navbar-inverse bg-inverse">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+</div>
+</div>
+<div class="bd-clipboard"><span class="btn-clipboard" title="" data-original-title="Copy to clipboard">Copy</span></div><div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"pos-f-t"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"collapse"</span> <span class="na">id=</span><span class="s">"navbarToggleExternalContent"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"bg-inverse p-4"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;h4</span> <span class="na">class=</span><span class="s">"text-white"</span><span class="nt">&gt;</span>Collapsed content<span class="nt">&lt;/h4&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"text-muted"</span><span class="nt">&gt;</span>Toggleable via the navbar brand.<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"navbar navbar-inverse bg-inverse"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"navbar-toggler"</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">data-toggle=</span><span class="s">"collapse"</span> <span class="na">data-target=</span><span class="s">"#navbarToggleExternalContent"</span> <span class="na">aria-controls=</span><span class="s">"navbarToggleExternalContent"</span> <span class="na">aria-expanded=</span><span class="s">"false"</span> <span class="na">aria-label=</span><span class="s">"Toggle navigation"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"navbar-toggler-icon"</span><span class="nt">&gt;&lt;/span&gt;</span>
+    <span class="nt">&lt;/button&gt;</span>
+  <span class="nt">&lt;/nav&gt;</span>
+<span class="nt">&lt;/div&gt;</span></code></pre></div>
+
+
+        </div>
+      </div>
+    </div>
+
+    <footer class="bd-footer text-muted">
+  <div class="container">
+    <ul class="bd-footer-links">
+      <li><a href="https://github.com/twbs/bootstrap">GitHub</a></li>
+      <li><a href="https://twitter.com/getbootstrap">Twitter</a></li>
+      <li><a href="https://v4-alpha.getbootstrap.com/examples/">Examples</a></li>
+      <li><a href="https://v4-alpha.getbootstrap.com/about/history/">About</a></li>
+    </ul>
+    <p>Designed and built with all the love in the world by <a href="https://twitter.com/mdo" target="_blank">@mdo</a> and <a href="https://twitter.com/fat" target="_blank">@fat</a>. Maintained by the <a href="https://github.com/orgs/twbs/people">core team</a> with the help of <a href="https://github.com/twbs/bootstrap/graphs/contributors">our contributors</a>.</p>
+    <p>Currently v4.0.0-alpha.6. Code licensed <a rel="license" href="https://github.com/twbs/bootstrap/blob/master/LICENSE" target="_blank">MIT</a>, docs <a rel="license" href="https://creativecommons.org/licenses/by/3.0/" target="_blank">CC BY 3.0</a>.</p>
+  </div>
+</footer>
+
+<script src="Navbar%20%C2%B7%20Bootstrap_files/jquery-3.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery.min.js"><\/script>')</script>
+
+<script src="Navbar%20%C2%B7%20Bootstrap_files/tether.js"></script>
+
+
+  <script src="Navbar%20%C2%B7%20Bootstrap_files/bootstrap.js"></script>
+
+
+
+  <script src="Navbar%20%C2%B7%20Bootstrap_files/anchor.js"></script>
+
+  <script src="Navbar%20%C2%B7%20Bootstrap_files/clipboard.js"></script>
+
+  <script src="Navbar%20%C2%B7%20Bootstrap_files/holder.js"></script>
+
+  <script src="Navbar%20%C2%B7%20Bootstrap_files/application.js"></script>
+
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="Navbar%20%C2%B7%20Bootstrap_files/ie10-viewport-bug-workaround.js"></script>
+<script src="Navbar%20%C2%B7%20Bootstrap_files/ie-emulation-modes-warning.js"></script>
+
+
+<script src="Navbar%20%C2%B7%20Bootstrap_files/jekyll-search.js"></script>
+
+<script>
+SimpleJekyllSearch.init({
+  searchInput: document.getElementById('search-input'),
+  resultsContainer: document.getElementById('search-results'),
+  searchResultTemplate: '<a class="dropdown-item" href="{url}">{title}</a>',
+  noResultsText: '<div class="dropdown-item no-results">Sorry, there are no results for that search.</div>',
+  json: '/search.json'
+})
+</script>
+
+
+<script>
+Holder.addTheme('gray', {
+  bg: '#777',
+  fg: 'rgba(255,255,255,.75)',
+  font: 'Helvetica',
+  fontweight: 'normal'
+})
+</script>
+
+  
+
+</body></html>

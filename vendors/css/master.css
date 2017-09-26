@@ -1,0 +1,12 @@
+*{
+    text-align: justify;
+}
+.logo img{
+    height: 91px;
+}
+.logo{
+    position: absolute;
+}
+.center-content{
+    text-align: center;
+}

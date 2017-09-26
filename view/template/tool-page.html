@@ -1,0 +1,30 @@
+<div ng-controller="toolController as toolCtrl" ng-init="loadInitData()" class="">
+    <div class="row">
+        <div class="">
+            <input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+        </div>
+    </div>
+
+    <table class="table table-striped">
+        <tr>
+            <th><b>Name</b></th>
+            <th><b>Type</b></th>
+            <th><b>Link</b></th>
+            <th><b>Description</b></th>
+            <th><b>Details</b></th>
+        </tr>
+        <tr dir-paginate="tool in toolsArray | filter:q | itemsPerPage: pageSize" current-page="currentPage">
+            <td>{{tool.name}}</td>
+            <td>{{tool['@type'] | uppercase}}</td>
+            <td><a href="{{tool.homepage}}">{{tool.homepage}}</a></td>
+            <td>{{tool.description}}</td>
+            <td><a href="https://bio.tools/?page=1&q={{tool.name}} "class="btn btn-primary"type="button" name="button">Details</a></td>
+        </tr>
+    </table>
+    </div>
+      <div class="text-center">
+      <dir-pagination-controls boundary-links="true" max-size="12"></dir-pagination-controls>
+      </div>
+    </div>
+
+</div>
