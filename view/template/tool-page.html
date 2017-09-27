@@ -1,4 +1,4 @@
-<div ng-controller="toolController as toolCtrl" ng-init="loadInitData()" class="">
+<div ng-controller="toolController as toolCtrl" ng-init="toolCtrl.loadInitData();" class="">
     <div class="row">
         <div class="">
             <input ng-model="q" id="search" class="form-control" placeholder="Filter text">
@@ -13,7 +13,8 @@
             <th><b>Description</b></th>
             <th><b>Details</b></th>
         </tr>
-        <tr dir-paginate="tool in toolsArray | filter:q | itemsPerPage: pageSize" current-page="currentPage">
+        {{}}
+        <tr dir-paginate="tool in toolCtrl.toolsArray | filter:q | itemsPerPage: toolCtrl.pageSize" current-page="toolCtrl.currentPage">
             <td>{{tool.name}}</td>
             <td>{{tool['@type'] | uppercase}}</td>
             <td><a href="{{tool.homepage}}">{{tool.homepage}}</a></td>
