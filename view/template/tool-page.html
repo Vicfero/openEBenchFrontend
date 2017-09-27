@@ -1,31 +1,45 @@
 <div ng-controller="toolController as toolCtrl" ng-init="toolCtrl.loadInitData();" class="">
     <div class="row">
-        <div class="">
-            <input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+        <div class="col-xs-4 col-md-offset-5 right-inner-addon">
+            <i class="icon-search"></i>
+            <input ng-model="q" id="search" placeholder="Filter text">
         </div>
+        <table class="table table-striped">
+            <tr>
+                <th><b>Name</b></th>
+                <th><b>Type</b></th>
+                <th><b>Link</b></th>
+                <th><b>Description</b></th>
+                <th><b>Details</b></th>
+            </tr>
+            <tr dir-paginate="tool in toolCtrl.toolsArray | filter:q | itemsPerPage: toolCtrl.pageSize" current-page="toolCtrl.currentPage">
+                <td>{{tool.name}}</td>
+                <td><img ng-src="img/{{tool['@type']}}.png" alt="" data-toggle="tooltip" title="{{tool['@type'] | uppercase}}"></td>
+                <td><a href="{{tool.homepage}}" target="_blank">{{tool.homepage}}</a></td>
+                <td data-toggle="tooltip" title={{tool.description}} >{{tool.description | limitTo:150 }}{{tool.description.length > 150 ? '...':''}}</td>
+                <td><a ng-click="toolCtrl.showDetails(tool);" class="btn btn-primary"type="button" name="button">Details</a></td>
+                <!-- href="https://bio.tools/?page=1&q={{tool.name}}" -->
+            </tr>
+        </table>
     </div>
-
-    <table class="table table-striped">
-        <tr>
-            <th><b>Name</b></th>
-            <th><b>Type</b></th>
-            <th><b>Link</b></th>
-            <th><b>Description</b></th>
-            <th><b>Details</b></th>
-        </tr>
-        {{}}
-        <tr dir-paginate="tool in toolCtrl.toolsArray | filter:q | itemsPerPage: toolCtrl.pageSize" current-page="toolCtrl.currentPage">
-            <td>{{tool.name}}</td>
-            <td>{{tool['@type'] | uppercase}}</td>
-            <td><a href="{{tool.homepage}}">{{tool.homepage}}</a></td>
-            <td>{{tool.description}}</td>
-            <td><a href="https://bio.tools/?page=1&q={{tool.name}} "class="btn btn-primary"type="button" name="button">Details</a></td>
-        </tr>
-    </table>
+    <div class="text-center">
+        <dir-pagination-controls boundary-links="true" max-size="12"></dir-pagination-controls>
     </div>
-      <div class="text-center">
-      <dir-pagination-controls boundary-links="true" max-size="12"></dir-pagination-controls>
-      </div>
-    </div>
-
 </div>
+<!-- <span id="sparkline">
+
+</span> -->
+
+
+
+<!-- <script type="text/javascript">
+$("#sparkline").sparkline([-1,1,1,-1,1,], {
+    // disableTooltips: 'false',
+    tooltipValueLookups : {'-1':"down","1":"up"},
+    posBarColor : 'blue',
+    negBarColor : 'red',
+    type: 'tristate',
+    height: 'auto',
+    barWidth: 9,
+    barSpacing: 1});
+    </script> -->

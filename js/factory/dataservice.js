@@ -26,7 +26,8 @@
 
             function errorCallback(response){
                 console.log(response);
-                console.log('XHR Failed for getAvengers.' + error.data);
+                console.log('XHR Failed for getAvengers.' + response.data);
+                return response.data;
             };
 
             function successCallback(response){
@@ -35,5 +36,8 @@
                     return response.data;
             }
         }
+
     }
+    
+
 })();
