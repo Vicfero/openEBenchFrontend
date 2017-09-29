@@ -15,15 +15,15 @@
 
 		.controller("mainController",mainController)
 
-
+    mainController.$inject = ['$scope','$rootScope']
 	/**
 	@name controller
 	@description controls the index.html page of the angular app.
 	@version 1.0
 	@author Vicky Madan Sundesha
 	*/
-	function mainController ($scope){
-
+	function mainController ($scope, $rootScope){
+        $rootScope.array;
 	}
 
 })();
