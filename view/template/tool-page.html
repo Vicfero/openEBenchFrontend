@@ -1,29 +1,55 @@
 <div ng-controller="toolController as toolCtrl" ng-init="toolCtrl.loadInitData();" class="conatiner-fluid">
     <div class="form-group">
-        <div class="input-group col-md-2 col-md-offset-5">
+        <div class="input-group col-md-2 col-md-4 col-md-offset-5 col-xs-offset-8">
             <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-            <input ng-model="q" id="search" type="text" class="form-control" name="search" placeholder="Search">
+            <input ng-model="q" id="search" type="text" class="form-control" name="search" placeholder="Filter">
         </div>
     </div>
-    <table class="table table-striped table-div">
-        <tr>
-            <th><b>Name</b></th>
-            <th><b>Type</b></th>
-            <th><b>Link</b></th>
-            <th><b>Description</b></th>
-            <th><b>Details</b></th>
-        </tr>
-        <tr dir-paginate="tool in toolCtrl.toolsArray | filter:q | itemsPerPage: toolCtrl.pageSize" current-page="toolCtrl.currentPage">
-            <td>{{tool.name}}</td>
-            <td><img class ="table-icons"ng-src="img/{{tool['@type']}}.png" alt="" data-toggle="tooltip" title="{{tool['@type'] | uppercase}}"></td>
-            <td><a href="{{tool.homepage}}" target="_blank">{{tool.homepage}}</a></td>
-            <td data-toggle="tooltip" title={{tool.description}} >{{tool.description}}</td>
-            <td><a ng-click="toolCtrl.showDetails(tool);" class="btn btn-primary btn-xs"type="button" name="button">Details</a></td>
-            <!-- href="https://bio.tools/?page=1&q={{tool.name}}" -->
-        </tr>
-    </table>
+    <div class="responsive-table">
+        <table class="table table-striped" >
+            <tr>
+                <th><b>Name</b></th>
+                <th><b>Type</b></th>
+                <th><b>Link</b></th>
+                <th><b>Description</b></th>
+                <th><b>Details</b></th>
+            </tr>
+            <tr dir-paginate="tool in toolCtrl.toolsArray | filter:q | itemsPerPage: toolCtrl.pageSize" current-page="toolCtrl.currentPage">
+                <td>{{tool.name}}</td>
+                <td><img class ="table-icons"ng-src="img/{{tool['@type']}}.png" alt="" data-toggle="tooltip" title="{{tool['@type'] | uppercase}}"></td>
+                <td><a href="{{tool.homepage}}" target="_blank">{{tool.homepage}}</a></td>
+                <td data-toggle="tooltip" title={{tool.description}} >{{tool.description}}</td>
+                <td><a ng-click="toolCtrl.showDetails(tool);" class="btn btn-primary btn-xs"type="button" name="button">Details</a></td>
+                <!-- href="https://bio.tools/?page=1&q={{tool.name}}" -->
+                <!-- <td ng-show="toolCtrl.toolsArray.length==0">Sorry! No data found</td> -->
+                <!-- {{!tool ? "yes" : "no"}} -->
+            </tr>
+        </table>
+    </div>
     <div class="text-center">
         <dir-pagination-controls boundary-links="true" max-size="12"></dir-pagination-controls>
+    </div>
+    <div ng-show="toolCtrl.displayDetailsView == 1">
+        <hr>
+        <h1>{{toolCtrl.basicDetails.getName()}}</h1>
+        <div class="col-md-2" >
+            <div  ng-repeat="edamDiv in toolCtrl.detailsToDisplayObjects">
+                <div  style="margin: 2%; border: 1px solid black;">
+                    <p>Type : {{edamDiv.edamType}}</p>
+                    <p data-toggle="tooltip" title="{{edamDiv.toolComment[0]}}">Name : {{edamDiv.toolName[0]}}</p>
+                    <span ng-if="edamDiv.formatComment[0]">
+                        <p  data-toggle="tooltip" title="{{edamDiv.formatComment[0]}}">Format : {{edamDiv.formatLabel[0]}}</p>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-10">
+            <p>Description : {{toolCtrl.basicDetails.getDesc()}}</p>
+            <p>Documentation : {{toolCtrl.basicDetails.getDocs() ? toolCtrl.basicDetails.getDocs() : "No data"}}</p>
+            <p>Version : {{toolCtrl.basicDetails.getVersion() ? toolCtrl.basicDetails.getVersion() : "No data"}}</p>
+            <p>Publication : {{toolCtrl.basicDetails.getPublication() ? toolCtrl.basicDetails.getPublication() : "No data"}}</p>
+            <p>Contact : {{toolCtrl.basicDetails.getContact() ? toolCtrl.basicDetails.getContact() : "No data"}}</p>
+        </div>
     </div>
 </div>
 <!-- <span id="sparkline">

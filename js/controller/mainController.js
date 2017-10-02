@@ -17,8 +17,9 @@
 
     mainController.$inject = ['$scope','$rootScope']
 	/**
-	@name controller
-	@description controls the index.html page of the angular app.
+	@name mainController
+	@description controls the index.html page of the angular app and sets the $rootScope.array
+    where the tools are saved once every session this is used in the toolController.
 	@version 1.0
 	@author Vicky Madan Sundesha
 	*/

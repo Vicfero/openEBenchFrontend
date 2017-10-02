@@ -1,3 +1,8 @@
+/*
+    master.css
+    the main style sheet document
+*/
+
 *{
     text-align: justify;
 }
@@ -26,4 +31,7 @@ td {
 .main-text br{
     padding: 5px;
     line-height: 200%;
+}
+.responsive-table{
+    overflow-x: auto;
 }
