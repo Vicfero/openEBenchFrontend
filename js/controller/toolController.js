@@ -67,7 +67,7 @@
 			}).then(function successCallback(response){
 					vm.toolsArray =  response.data;
 					$rootScope.array = vm.toolsArray;
-					console.log(vm.toolsArray);
+					// console.log(vm.toolsArray);
 			}, function errorCallback(response){
 					// TODO: control errors
 					console.log(response);
@@ -122,6 +122,12 @@
 			if(tool.contacts){
 				toolBasicDetails.setContact(tool.contacts)
 			}
+			if(tool.repositories){
+				toolBasicDetails.setRepo(tool.repositories)
+			}
+			if(tool.documentation){
+				toolBasicDetails.setDocs(tool.documentation)
+			}
 			vm.basicDetails = toolBasicDetails;
 		}
 
@@ -160,7 +166,7 @@
 
 		vm.createDetailsView = function (edamObject,edamType){
 
-			// console.log(edamObject);
+			console.log(edamObject);
 			var toolLabel;
 			var toolComment;
 			var formatLabel;
@@ -179,7 +185,7 @@
 			var edamDetailObject = new EdamDetail();
 			// edamDetailObject.construct(edamType,toolLabel,toolComment,formatLabel,formatComment);
 			edamDetailObject.setEdamType(edamType);
-			edamDetailObject.setToolName(toolLabel);
+			edamDetailObject.setToolLabel(toolLabel);
 			edamDetailObject.setToolComment(toolComment);
 			edamDetailObject.setFormatLabel(formatLabel);
 			edamDetailObject.setFormatComment(formatComment);

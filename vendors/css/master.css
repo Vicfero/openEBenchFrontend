@@ -35,3 +35,27 @@ td {
 .responsive-table{
     overflow-x: auto;
 }
+.inputs{
+    border-left: 6px solid #174C7F;
+    background-color: #6A98C4;
+    padding: 1px;
+}
+.outputs{
+    border-left: 6px solid #E94D38;
+    background-color: #FF9281;
+    padding: 1px;
+}
+.topics{
+    background-color: #9DE8B1;
+    border-left: 6px solid #2AAE4D;
+    padding: 1px;
+}
+.operations{
+    background-color: #FFCC81;
+    border-left: 6px solid #E9A138;
+    padding: 1px;
+}
+.details-content{
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+}

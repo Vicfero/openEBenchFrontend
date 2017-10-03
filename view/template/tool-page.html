@@ -10,14 +10,12 @@
             <tr>
                 <th><b>Name</b></th>
                 <th><b>Type</b></th>
-                <th><b>Link</b></th>
                 <th><b>Description</b></th>
                 <th><b>Details</b></th>
             </tr>
             <tr dir-paginate="tool in toolCtrl.toolsArray | filter:q | itemsPerPage: toolCtrl.pageSize" current-page="toolCtrl.currentPage">
-                <td>{{tool.name}}</td>
+                <td><a data-toggle="tooltip" title={{tool.homepage}} href="{{tool.homepage}}" target="_blank">{{tool.name}}</a></td>
                 <td><img class ="table-icons"ng-src="img/{{tool['@type']}}.png" alt="" data-toggle="tooltip" title="{{tool['@type'] | uppercase}}"></td>
-                <td><a href="{{tool.homepage}}" target="_blank">{{tool.homepage}}</a></td>
                 <td data-toggle="tooltip" title={{tool.description}} >{{tool.description}}</td>
                 <td><a ng-click="toolCtrl.showDetails(tool);" class="btn btn-primary btn-xs"type="button" name="button">Details</a></td>
                 <!-- href="https://bio.tools/?page=1&q={{tool.name}}" -->
@@ -30,25 +28,51 @@
         <dir-pagination-controls boundary-links="true" max-size="12"></dir-pagination-controls>
     </div>
     <div ng-show="toolCtrl.displayDetailsView == 1">
-        <hr>
-        <h1>{{toolCtrl.basicDetails.getName()}}</h1>
-        <div class="col-md-2" >
-            <div  ng-repeat="edamDiv in toolCtrl.detailsToDisplayObjects">
-                <div  style="margin: 2%; border: 1px solid black;">
-                    <p>Type : {{edamDiv.edamType}}</p>
-                    <p data-toggle="tooltip" title="{{edamDiv.toolComment[0]}}">Name : {{edamDiv.toolName[0]}}</p>
-                    <span ng-if="edamDiv.formatComment[0]">
-                        <p  data-toggle="tooltip" title="{{edamDiv.formatComment[0]}}">Format : {{edamDiv.formatLabel[0]}}</p>
-                    </span>
+        <div class="details-content">
+            <hr>
+            <div class="col-md-12">
+                <h1 class="text-center"><a data-toggle="tooltip" title="{{toolCtrl.basicDetails.getLink()}}" href="{{toolCtrl.basicDetails.getLink()}}">{{toolCtrl.basicDetails.getName()}}  </a><span><img class ="table-icons" ng-src="img/{{toolCtrl.basicDetails.getType()}}.png" alt="" data-toggle="tooltip" title="{{toolCtrl.basicDetails.getType() | uppercase}}"></span></h1>
+            </div>
+            <div class="col-md-6">
+                <h4>Description</h4>
+                <p>{{toolCtrl.basicDetails.getDesc()}}</p>
+                <h4>Version</h4>
+                <p>{{toolCtrl.basicDetails.getVersion() ? toolCtrl.basicDetails.getVersion() : "No version information found"}}</p>
+                <!-- <p>Documentation : {{toolCtrl.basicDetails.getDocs() ? toolCtrl.basicDetails.getDocs() : "No documentation found"}}</p> -->
+                <h4>Documentations</h4>
+                <ul ng-repeat="(key,value) in toolCtrl.basicDetails.getDocs() track by $index">
+                    <p>{{key}} : {{value ? value : "No information found"}}</p>
+                </ul>
+                <h4>Publications</h4>
+                <ul ng-repeat="publicationInfoObject in toolCtrl.basicDetails.getPublication()">
+                    <ul ng-repeat="(key,value) in publicationInfoObject track by $index">
+                        <p>{{key}} : {{value ? value : "No information found"}}</p>
+                    </ul>
+                </ul>
+                <h4>Contacts</h4>
+                <ul ng-repeat="contactInfoObject in toolCtrl.basicDetails.getContact()">
+                    <ul ng-repeat="(key,value) in contactInfoObject track by $index">
+                        <p>{{key}} : {{value ? value : "No information found"}}</p>
+                    </ul>
+                </ul>
+                <h4>Repositories</h4>
+                <ul ng-repeat="repoLinks in toolCtrl.basicDetails.getRepo()">
+                    <p ng-if="!repoLinks"> No repositories found</p>
+                    <a href="{{repoLinks}}">{{repoLinks ? repLinks : "No repositories found"}}</a>
+                </ul>
+            </div>
+            <div class="col-md-3" >
+                <h4>Semantics</h4>
+                <div  ng-repeat="edamDiv in toolCtrl.detailsToDisplayObjects">
+                    <div class="{{edamDiv.edamType}}">
+                        <h6 class="text-center">{{edamDiv.edamType | uppercase}}</h6>
+                        <p class="text-center" data-toggle="tooltip" title="{{edamDiv.toolComment[0]}}">Label : {{edamDiv.toolLabel[0]}}</p>
+                        <!-- <span ng-if="edamDiv.formatComment[0]"> -->
+                            <p  class="text-center" data-toggle="tooltip" title="{{edamDiv.formatComment[0]}}">Format : {{edamDiv.formatLabel[0] ? edamDiv.formatLabel[0] : "No format information"}}</p>
+                        <!-- </span> -->
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-10">
-            <p>Description : {{toolCtrl.basicDetails.getDesc()}}</p>
-            <p>Documentation : {{toolCtrl.basicDetails.getDocs() ? toolCtrl.basicDetails.getDocs() : "No data"}}</p>
-            <p>Version : {{toolCtrl.basicDetails.getVersion() ? toolCtrl.basicDetails.getVersion() : "No data"}}</p>
-            <p>Publication : {{toolCtrl.basicDetails.getPublication() ? toolCtrl.basicDetails.getPublication() : "No data"}}</p>
-            <p>Contact : {{toolCtrl.basicDetails.getContact() ? toolCtrl.basicDetails.getContact() : "No data"}}</p>
         </div>
     </div>
 </div>

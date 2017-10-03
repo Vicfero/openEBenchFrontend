@@ -7,8 +7,9 @@ function Detail(){
     this.publication
     this.contact;
     this.link;
+    this.repo;
 
-    this.construct = function (name,type,desc,docs,version,publication,contact,link){
+    this.construct = function (name,type,desc,docs,version,publication,contact,link,repo){
         this.setName(name);
         this.setType(type)
         this.setDesc(desc);
@@ -17,6 +18,7 @@ function Detail(){
         this.setPublication(publication);
         this.setContact(contact);
         this.setLink(link);
+        this.setRepo(repo)
     }
 
     //Setters
@@ -28,6 +30,7 @@ function Detail(){
     this.setPublication = function (publication){this.publication = publication;}
     this.setContact = function (contact){this.contact = contact;}
     this.setLink = function (link){this.link = link;}
+    this.setRepo= function (repo) {this.repo = repo;}
 
     //Getters
     this.getName = function () {return this.name;}
@@ -38,4 +41,5 @@ function Detail(){
     this.getPublication = function () {return this.publication;}
     this.getContact = function () {return this.contact;}
     this.getLink = function () {return this.link;}
+    this.getRepo = function () {return this.repo;}
 }
