@@ -41,12 +41,16 @@
 			vm.displayDetailsView = 0;
 			vm.detailsToDisplayObjects = [];
 			vm.basicDetails;
-
+			vm.loadingDisplay;
+			vm.message = "";
+			vm.urlToBioTools = "";
 			//if $rootScope.array is empty
 			if(!$rootScope.array){
+				vm.loadingDisplay = 0;
 				vm.getData();
 			} else {
 				//if $rootScope.array is full
+				vm.loadingDisplay = 1;
 				vm.toolsArray = $rootScope.array;
 			}
 
@@ -59,19 +63,27 @@
 		@author Vicky Sundesha
 		*/
 		vm.getData = function (){
-			// varcontact url = 'http://localhost/~vsundesh/openEBenchFrontend/json/tool.json'
+			// var url = 'http://bsclife010.int.bsc.es/~vsundesh/openEBenchFrontend/json/tool.json'
 			var url = 'https://elixir.bsc.es/tool'
 			$http({
 				method: 'GET',
 				url: url,
+				timeout: 3000,
 			}).then(function successCallback(response){
 					vm.toolsArray =  response.data;
 					$rootScope.array = vm.toolsArray;
-					// console.log(vm.toolsArray);
+					vm.loadingDisplay = 1;
 			}, function errorCallback(response){
-					// TODO: control errors
-					console.log(response);
+					// console.log(response);
+					var msg = "Sorry our services are not available at this moment. Please try later"
+					vm.createMsg(response,msg);
 			});
+		}
+
+
+		vm.createMsg = function (response,msg){
+			var messageToDisplay = "<div class='alert alert-danger text-center' role='alert'>"+msg+"</div>";
+            vm.message = messageToDisplay;
 		}
 
 
@@ -85,7 +97,10 @@
 		@author Vicky Sundesha
 		*/
 		vm.showDetails = function (tool){
+			vm.urlToBioTools = "";
 			vm.detailsToDisplayObjects = [];
+			vm.urlToBioTools = "https://bio.tools/"+tool.name.replace(/[\s]/g,"_");
+			// console.log(vm.urlToBioTools);
 			vm.populateToolDetails(tool);
 			var idSplit = tool['@id'];
 			var pathname = new URL(idSplit).pathname;
@@ -94,20 +109,25 @@
 		};
 
 		vm.getDetails = function (url){
+			// console.log(url);
 			$http({
 				method: 'GET',
 				url: url,
+				timeout: 3000,
 			}).then(function successCallback(response){
 					vm.toolDetails = response.data;
 					vm.seperateDetails(vm.toolDetails);
 			}, function errorCallback(response){
-					// TODO: control errors
-					console.log(response);
+					var msg = "Sorry our services are not available at this moment. Please try later"
+					vm.createMsg(response,msg);
 			});
 		};
 
+
+
+
 		vm.populateToolDetails=function(tool){
-			console.log(tool);
+			// console.log(tool);
 			var toolBasicDetails = new Detail();
 			toolBasicDetails.setName(tool.name);
 			toolBasicDetails.setLink(tool.homepage)
@@ -147,13 +167,13 @@
 						var edamArray = object[objectKeys[i]];
 						vm.iterateEdamArray(edamArray,objectKeys[i]);
 						break;
-					default:
+					default:// TODO: control errors
 
 				};
 			};
 			if(i == objectKeys.length){
 				vm.displayDetailsView = 1;
-			}
+			}// TODO: control errors
 		}
 
 
@@ -166,7 +186,7 @@
 
 		vm.createDetailsView = function (edamObject,edamType){
 
-			console.log(edamObject);
+			// console.log(edamObject);
 			var toolLabel;
 			var toolComment;
 			var formatLabel;

@@ -2,9 +2,13 @@
     master.css
     the main style sheet document
 */
+/*<style>*/
+@import url('https://fonts.googleapis.com/css?family=Roboto:300');
+/*</style> */
 
 *{
     text-align: justify;
+    font-family: 'Roboto', sans-serif;
 }
 .logo img{
     height: 91px;
@@ -36,23 +40,23 @@ td {
     overflow-x: auto;
 }
 .inputs{
-    border-left: 6px solid #174C7F;
-    background-color: #6A98C4;
+    border-left: 4px solid #174C7F;
+    background-color: #F9F9F9;
     padding: 1px;
 }
 .outputs{
-    border-left: 6px solid #E94D38;
-    background-color: #FF9281;
+    border-left: 4px solid #E94D38;
+    background-color: #F9F9F9;
     padding: 1px;
 }
 .topics{
-    background-color: #9DE8B1;
-    border-left: 6px solid #2AAE4D;
+    background-color: #F9F9F9;
+    border-left: 4px solid #2AAE4D;
     padding: 1px;
 }
 .operations{
-    background-color: #FFCC81;
-    border-left: 6px solid #E9A138;
+    background-color: #F9F9F9;
+    border-left: 4px solid #E9A138;
     padding: 1px;
 }
 .details-content{

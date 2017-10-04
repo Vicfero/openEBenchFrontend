@@ -1,77 +1,86 @@
 <div ng-controller="toolController as toolCtrl" ng-init="toolCtrl.loadInitData();" class="conatiner-fluid">
-    <div class="form-group">
-        <div class="input-group col-md-2 col-md-4 col-md-offset-5 col-xs-offset-8">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-            <input ng-model="q" id="search" type="text" class="form-control" name="search" placeholder="Filter">
+    <!-- <div ng-hide="toolCtrl.loadingDisplay==1" class="col-md-offset-4 col-xs-offset-5">
+        <div  class="progress" style="width:50%">
+            <div  class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="110" aria-valuemin="0" aria-valuemax="100" style="width:100%">Loading... </div>
         </div>
-    </div>
-    <div class="responsive-table">
+    </div> -->
+    <div class="responsive-table" ng-show="toolCtrl.loadingDisplay==1">
+        <div class="form-group">
+            <div class="input-group col-md-2 col-md-4 col-md-offset-5 col-xs-offset-8">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                <input ng-model="q" id="search" type="text" class="form-control" name="search" placeholder="Filter">
+            </div>
+        </div>
         <table class="table table-striped" >
             <tr>
                 <th><b>Name</b></th>
+                <th><b>More info</b></th>
                 <th><b>Type</b></th>
                 <th><b>Description</b></th>
-                <th><b>Details</b></th>
             </tr>
             <tr dir-paginate="tool in toolCtrl.toolsArray | filter:q | itemsPerPage: toolCtrl.pageSize" current-page="toolCtrl.currentPage">
                 <td><a data-toggle="tooltip" title={{tool.homepage}} href="{{tool.homepage}}" target="_blank">{{tool.name}}</a></td>
+                <td><a ng-click="toolCtrl.showDetails(tool);" type="button" class="btn btn-info btn-xs" >+ info</a></td>
                 <td><img class ="table-icons"ng-src="img/{{tool['@type']}}.png" alt="" data-toggle="tooltip" title="{{tool['@type'] | uppercase}}"></td>
                 <td data-toggle="tooltip" title={{tool.description}} >{{tool.description}}</td>
-                <td><a ng-click="toolCtrl.showDetails(tool);" class="btn btn-primary btn-xs"type="button" name="button">Details</a></td>
-                <!-- href="https://bio.tools/?page=1&q={{tool.name}}" -->
-                <!-- <td ng-show="toolCtrl.toolsArray.length==0">Sorry! No data found</td> -->
-                <!-- {{!tool ? "yes" : "no"}} -->
             </tr>
         </table>
     </div>
     <div class="text-center">
         <dir-pagination-controls boundary-links="true" max-size="12"></dir-pagination-controls>
     </div>
+    <div class="text-center" ng-bind-html="toolCtrl.message"></div>
     <div ng-show="toolCtrl.displayDetailsView == 1">
-        <div class="details-content">
+        <div class="details-content container-fluid">
             <hr>
             <div class="col-md-12">
                 <h1 class="text-center"><a data-toggle="tooltip" title="{{toolCtrl.basicDetails.getLink()}}" href="{{toolCtrl.basicDetails.getLink()}}">{{toolCtrl.basicDetails.getName()}}  </a><span><img class ="table-icons" ng-src="img/{{toolCtrl.basicDetails.getType()}}.png" alt="" data-toggle="tooltip" title="{{toolCtrl.basicDetails.getType() | uppercase}}"></span></h1>
             </div>
             <div class="col-md-6">
-                <h4>Description</h4>
+                <h4>Description <small><span class="label label-info">bio tools</span></small></h4>
                 <p>{{toolCtrl.basicDetails.getDesc()}}</p>
-                <h4>Version</h4>
+                <h4>Version <small><span class="label label-info">bio tools</span></small></h4>
                 <p>{{toolCtrl.basicDetails.getVersion() ? toolCtrl.basicDetails.getVersion() : "No version information found"}}</p>
                 <!-- <p>Documentation : {{toolCtrl.basicDetails.getDocs() ? toolCtrl.basicDetails.getDocs() : "No documentation found"}}</p> -->
-                <h4>Documentations</h4>
+                <h4>Documentations <small><span class="label label-info">bio tools</span></small></h4>
+                <p ng-if="toolCtrl.basicDetails.getDocs().length == ''">No documentation found</p>
                 <ul ng-repeat="(key,value) in toolCtrl.basicDetails.getDocs() track by $index">
                     <p>{{key}} : {{value ? value : "No information found"}}</p>
                 </ul>
-                <h4>Publications</h4>
+                <h4>Publications <small><span class="label label-info">bio tools</span></small></h4>
+                <p ng-if="toolCtrl.basicDetails.getPublication().length == 0">No publications found</p>
                 <ul ng-repeat="publicationInfoObject in toolCtrl.basicDetails.getPublication()">
                     <ul ng-repeat="(key,value) in publicationInfoObject track by $index">
                         <p>{{key}} : {{value ? value : "No information found"}}</p>
                     </ul>
                 </ul>
-                <h4>Contacts</h4>
+                <h4>Contacts <small><span class="label label-info">bio tools</span></small></h4>
+                <p ng-if="toolCtrl.basicDetails.getContact().length == 0">No contact information found</p>
                 <ul ng-repeat="contactInfoObject in toolCtrl.basicDetails.getContact()">
                     <ul ng-repeat="(key,value) in contactInfoObject track by $index">
                         <p>{{key}} : {{value ? value : "No information found"}}</p>
                     </ul>
                 </ul>
-                <h4>Repositories</h4>
-                <ul ng-repeat="repoLinks in toolCtrl.basicDetails.getRepo()">
-                    <p ng-if="!repoLinks"> No repositories found</p>
-                    <a href="{{repoLinks}}">{{repoLinks ? repLinks : "No repositories found"}}</a>
+                <h4>Repositories <small><span class="label label-info">bio tools</span></small></h4>
+                <p ng-if="toolCtrl.basicDetails.getRepo().length == 0">No repositories found</p>
+                <ul ng-repeat="repoLinks in toolCtrl.basicDetails.getRepo() track by $index">
+                    <a target="_blank" href="{{repoLinks}}">{{repoLinks}}</a>
                 </ul>
             </div>
             <div class="col-md-3" >
-                <h4>Semantics</h4>
+                <h4>Semantics <small><span class="label label-warning">EDAM</span></small></h4>
                 <div  ng-repeat="edamDiv in toolCtrl.detailsToDisplayObjects">
                     <div class="{{edamDiv.edamType}}">
                         <h6 class="text-center">{{edamDiv.edamType | uppercase}}</h6>
-                        <p class="text-center" data-toggle="tooltip" title="{{edamDiv.toolComment[0]}}">Label : {{edamDiv.toolLabel[0]}}</p>
-                        <!-- <span ng-if="edamDiv.formatComment[0]"> -->
-                            <p  class="text-center" data-toggle="tooltip" title="{{edamDiv.formatComment[0]}}">Format : {{edamDiv.formatLabel[0] ? edamDiv.formatLabel[0] : "No format information"}}</p>
-                        <!-- </span> -->
+                            <p class="text-center" data-toggle="tooltip" title="{{edamDiv.toolComment[0]}}">{{edamDiv.toolLabel[0]}}</p>
+                            <span ng-if="edamDiv.edamType == 'inputs' || edamDiv.edamType == 'outputs'">
+                                <p  class="text-center" data-toggle="tooltip" title="{{edamDiv.formatComment[0]}}">{{edamDiv.formatLabel[0] ? edamDiv.formatLabel[0] : "No format information"}}</p>
+                            </span>
                     </div>
                 </div>
+            </div>
+            <div class="col-md-12">
+                <a target="_blank" href="{{toolCtrl.urlToBioTools}}"><small class="text-center" >For more detailed information about {{toolCtrl.basicDetails.getName()}} please visit bio.tools</small></a>
             </div>
         </div>
     </div>

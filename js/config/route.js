@@ -1,6 +1,6 @@
 /**
 @name route.js
-@description this takes care of url routes 
+@description this takes care of url routes
 @version 1.0
 @author Vicky Madan Sundesha
 */
