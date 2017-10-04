@@ -19,7 +19,7 @@
                 <th><b>Description</b></th>
             </tr>
             <tr dir-paginate="tool in toolCtrl.toolsArray | filter:q | itemsPerPage: toolCtrl.pageSize" current-page="toolCtrl.currentPage">
-                <td><a data-toggle="tooltip" title={{tool.homepage}} href="{{tool.homepage}}" target="_blank">{{tool.name}}</a></td>
+                <td><a data-toggle="tooltip" title={{tool.homepage}} href="{{tool.homepage}}" target="_blank">{{tool.name}}</a><i class="fa fa-external-link"></i></td>
                 <td><a ng-click="toolCtrl.showDetails(tool);" type="button" class="btn btn-info btn-xs" >+ info</a></td>
                 <td><img class ="table-icons"ng-src="img/{{tool['@type']}}.png" alt="" data-toggle="tooltip" title="{{tool['@type'] | uppercase}}"></td>
                 <td data-toggle="tooltip" title={{tool.description}} >{{tool.description}}</td>

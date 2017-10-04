@@ -127,7 +127,7 @@
 
 
 		vm.populateToolDetails=function(tool){
-			// console.log(tool);
+			console.log(tool);
 			var toolBasicDetails = new Detail();
 			toolBasicDetails.setName(tool.name);
 			toolBasicDetails.setLink(tool.homepage)
@@ -186,7 +186,7 @@
 
 		vm.createDetailsView = function (edamObject,edamType){
 
-			// console.log(edamObject);
+			console.log(edamObject);
 			var toolLabel;
 			var toolComment;
 			var formatLabel;

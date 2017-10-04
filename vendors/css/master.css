@@ -63,3 +63,9 @@ td {
     margin-bottom: 15px;
     padding-bottom: 10px;
 }
+a[href^="https://"],a[href^="http://"] {
+    background: url(../../img/external.svg) center right no-repeat;
+    height: 1px;
+    width: auto;
+    padding-right: 13px;
+}
