@@ -32,9 +32,7 @@
 		@version 1.0
 		@author Vicky Sundesha
 		*/
-		vm.loadInitData = function() {					$location.hash('bottom');
-					// call $anchorScroll()
-					$anchorScroll();
+		vm.loadInitData = function() {
 			vm.currentPage = 1;
 			vm.pageSize = 10;
 			vm.toolsArray = [];
