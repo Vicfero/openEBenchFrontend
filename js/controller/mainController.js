@@ -12,7 +12,6 @@
 
 	angular
 		.module('elixibilitasApp')
-
 		.controller("mainController",mainController)
 
     mainController.$inject = ['$scope','$rootScope']

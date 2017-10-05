@@ -18,11 +18,11 @@
                 <th><b>Type</b></th>
                 <th><b>Description</b></th>
             </tr>
-            <tr dir-paginate="tool in toolCtrl.toolsArray | filter: q  | itemsPerPage: toolCtrl.pageSize" current-page="toolCtrl.currentPage">
-                <td><a data-toggle="tooltip" title={{tool.homepage}} href="{{tool.homepage}}" target="_blank">{{tool.name}}</a><i class="fa fa-external-link"></i></td>
+            <tr dir-paginate="tool in toolCtrl.toolsArray | filter: q  | itemsPerPage: toolCtrl.pageSize" current-page="toolCtrl.currentPage" >
+                <td><a data-toggle="tooltip" title={{tool.getLink()}} href="{{tool.getLink()}}" target="_blank">{{tool.getName()}}</a><i class="fa fa-external-link"></i></td>
                 <td><a ng-click="toolCtrl.showDetails(tool);" type="button" class="btn btn-info btn-xs" >+ info</a></td>
-                <td><img class ="table-icons"ng-src="img/{{tool['@type']}}.png" alt="" data-toggle="tooltip" title="{{tool['@type'] | uppercase}}"></td>
-                <td data-toggle="tooltip" title={{tool.description}} >{{tool.description}}</td>
+                <td><img class ="table-icons"ng-src="img/{{tool.getType()}}.png" alt="" data-toggle="tooltip" title="{{tool.getType() | uppercase}}"></td>
+                <td data-toggle="tooltip" title={{tool.getDesc()}} >{{tool.getDesc()}}</td>
             </tr>
         </table>
     </div>
@@ -40,16 +40,21 @@
                 <h1 class="text-center"><a data-toggle="tooltip" title="{{toolCtrl.basicDetails.getLink()}}" href="{{toolCtrl.basicDetails.getLink()}}">{{toolCtrl.basicDetails.getName()}}  </a><span><img class ="table-icons" ng-src="img/{{toolCtrl.basicDetails.getType()}}.png" alt="" data-toggle="tooltip" title="{{toolCtrl.basicDetails.getType() | uppercase}}"></span></h1>
             </div>
             <div class="col-md-6">
+
                 <h4>Description <small><span class="label label-info">bio tools</span></small></h4>
                 <p>{{toolCtrl.basicDetails.getDesc()}}</p>
+
+
                 <h4>Version <small><span class="label label-info">bio tools</span></small></h4>
                 <p>{{toolCtrl.basicDetails.getVersion() ? toolCtrl.basicDetails.getVersion() : "No version information found"}}</p>
-                <!-- <p>Documentation : {{toolCtrl.basicDetails.getDocs() ? toolCtrl.basicDetails.getDocs() : "No documentation found"}}</p> -->
+
+
                 <h4>Documentations <small><span class="label label-info">bio tools</span></small></h4>
-                <p ng-if="toolCtrl.basicDetails.getDocs().length == ''">No documentation found</p>
                 <ul ng-repeat="(key,value) in toolCtrl.basicDetails.getDocs() track by $index">
                     <p>{{key}} : {{value ? value : "No information found"}}</p>
                 </ul>
+
+
                 <h4>Publications <small><span class="label label-info">bio tools</span></small></h4>
                 <p ng-if="toolCtrl.basicDetails.getPublication().length == 0">No publications found</p>
                 <ul ng-repeat="publicationInfoObject in toolCtrl.basicDetails.getPublication()">
@@ -57,6 +62,8 @@
                         <p>{{key}} : {{value ? value : "No information found"}}</p>
                     </ul>
                 </ul>
+
+
                 <h4>Contacts <small><span class="label label-info">bio tools</span></small></h4>
                 <p ng-if="toolCtrl.basicDetails.getContact().length == 0">No contact information found</p>
                 <ul ng-repeat="contactInfoObject in toolCtrl.basicDetails.getContact()">
@@ -64,14 +71,20 @@
                         <p>{{key}} : {{value ? value : "No information found"}}</p>
                     </ul>
                 </ul>
+
+
                 <h4>Repositories <small><span class="label label-info">bio tools</span></small></h4>
                 <p ng-if="toolCtrl.basicDetails.getRepo().length == 0">No repositories found</p>
                 <ul ng-repeat="repoLinks in toolCtrl.basicDetails.getRepo() track by $index">
                     <a target="_blank" href="{{repoLinks}}">{{repoLinks}}</a>
                 </ul>
+
+
             </div>
+
+
             <div class="col-md-12">
-                <a target="_blank" href="{{toolCtrl.urlToBioTools}}"><small class="text-center" >For more detailed information about {{toolCtrl.basicDetails.getName()}} please visit bio.tools</small></a>
+                <a target="_blank" href="{{toolCtrl.basicDetails.getLinkToBioTool()}}"><small class="text-center" >For more detailed information about {{toolCtrl.basicDetails.getName()}} please visit bio.tools</small></a>
             </div>
         </div>
     </div>

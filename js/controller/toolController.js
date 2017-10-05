@@ -32,22 +32,21 @@
 		@version 1.0
 		@author Vicky Sundesha
 		*/
-		vm.loadInitData = function() {	
+		vm.loadInitData = function() {
 			vm.currentPage = 1;
 			vm.pageSize = 10;
 			vm.toolsArray = [];
 			vm.displayDetailsView = 0;
 			vm.basicDetails;
 			vm.message = "";
-			vm.urlToBioTools;
 			//if $rootScope.array is empty
 			if(!$rootScope.array){
 				vm.loadingDisplay = 0;
 				vm.getData();
 			} else {
 				//if $rootScope.array is full
-				vm.loadingDisplay = 1;
 				vm.toolsArray = $rootScope.array;
+				vm.loadingDisplay = 1;
 			}
 
 		};
@@ -59,18 +58,15 @@
 		@author Vicky Sundesha
 		*/
 		vm.getData = function (){
-			var url = 'http://bsclife010.int.bsc.es/~vsundesh/openEBenchFrontend/json/tool.json'
-			// var url = 'https://elixir.bsc.es/tool'
+			// var url = 'http://bsclife010.int.bsc.es/~vsundesh/openEBenchFrontend/json/tool.json'
+			var url = 'https://elixir.bsc.es/tool'
 			$http({
 				method: 'GET',
 				url: url,
 				timeout: 3000,
 			}).then(function successCallback(response){
-					vm.toolsArray =  response.data;
-					$rootScope.array = vm.toolsArray;
-					vm.loadingDisplay = 1;
+					vm.populateToolDetails(response.data);
 			}, function errorCallback(response){
-					// console.log(response);
 					var msg = "Sorry our services are not available at this moment. Please try later"
 					vm.createMsg(response,msg);
 			});
@@ -91,10 +87,7 @@
 		@author Vicky Sundesha
 		*/
 		vm.showDetails = function (tool){
-			vm.urlToBioTools = "";
-			vm.urlToBioTools = "https://bio.tools/"+tool.name.replace(/[\s]/g,"_");
-			// console.log(vm.urlToBioTools);
-			vm.populateToolDetails(tool);
+			vm.basicDetails=tool;
 			vm.displayDetailsView = 1;
 		};
 
@@ -103,28 +96,35 @@
 
 
 		vm.populateToolDetails=function(tool){
-			console.log(tool);
-			var toolBasicDetails = new Detail();
-			toolBasicDetails.setName(tool.name);
-			toolBasicDetails.setLink(tool.homepage)
-			toolBasicDetails.setType(tool['@type'])
-			toolBasicDetails.setDesc(tool.description)
-			if(tool.version){
-				toolBasicDetails.setVersion(tool.version)
+			for (var i = 0 ; i<tool.length; i++){
+				var urlToBioTools = "";
+				var urlToBioTools = "https://bio.tools/"+tool[i].name.replace(/[\s]/g,"_");
+				var toolBasicDetails = new Detail();
+				toolBasicDetails.setLinkToBioTool(urlToBioTools);
+				toolBasicDetails.setName(tool[i].name);
+				toolBasicDetails.setLink(tool[i].homepage)
+				toolBasicDetails.setType(tool[i]['@type'])
+				toolBasicDetails.setDesc(tool[i].description)
+				if(tool[i].version){
+					toolBasicDetails.setVersion(tool[i].version)
+				}
+				if(tool[i].publications){
+					toolBasicDetails.setPublication(tool[i].publications)
+				}
+				if(tool[i].contacts){
+					toolBasicDetails.setContact(tool[i].contacts)
+				}
+				if(tool[i].repositories){
+					toolBasicDetails.setRepo(tool[i].repositories)
+				}
+				if(tool[i].documentation){
+					toolBasicDetails.setDocs(tool[i].documentation)
+				}
+				vm.toolsArray.push(toolBasicDetails);
 			}
-			if(tool.publications){
-				toolBasicDetails.setPublication(tool.publications)
-			}
-			if(tool.contacts){
-				toolBasicDetails.setContact(tool.contacts)
-			}
-			if(tool.repositories){
-				toolBasicDetails.setRepo(tool.repositories)
-			}
-			if(tool.documentation){
-				toolBasicDetails.setDocs(tool.documentation)
-			}
-			vm.basicDetails = toolBasicDetails;
+			$rootScope.array = vm.toolsArray;
+			vm.loadingDisplay = 1;
+
 		}
 
 
