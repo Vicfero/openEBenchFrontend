@@ -117,9 +117,9 @@
 			}).then(function successCallback(response){
 					vm.toolDetails = response.data;
 					vm.seperateDetails(vm.toolDetails);
-					$location.hash('bottom');
-					// call $anchorScroll()
-					$anchorScroll();
+					// $location.hash('bottom');
+					// // call $anchorScroll()
+					// $anchorScroll();
 			}, function errorCallback(response){
 					var msg = "Sorry our services are not available at this moment. Please try later"
 					vm.createMsg(response,msg);
