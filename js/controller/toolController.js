@@ -32,20 +32,14 @@
 		@version 1.0
 		@author Vicky Sundesha
 		*/
-		vm.loadInitData = function() {					$location.hash('bottom');
-					// call $anchorScroll()
-					$anchorScroll();
+		vm.loadInitData = function() {	
 			vm.currentPage = 1;
 			vm.pageSize = 10;
 			vm.toolsArray = [];
-			vm.edamArray = [];
-			vm.toolDetails;
 			vm.displayDetailsView = 0;
-			vm.detailsToDisplayObjects = [];
 			vm.basicDetails;
-			vm.loadingDisplay;
 			vm.message = "";
-			vm.urlToBioTools = "";
+			vm.urlToBioTools;
 			//if $rootScope.array is empty
 			if(!$rootScope.array){
 				vm.loadingDisplay = 0;
@@ -98,33 +92,12 @@
 		*/
 		vm.showDetails = function (tool){
 			vm.urlToBioTools = "";
-			vm.detailsToDisplayObjects = [];
 			vm.urlToBioTools = "https://bio.tools/"+tool.name.replace(/[\s]/g,"_");
 			// console.log(vm.urlToBioTools);
 			vm.populateToolDetails(tool);
-			var idSplit = tool['@id'];
-			var pathname = new URL(idSplit).pathname;
-			var url = "https://elixir.bsc.es/edam"+pathname;
-			vm.getDetails(url);
+			vm.displayDetailsView = 1;
 		};
 
-		vm.getDetails = function (url){
-			console.log(url);
-			$http({
-				method: 'GET',
-				url: url,
-				timeout: 3000,
-			}).then(function successCallback(response){
-					vm.toolDetails = response.data;
-					vm.seperateDetails(vm.toolDetails);
-					// $location.hash('bottom');
-					// // call $anchorScroll()
-					// $anchorScroll();
-			}, function errorCallback(response){
-					var msg = "Sorry our services are not available at this moment. Please try later"
-					vm.createMsg(response,msg);
-			});
-		};
 
 
 
@@ -154,67 +127,7 @@
 			vm.basicDetails = toolBasicDetails;
 		}
 
-		vm.seperateDetails = function (toolDetails){
-			var object = toolDetails;
-			var objectKeys = Object.keys(object);
-			var i = 0;
-			for (i = 0; i < objectKeys.length; i++) {
-				switch (objectKeys[i]) {
-					case "inputs" :
 
-					case "operations" :
-
-					case "outputs" :
-
-					case "topics" :
-						var edamArray = object[objectKeys[i]];
-						vm.iterateEdamArray(edamArray,objectKeys[i]);
-						break;
-					default:// TODO: control errors
-
-				};
-			};
-			if(i == objectKeys.length){
-				vm.displayDetailsView = 1;
-			}// TODO: control errors
-		}
-
-
-		vm.iterateEdamArray = function (edamArray,edamType){
-				var j = 0;
-				for ( j=0; j < edamArray.length; j++){
-					vm.createDetailsView(edamArray[j],edamType)
-				}
-		};
-
-		vm.createDetailsView = function (edamObject,edamType){
-
-			console.log(edamObject);
-			var toolLabel;
-			var toolComment;
-			var formatLabel;
-			var formatComment;
-
-			toolLabel = edamObject.labels;
-			toolComment = edamObject.comments;
-
-			if(edamObject.formats){
-
-				if(edamObject.formats[0]){
-					formatLabel = edamObject.formats[0].labels;
-					formatComment = edamObject.formats[0].comments;
-				}
-			}
-			var edamDetailObject = new EdamDetail();
-			// edamDetailObject.construct(edamType,toolLabel,toolComment,formatLabel,formatComment);
-			edamDetailObject.setEdamType(edamType);
-			edamDetailObject.setToolLabel(toolLabel);
-			edamDetailObject.setToolComment(toolComment);
-			edamDetailObject.setFormatLabel(formatLabel);
-			edamDetailObject.setFormatComment(formatComment);
-			vm.detailsToDisplayObjects.push(edamDetailObject)
-
-		}
 	}
 
 

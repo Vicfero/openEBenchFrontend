@@ -70,18 +70,6 @@
                     <a target="_blank" href="{{repoLinks}}">{{repoLinks}}</a>
                 </ul>
             </div>
-            <div class="col-md-3" >
-                <h4>Semantics <small><span class="label label-warning">EDAM</span></small></h4>
-                <div  ng-repeat="edamDiv in toolCtrl.detailsToDisplayObjects">
-                    <div class="{{edamDiv.edamType}}">
-                        <h6 class="text-center">{{edamDiv.edamType | uppercase}}</h6>
-                            <p class="text-center" data-toggle="tooltip" title="{{edamDiv.toolComment[0]}}">{{edamDiv.toolLabel[0]}}</p>
-                            <span ng-if="edamDiv.edamType == 'inputs' || edamDiv.edamType == 'outputs'">
-                                <p  class="text-center" data-toggle="tooltip" title="{{edamDiv.formatComment[0]}}">{{edamDiv.formatLabel[0] ? edamDiv.formatLabel[0] : "No format information"}}</p>
-                            </span>
-                    </div>
-                </div>
-            </div>
             <div class="col-md-12">
                 <a target="_blank" href="{{toolCtrl.urlToBioTools}}"><small class="text-center" >For more detailed information about {{toolCtrl.basicDetails.getName()}} please visit bio.tools</small></a>
             </div>
