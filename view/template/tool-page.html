@@ -18,7 +18,7 @@
                 <th><b>Type</b></th>
                 <th><b>Description</b></th>
             </tr>
-            <tr dir-paginate="tool in toolCtrl.toolsArray | filter:q | itemsPerPage: toolCtrl.pageSize" current-page="toolCtrl.currentPage">
+            <tr dir-paginate="tool in toolCtrl.toolsArray | filter: q  | itemsPerPage: toolCtrl.pageSize" current-page="toolCtrl.currentPage">
                 <td><a data-toggle="tooltip" title={{tool.homepage}} href="{{tool.homepage}}" target="_blank">{{tool.name}}</a><i class="fa fa-external-link"></i></td>
                 <td><a ng-click="toolCtrl.showDetails(tool);" type="button" class="btn btn-info btn-xs" >+ info</a></td>
                 <td><img class ="table-icons"ng-src="img/{{tool['@type']}}.png" alt="" data-toggle="tooltip" title="{{tool['@type'] | uppercase}}"></td>
@@ -29,8 +29,11 @@
     <div class="text-center">
         <dir-pagination-controls boundary-links="true" max-size="12"></dir-pagination-controls>
     </div>
+    <!-- <span ng-repeat="i in toolCtrl.toolsArray">
+        {{i.description}}<br>
+    </span> -->
     <div class="text-center" ng-bind-html="toolCtrl.message"></div>
-    <div ng-show="toolCtrl.displayDetailsView == 1">
+    <div ng-show="toolCtrl.displayDetailsView == 1" id="bottom">
         <div class="details-content container-fluid">
             <hr>
             <div class="col-md-12">

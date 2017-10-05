@@ -14,14 +14,14 @@
 		.controller("toolController", toolController);
 
 
-	toolController.$inject = ['$scope','$http', '$window','$rootScope']
+	toolController.$inject = ['$scope','$http', '$window','$rootScope','$anchorScroll', '$location']
 	/**
 	@name toolController
 	@description controls the tool-page.html page of the angular app.
 	@version 1.0
 	@author Vicky Sundesha
 	*/
-	function toolController ($scope, $http, $window, $rootScope){
+	function toolController ($scope, $http, $window, $rootScope, $anchorScroll, $location){
 
 		var vm = this;
 
@@ -63,8 +63,8 @@
 		@author Vicky Sundesha
 		*/
 		vm.getData = function (){
-			// var url = 'http://bsclife010.int.bsc.es/~vsundesh/openEBenchFrontend/json/tool.json'
-			var url = 'https://elixir.bsc.es/tool'
+			var url = 'http://bsclife010.int.bsc.es/~vsundesh/openEBenchFrontend/json/tool.json'
+			// var url = 'https://elixir.bsc.es/tool'
 			$http({
 				method: 'GET',
 				url: url,
@@ -90,9 +90,7 @@
 
 		/**
 		@name showDetails
-		@description showDetails is called when detailsvm.toolsArray =  response.data;
-					$rootScope.array = vm.toolsArray;
-					console.log(vm.toolsArray); button is clicked for everytool this iterates the semantics and send each semantic to this corisponding function.
+		@description showDetails is called when details button is clicked for everytool this iterates the semantics and send each semantic to this corisponding function.
 		@version 1.0
 		@author Vicky Sundesha
 		*/
@@ -109,7 +107,7 @@
 		};
 
 		vm.getDetails = function (url){
-			// console.log(url);
+			console.log(url);
 			$http({
 				method: 'GET',
 				url: url,
@@ -117,6 +115,9 @@
 			}).then(function successCallback(response){
 					vm.toolDetails = response.data;
 					vm.seperateDetails(vm.toolDetails);
+					$location.hash('bottom');
+					// call $anchorScroll()
+					$anchorScroll();
 			}, function errorCallback(response){
 					var msg = "Sorry our services are not available at this moment. Please try later"
 					vm.createMsg(response,msg);
