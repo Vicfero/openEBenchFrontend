@@ -24,7 +24,6 @@ function Detail(){
         this.setCredits(credits);
         this.setLinkToBioTool(linkToBioTool);
     }
-
     //Setters
     this.setName = function (name) {this.name = name;}
     this.setType = function (type) {this.type = type;}
@@ -37,7 +36,6 @@ function Detail(){
     this.setRepo= function (repo) {this.repo = repo;}
     this.setCredits = function (credits) {this.credits = credits;}
     this.setLinkToBioTool = function (linkToBioTool) {this.linkToBioTool = linkToBioTool;}
-
     //Getters
     this.getName = function () {return this.name;}
     this.getType = function () {return this.type;}
