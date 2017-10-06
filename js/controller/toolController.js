@@ -95,36 +95,99 @@
 
 
 
+		// vm.populateToolDetails=function(tool){
+		// 	for (var i = 0 ; i<tool.length; i++){
+		// 		var urlToBioTools = "";
+		// 		var urlToBioTools = "https://bio.tools/"+tool[i].name.replace(/[\s]/g,"_");
+		// 		var toolBasicDetails = new Detail();
+		// 		toolBasicDetails.setName(tool[i].name);
+		// 		toolBasicDetails.setLink(tool[i].homepage)
+		// 		toolBasicDetails.setType(tool[i]['@type'])
+		// 		toolBasicDetails.setDesc(tool[i].description)
+		// 		if(tool[i].version){
+		// 			toolBasicDetails.setVersion(tool[i].version)
+		// 		}
+		// 		if(tool[i].publications){
+		// 			toolBasicDetails.setPublication(tool[i].publications)
+		// 		}
+		// 		if(tool[i].contacts){
+		// 			toolBasicDetails.setContact(tool[i].contacts)
+		// 		}
+		// 		if(tool[i].repositories){
+		// 			toolBasicDetails.setRepo(tool[i].repositories)
+		// 		}
+		// 		if(tool[i].documentation){
+		// 			toolBasicDetails.setDocs(tool[i].documentation)
+		// 		}
+		// 		toolBasicDetails.setLinkToBioTool(urlToBioTools);
+		//
+		// 		vm.toolsArray.push(toolBasicDetails);
+		// 	}
+		// 	$rootScope.array = vm.toolsArray;
+		// 	vm.loadingDisplay = 1;
+		//
+		// }
+
 		vm.populateToolDetails=function(tool){
-			for (var i = 0 ; i<tool.length; i++){
-				var urlToBioTools = "";
-				var urlToBioTools = "https://bio.tools/"+tool[i].name.replace(/[\s]/g,"_");
-				var toolBasicDetails = new Detail();
-				toolBasicDetails.setLinkToBioTool(urlToBioTools);
-				toolBasicDetails.setName(tool[i].name);
-				toolBasicDetails.setLink(tool[i].homepage)
-				toolBasicDetails.setType(tool[i]['@type'])
-				toolBasicDetails.setDesc(tool[i].description)
+			for (var i = 0; i<tool.length; i++){
+
+				var instance = new Instance();
+
+				instance.setType(tool[i]['@type'])
 				if(tool[i].version){
-					toolBasicDetails.setVersion(tool[i].version)
+					instance.setVersion(tool[i].version)
 				}
 				if(tool[i].publications){
-					toolBasicDetails.setPublication(tool[i].publications)
+					instance.setPublication(tool[i].publications)
 				}
-				if(tool[i].contacts){
-					toolBasicDetails.setContact(tool[i].contacts)
-				}
+				// if(tool[i].contacts){
+				// 	instance.setContact(tool[i].contacts)
+				// }
 				if(tool[i].repositories){
-					toolBasicDetails.setRepo(tool[i].repositories)
+					instance.setRepo(tool[i].repositories)
 				}
 				if(tool[i].documentation){
-					toolBasicDetails.setDocs(tool[i].documentation)
+					instance.setDocs(tool[i].documentation)
 				}
-				vm.toolsArray.push(toolBasicDetails);
+				if (i>0){
+
+					if(tool[i].name != tool[i-1].name){
+						// console.log(i,"if");
+						var toolBasicDetails = new Tool();
+						toolBasicDetails.setName(tool[i].name);
+						toolBasicDetails.setDesc(tool[i].description)
+						toolBasicDetails.setLink(tool[i].homepage)
+						toolBasicDetails.setContact(tool[i].contacts)
+						toolBasicDetails.setCredits(tool[i].credits)
+						var urlToBioTools = "";
+						var urlToBioTools = "https://bio.tools/"+tool[i].name.replace(/[\s]/g,"_");
+						toolBasicDetails.setLinkToBioTool(urlToBioTools);
+						toolBasicDetails.setInstance(instance);
+						vm.toolsArray.push(toolBasicDetails);
+
+					} else {
+						// console.log(i,"else");
+						// console.log(vm.toolsArray);
+						vm.toolsArray[vm.toolsArray.length-1].setInstance(instance);
+					}
+
+				} else {
+					var toolBasicDetails = new Tool();
+					toolBasicDetails.setName(tool[i].name);
+					toolBasicDetails.setDesc(tool[i].description)
+					toolBasicDetails.setLink(tool[i].homepage)
+					toolBasicDetails.setContact(tool[i].contacts)
+					toolBasicDetails.setCredits(tool[i].credits)
+					var urlToBioTools = "";
+					var urlToBioTools = "https://bio.tools/"+tool[i].name.replace(/[\s]/g,"_");
+					toolBasicDetails.setLinkToBioTool(urlToBioTools);
+					toolBasicDetails.setInstance(instance);
+					vm.toolsArray.push(toolBasicDetails);
+				}
+
 			}
 			$rootScope.array = vm.toolsArray;
 			vm.loadingDisplay = 1;
-
 		}
 
 

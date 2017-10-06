@@ -21,7 +21,12 @@
             <tr dir-paginate="tool in toolCtrl.toolsArray | filter: q  | itemsPerPage: toolCtrl.pageSize" current-page="toolCtrl.currentPage" >
                 <td><a data-toggle="tooltip" title={{tool.getLink()}} href="{{tool.getLink()}}" target="_blank">{{tool.getName()}}</a><i class="fa fa-external-link"></i></td>
                 <td><a ng-click="toolCtrl.showDetails(tool);" type="button" class="btn btn-info btn-xs" >+ info</a></td>
-                <td><img class ="table-icons"ng-src="img/{{tool.getType()}}.png" alt="" data-toggle="tooltip" title="{{tool.getType() | uppercase}}"></td>
+                <td ng-if="tool.getInstance().length == 1">
+                    <img class ="table-icons" ng-src="img/{{tool.getInstance()[0].type}}.png" alt="" data-toggle="tooltip" title="{{tool.getInstance()[0].type | uppercase}}"
+                </td>
+                <td ng-if="tool.getInstance().length != 1">
+                    {{"varios"}}
+                </td>
                 <td data-toggle="tooltip" title={{tool.getDesc()}} >{{tool.getDesc()}}</td>
             </tr>
         </table>
@@ -29,56 +34,75 @@
     <div class="text-center">
         <dir-pagination-controls boundary-links="true" max-size="12"></dir-pagination-controls>
     </div>
-    <!-- <span ng-repeat="i in toolCtrl.toolsArray">
-        {{i.description}}<br>
-    </span> -->
     <div class="text-center" ng-bind-html="toolCtrl.message"></div>
+
     <div ng-show="toolCtrl.displayDetailsView == 1" id="bottom">
         <div class="details-content container-fluid">
             <hr>
             <div class="col-md-12">
                 <h1 class="text-center"><a data-toggle="tooltip" title="{{toolCtrl.basicDetails.getLink()}}" href="{{toolCtrl.basicDetails.getLink()}}">{{toolCtrl.basicDetails.getName()}}  </a><span><img class ="table-icons" ng-src="img/{{toolCtrl.basicDetails.getType()}}.png" alt="" data-toggle="tooltip" title="{{toolCtrl.basicDetails.getType() | uppercase}}"></span></h1>
             </div>
+
             <div class="col-md-6">
 
-                <h4>Description <small><span class="label label-info">bio tools</span></small></h4>
+                <h3>Description <small><span class="label label-info">bio tools</span></small></h4>
                 <p>{{toolCtrl.basicDetails.getDesc()}}</p>
 
-
-                <h4>Version <small><span class="label label-info">bio tools</span></small></h4>
-                <p>{{toolCtrl.basicDetails.getVersion() ? toolCtrl.basicDetails.getVersion() : "No version information found"}}</p>
-
-
-                <h4>Documentations <small><span class="label label-info">bio tools</span></small></h4>
-                <ul ng-repeat="(key,value) in toolCtrl.basicDetails.getDocs() track by $index">
-                    <p>{{key}} : {{value ? value : "No information found"}}</p>
-                </ul>
-
-
-                <h4>Publications <small><span class="label label-info">bio tools</span></small></h4>
-                <p ng-if="toolCtrl.basicDetails.getPublication().length == 0">No publications found</p>
-                <ul ng-repeat="publicationInfoObject in toolCtrl.basicDetails.getPublication()">
-                    <ul ng-repeat="(key,value) in publicationInfoObject track by $index">
-                        <p>{{key}} : {{value ? value : "No information found"}}</p>
-                    </ul>
-                </ul>
-
-
-                <h4>Contacts <small><span class="label label-info">bio tools</span></small></h4>
-                <p ng-if="toolCtrl.basicDetails.getContact().length == 0">No contact information found</p>
-                <ul ng-repeat="contactInfoObject in toolCtrl.basicDetails.getContact()">
+                <h3>Contact <small><span class="label label-info">bio tools</span></small></h3>
+                
+                <span ng-repeat="contactInfoObject in toolCtrl.basicDetails.getContact()">
                     <ul ng-repeat="(key,value) in contactInfoObject track by $index">
                         <p>{{key}} : {{value ? value : "No information found"}}</p>
                     </ul>
-                </ul>
+                </span>
 
 
-                <h4>Repositories <small><span class="label label-info">bio tools</span></small></h4>
-                <p ng-if="toolCtrl.basicDetails.getRepo().length == 0">No repositories found</p>
-                <ul ng-repeat="repoLinks in toolCtrl.basicDetails.getRepo() track by $index">
-                    <a target="_blank" href="{{repoLinks}}">{{repoLinks}}</a>
-                </ul>
+                <h3>Credits <small><span class="label label-info">bio tools</span></small></h3>
 
+
+                <span ng-repeat="creditsInfoObject in toolCtrl.basicDetails.getCredits()">
+                    <ul ng-repeat="(key,value) in creditsInfoObject track by $index">
+                        <p>{{key}} : {{value ? value : "No information found"}}</p>
+                    </ul>
+                </span>
+
+                <h3>Instances </h3>
+
+                <div  ng-repeat="instance in toolCtrl.basicDetails.getInstance()">
+                    <div class="col-md-4">
+                        <h4>Type <small><span class="label label-info">bio tools</span></small></h4>
+                        <p><img class ="table-icons"ng-src="img/{{instance.getType()}}.png" alt="" data-toggle="tooltip" title="{{instance.getType() | uppercase}}"></p>
+
+
+                        <h4>Version <small><span class="label label-info">bio tools</span></small></h4>
+                        <p>{{instance.getVersion() ? instance.getVersion() : "No version information found"}}</p>
+
+
+                        <h4>Documentations <small><span class="label label-info">bio tools</span></small></h4>
+
+                        <ul ng-repeat="(key,value) in instance.getDocs() track by $index">
+                            <p>{{key}} : {{value ? value : "No information found"}}</p>
+                        </ul>
+
+
+                        <h4>Publications <small><span class="label label-info">bio tools</span></small></h4>
+                        <p ng-if="instance.getPublication().length == 0">No publications found</p>
+                        <ul ng-repeat="publicationInfoObject in instance.getPublication()">
+                            <ul ng-repeat="(key,value) in publicationInfoObject track by $index">
+                                <p>{{key}} : {{value ? value : "No information found"}}</p>
+                            </ul>
+                        </ul>
+
+
+                        <h4>Repositories <small><span class="label label-info">bio tools</span></small></h4>
+                        <p ng-if="instance.getRepo().length == 0">No repositories found</p>
+                        <ul ng-repeat="repoLinks in instance.getRepo() track by $index">
+                            <a target="_blank" href="{{repoLinks}}">{{repoLinks}}</a>
+                        </ul>
+
+
+                    </div>
+                </div>
 
             </div>
 
