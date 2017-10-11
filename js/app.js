@@ -11,7 +11,6 @@
     angular
         .module('elixibilitasApp', [
             'angularUtils.directives.dirPagination',
-            'ngAnimate',
             'ngSanitize',
             'ui.bootstrap',
             'ngRoute'

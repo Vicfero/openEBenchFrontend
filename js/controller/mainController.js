@@ -24,6 +24,7 @@
 	*/
 	function mainController ($scope, $rootScope){
         $rootScope.array;
+        $rootScope.allData=[];
 	}
 
 })();

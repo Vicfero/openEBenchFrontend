@@ -14,14 +14,14 @@
 		.controller("toolController", toolController);
 
 
-	toolController.$inject = ['$scope','$http', '$window','$rootScope','$anchorScroll', '$location']
+	toolController.$inject = ['$scope','$http', '$window','$rootScope','$anchorScroll', '$location', '$q']
 	/**
 	@name toolController
 	@description controls the tool-page.html page of the angular app.
 	@version 1.0
 	@author Vicky Sundesha
 	*/
-	function toolController ($scope, $http, $window, $rootScope, $anchorScroll, $location){
+	function toolController ($scope, $http, $window, $rootScope, $anchorScroll, $location, $q){
 
 		var vm = this;
 
@@ -39,10 +39,17 @@
 			vm.displayDetailsView = 0;
 			vm.basicDetails;
 			vm.message = "";
+			vm.edamTerm = "";
+			vm.sortKey;
+			vm.reverse;
 			//if $rootScope.array is empty
 			if(!$rootScope.array){
+				// var url = 'https://bsclife010.int.bsc.es/~vsundesh/openEBenchFrontend/json/tool.json'
+				var url = 'https://elixir.bsc.es/tool'
 				vm.loadingDisplay = 0;
-				vm.getData();
+				vm.getData(url).then(function(response){
+					vm.loadData(response)
+				});
 			} else {
 				//if $rootScope.array is full
 				vm.toolsArray = $rootScope.array;
@@ -51,29 +58,51 @@
 
 		};
 
+		vm.sort = function (keyName){
+			vm.sortKey = keyName;
+			vm.reverse = !vm.reverse;
+		}
+
+		vm.loadData = function(response){
+			$rootScope.array = vm.allData(response.data);
+			// vm.toolsArray = vm.removeDuplicates(vm.allData(response.data));
+			vm.toolsArray = vm.allData(response.data);
+			vm.loadingDisplay = 1;
+		}
+
 		/**
 		@name getData
-		@description getData fetches all tools in json format from the api and saves it to the $rootScope.array
+		@description getData fetches all tools in json format from the api
+		@param url to get
 		@version 1.0
 		@author Vicky Sundesha
 		*/
-		vm.getData = function (){
-			// var url = 'http://bsclife010.int.bsc.es/~vsundesh/openEBenchFrontend/json/tool.json'
-			var url = 'https://elixir.bsc.es/tool'
+		vm.getData = function (url){
+			var def = $q.defer();
 			$http({
 				method: 'GET',
 				url: url,
-				timeout: 3000,
+				// timeout: 3000,
 			}).then(function successCallback(response){
-					vm.populateToolDetails(response.data);
+					 def.resolve(response);
 			}, function errorCallback(response){
-					var msg = "Sorry our services are not available at this moment. Please try later"
-					vm.createMsg(response,msg);
+				var msg = "Sorry our services are not available at this moment. Please try later";
+				vm.createMsg(msg);
+					// if something went wrong;
+					def.reject("Sorry our services are not available at this moment. Please try later");
 			});
+			return def.promise;
 		}
 
-
-		vm.createMsg = function (response,msg){
+		/**
+		@name createMsg
+		@description creates div with error message
+		@param msg is the message to be displayed.
+		@version 1.0
+		@author Vicky Sundesha
+		@return messageToDisplay this is the the code that is displayed when there is an error
+		*/
+		vm.createMsg = function (msg){
 			var messageToDisplay = "<div class='alert alert-danger text-center' role='alert'>"+msg+"</div>";
             vm.message = messageToDisplay;
 		}
@@ -83,113 +112,147 @@
 		/**
 		@name showDetails
 		@description showDetails is called when details button is clicked for everytool this iterates the semantics and send each semantic to this corisponding function.
+		@param tool for details.
 		@version 1.0
 		@author Vicky Sundesha
 		*/
 		vm.showDetails = function (tool){
 			vm.basicDetails=tool;
 			vm.displayDetailsView = 1;
+			var url = tool._id.replace(/\/tool\//g,"/metrics/").replace("http","https");
+			console.log(url);
+			vm.getData(url).then(function (response){
+				console.log(response.data);
+			})
 		};
 
-
-
-
-
-		// vm.populateToolDetails=function(tool){
-		// 	for (var i = 0 ; i<tool.length; i++){
-		// 		var urlToBioTools = "";
-		// 		var urlToBioTools = "https://bio.tools/"+tool[i].name.replace(/[\s]/g,"_");
-		// 		var toolBasicDetails = new Detail();
-		// 		toolBasicDetails.setName(tool[i].name);
-		// 		toolBasicDetails.setLink(tool[i].homepage)
-		// 		toolBasicDetails.setType(tool[i]['@type'])
-		// 		toolBasicDetails.setDesc(tool[i].description)
-		// 		if(tool[i].version){
-		// 			toolBasicDetails.setVersion(tool[i].version)
-		// 		}
-		// 		if(tool[i].publications){
-		// 			toolBasicDetails.setPublication(tool[i].publications)
-		// 		}
-		// 		if(tool[i].contacts){
-		// 			toolBasicDetails.setContact(tool[i].contacts)
-		// 		}
-		// 		if(tool[i].repositories){
-		// 			toolBasicDetails.setRepo(tool[i].repositories)
-		// 		}
-		// 		if(tool[i].documentation){
-		// 			toolBasicDetails.setDocs(tool[i].documentation)
-		// 		}
-		// 		toolBasicDetails.setLinkToBioTool(urlToBioTools);
-		//
-		// 		vm.toolsArray.push(toolBasicDetails);
-		// 	}
-		// 	$rootScope.array = vm.toolsArray;
-		// 	vm.loadingDisplay = 1;
-		//
-		// }
-
-		vm.populateToolDetails=function(tool){
-			for (var i = 0; i<tool.length; i++){
-
-				var instance = new Instance();
-
-				instance.setType(tool[i]['@type'])
-				if(tool[i].version){
-					instance.setVersion(tool[i].version)
-				}
-				if(tool[i].publications){
-					instance.setPublication(tool[i].publications)
-				}
-				// if(tool[i].contacts){
-				// 	instance.setContact(tool[i].contacts)
-				// }
-				if(tool[i].repositories){
-					instance.setRepo(tool[i].repositories)
-				}
-				if(tool[i].documentation){
-					instance.setDocs(tool[i].documentation)
-				}
-				if (i>0){
-
-					if(tool[i].name != tool[i-1].name){
-						// console.log(i,"if");
-						var toolBasicDetails = new Tool();
-						toolBasicDetails.setName(tool[i].name);
-						toolBasicDetails.setDesc(tool[i].description)
-						toolBasicDetails.setLink(tool[i].homepage)
-						toolBasicDetails.setContact(tool[i].contacts)
-						toolBasicDetails.setCredits(tool[i].credits)
-						var urlToBioTools = "";
-						var urlToBioTools = "https://bio.tools/"+tool[i].name.replace(/[\s]/g,"_");
-						toolBasicDetails.setLinkToBioTool(urlToBioTools);
-						toolBasicDetails.setInstance(instance);
-						vm.toolsArray.push(toolBasicDetails);
-
-					} else {
-						// console.log(i,"else");
-						// console.log(vm.toolsArray);
-						vm.toolsArray[vm.toolsArray.length-1].setInstance(instance);
-					}
-
-				} else {
-					var toolBasicDetails = new Tool();
-					toolBasicDetails.setName(tool[i].name);
-					toolBasicDetails.setDesc(tool[i].description)
-					toolBasicDetails.setLink(tool[i].homepage)
-					toolBasicDetails.setContact(tool[i].contacts)
-					toolBasicDetails.setCredits(tool[i].credits)
-					var urlToBioTools = "";
-					var urlToBioTools = "https://bio.tools/"+tool[i].name.replace(/[\s]/g,"_");
-					toolBasicDetails.setLinkToBioTool(urlToBioTools);
-					toolBasicDetails.setInstance(instance);
-					vm.toolsArray.push(toolBasicDetails);
-				}
-
+		vm.allData= function (tool){
+			var array = []
+			for (var i = 0; i < tool.length; i++) {
+				array.push(vm.initTool(tool[i],vm.initInstance(tool[i])));
 			}
-			$rootScope.array = vm.toolsArray;
-			vm.loadingDisplay = 1;
+			return array
 		}
 
+		vm.removeDuplicates = function (tool){
+			var noDuplicatesArray = [];
+			for (var i = 0; i < tool.length; i++) {
+				if(i>0){
+					if(vm.checkName(i,tool)){
+						for (var j = 0; j < tool[i].getInstance().length; j++) {
+							noDuplicatesArray[noDuplicatesArray.length-1].setInstance(tool[i].getInstance()[j])
+						}
+					} else {
+						noDuplicatesArray.push(tool[i]);
+					}
+				} else {
+					noDuplicatesArray.push(tool[i]);
+				}
+			}
+			return noDuplicatesArray
+		}
+
+
+		/**
+		@name initInstance
+		@description Creats new instances of a tool and returns the instance
+		@param tool is the response data from the Api
+		@param i is the posistion
+		@version 1.0
+		@author Vicky Sundesha
+		*/
+		vm.initInstance = function (tool){
+			var instance = new Instance();
+			if(tool['@type']){
+				instance.setType(tool['@type'])
+			}
+			if(tool.version){
+				instance.setVersion(tool.version)
+			}
+			if(tool.publications){
+				instance.setPublication(tool.publications)
+			}
+			if(tool.repositories){
+				instance.setRepo(tool.repositories)
+			}
+			if(tool.documentation){
+				instance.setDocs(tool.documentation)
+			}
+			return instance;
+		}
+
+
+		/**
+		@name checkName
+		@description checks if the tool name exists
+		@param tool is the response data from the Api
+		@param i is the posistion
+		@version 1.0
+		@author Vicky Sundesha
+		*/
+		vm.checkName = function (i,tool){
+			return tool[i].name != tool[i-1].name ? false : true;
+		}
+
+
+		/**
+		@name initTool
+		@description Creats new tool and returns the tool
+		@param tool is the response data from the Api
+		@param i is the posistion
+		@param instance is are the diffrent instances of the tool web,cmd,app etc..
+		@version 1.0
+		@author Vicky Sundesha
+		*/
+		vm.initTool = function (tool,instance){
+			var toolBasicDetails = new Tool();
+			toolBasicDetails.setId(tool['@id']);
+			toolBasicDetails.setName(tool.name);
+			toolBasicDetails.setDesc(tool.description);
+			toolBasicDetails.setLink(tool.homepage);
+			toolBasicDetails.setContact(tool.contacts);
+			toolBasicDetails.setCredits(tool.credits);
+			var urlToBioTools = "";
+			var urlToBioTools = "https://bio.tools/"+tool.name.replace(/[\s]/g,"_");
+			toolBasicDetails.setLinkToBioTool(urlToBioTools);
+			toolBasicDetails.setInstance(instance);
+			return toolBasicDetails;
+		}
+
+		vm.removeFilter = function () {
+			vm.edamTerm = "";
+			vm.toolsArray = $rootScope.array;
+			// vm.loadingDisplay = 1;
+
+		}
+
+		vm.advancedSearch = function (){
+			if(vm.edamTerm){
+				var url = "https://elixir.bsc.es/edam/tool/search?text="+vm.edamTerm;
+				vm.getData(url).then(function (response){
+					vm.searchByEdam(response.data);
+				})
+				console.log(url);
+			} else {
+				vm.toolsArray = $rootScope.array;
+			}
+
+
+		}
+
+		vm.searchByEdam = function (data){
+			var toolArray = [];
+			for (var i = 0; i < data.length; i++) {
+				var tool;
+				if($rootScope.array.find(tool => tool['_id'] === data[i]['@id'])){
+					toolArray.push($rootScope.array[i]);
+				}
+			}
+			if(i == data.length){
+				vm.toolsArray = toolArray;
+			}
+
+		}
 
 	}
 

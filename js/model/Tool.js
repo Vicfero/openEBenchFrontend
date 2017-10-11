@@ -1,4 +1,5 @@
 function Tool(){
+    this._id
     this.name;
     this.desc;
     this.link;
@@ -7,7 +8,8 @@ function Tool(){
     this.contact;
     this.credits;
 
-    this.construct = function (name,desc,link,linkToBioTool,instance,contact,credits){
+    this.construct = function (_id,name,desc,link,linkToBioTool,instance,contact,credits){
+        this.setId(_id);
         this.setName(name);
         this.setDesc(desc);
         this.setLink(link);
@@ -18,6 +20,7 @@ function Tool(){
     }
 
     //Setters
+    this.setId = function (_id) {this._id= _id;}
     this.setName = function (name) {this.name = name;}
     this.setDesc = function (desc){this.desc = desc;}
     this.setLink = function (link){this.link = link;}
@@ -28,6 +31,7 @@ function Tool(){
 
 
     //Getters
+    this.getId = function () {return this._id;}
     this.getName = function () {return this.name;}
     this.getDesc = function () {return this.desc;}
     this.getLink = function () {return this.link;}
