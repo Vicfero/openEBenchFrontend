@@ -42,14 +42,20 @@
 			vm.edamTerm = "";
 			vm.sortKey;
 			vm.reverse;
+
 			//if $rootScope.array is empty
 			if(!$rootScope.array){
-				// var url = 'https://bsclife010.int.bsc.es/~vsundesh/openEBenchFrontend/json/tool.json'
+				// var url = 'http://bsclife010.int.bsc.es/~vsundesh/openEBenchFrontend/json/tool.json'
 				var url = 'https://elixir.bsc.es/tool'
+
 				vm.loadingDisplay = 0;
+
 				vm.getData(url).then(function(response){
 					vm.loadData(response)
+				}, function(error){
+					vm.createMsg();
 				});
+
 			} else {
 				//if $rootScope.array is full
 				vm.toolsArray = $rootScope.array;
@@ -70,6 +76,11 @@
 			vm.loadingDisplay = 1;
 		}
 
+
+		vm.loadingGif = function(){
+
+		}
+
 		/**
 		@name getData
 		@description getData fetches all tools in json format from the api
@@ -86,10 +97,7 @@
 			}).then(function successCallback(response){
 					 def.resolve(response);
 			}, function errorCallback(response){
-				var msg = "Sorry our services are not available at this moment. Please try later";
-				vm.createMsg(msg);
-					// if something went wrong;
-					def.reject("Sorry our services are not available at this moment. Please try later");
+					def.reject(response);
 			});
 			return def.promise;
 		}
@@ -97,12 +105,13 @@
 		/**
 		@name createMsg
 		@description creates div with error message
-		@param msg is the message to be displayed.
 		@version 1.0
 		@author Vicky Sundesha
 		@return messageToDisplay this is the the code that is displayed when there is an error
 		*/
-		vm.createMsg = function (msg){
+		vm.createMsg = function (){
+			vm.loadingDisplay = 2;
+			var msg = "Sorry our services are not available at this moment. Please try later";
 			var messageToDisplay = "<div class='alert alert-danger text-center' role='alert'>"+msg+"</div>";
             vm.message = messageToDisplay;
 		}
@@ -121,8 +130,9 @@
 			vm.displayDetailsView = 1;
 			var url = tool._id.replace(/\/tool\//g,"/metrics/").replace("http","https");
 			console.log(url);
+			console.log(tool);
 			vm.getData(url).then(function (response){
-				console.log(response.data);
+				vm.metrics = response.data;
 			})
 		};
 
@@ -134,23 +144,23 @@
 			return array
 		}
 
-		vm.removeDuplicates = function (tool){
-			var noDuplicatesArray = [];
-			for (var i = 0; i < tool.length; i++) {
-				if(i>0){
-					if(vm.checkName(i,tool)){
-						for (var j = 0; j < tool[i].getInstance().length; j++) {
-							noDuplicatesArray[noDuplicatesArray.length-1].setInstance(tool[i].getInstance()[j])
-						}
-					} else {
-						noDuplicatesArray.push(tool[i]);
-					}
-				} else {
-					noDuplicatesArray.push(tool[i]);
-				}
-			}
-			return noDuplicatesArray
-		}
+		// vm.removeDuplicates = function (tool){
+		// 	var noDuplicatesArray = [];
+		// 	for (var i = 0; i < tool.length; i++) {
+		// 		if(i>0){
+		// 			if(vm.checkName(i,tool)){
+		// 				for (var j = 0; j < tool[i].getInstance().length; j++) {
+		// 					noDuplicatesArray[noDuplicatesArray.length-1].setInstance(tool[i].type : tool[i].instance);
+		// 				}
+		// 			} else {
+		// 				noDuplicatesArray.push(tool[i]);
+		// 			}
+		// 		} else {
+		// 			noDuplicatesArray.push(tool[i]);
+		// 		}
+		// 	}
+		// 	return noDuplicatesArray
+		// }
 
 
 		/**
@@ -163,9 +173,9 @@
 		*/
 		vm.initInstance = function (tool){
 			var instance = new Instance();
-			if(tool['@type']){
-				instance.setType(tool['@type'])
-			}
+			// if(tool['@type']){
+			// 	instance.setType(tool['@type'])
+			// }
 			if(tool.version){
 				instance.setVersion(tool.version)
 			}
@@ -207,6 +217,7 @@
 		vm.initTool = function (tool,instance){
 			var toolBasicDetails = new Tool();
 			toolBasicDetails.setId(tool['@id']);
+			toolBasicDetails.setType(tool['@type']);
 			toolBasicDetails.setName(tool.name);
 			toolBasicDetails.setDesc(tool.description);
 			toolBasicDetails.setLink(tool.homepage);
@@ -231,8 +242,9 @@
 				var url = "https://elixir.bsc.es/edam/tool/search?text="+vm.edamTerm;
 				vm.getData(url).then(function (response){
 					vm.searchByEdam(response.data);
-				})
-				console.log(url);
+				},function(error){
+					vm.createMsg();
+				});
 			} else {
 				vm.toolsArray = $rootScope.array;
 			}

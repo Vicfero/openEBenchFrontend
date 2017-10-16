@@ -20,6 +20,7 @@
     text-align: center;
 }
 td {
+    table-layout: fixed;
     white-space: nowrap;
     max-width: 100vh;
     overflow: hidden;

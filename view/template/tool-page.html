@@ -1,11 +1,15 @@
 <div ng-controller="toolController as toolCtrl" ng-init="toolCtrl.loadInitData();" class="conatiner-fluid">
 
+    <div ng-show="toolCtrl.loadingDisplay==0" class="col-md-2 col-md-4 col-md-offset-5 col-xs-offset-8">
+        <img src="img/loader.gif" alt="">
+    </div>
+
     <div class="responsive-table" ng-show="toolCtrl.loadingDisplay==1">
         <div class="form-group">
 
             <div class="input-group col-md-2 col-md-4 col-md-offset-5 col-xs-offset-8">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-                <input ng-model="q" id="search" type="text" class="form-control" name="search" placeholder="Filter">
+                <input ng-model="all" id="search" type="text" class="form-control" name="search" placeholder="Filter">
             </div>
             <div class="input-group col-md-2 col-md-4 col-md-offset-5 col-xs-offset-8">
                 <small><a  href=""data-toggle="modal" data-target="#advancedSearch">Advanced search</a></small>
@@ -57,16 +61,30 @@
                     ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                 </th>
             </tr>
-            <tr dir-paginate="tool in toolCtrl.toolsArray | orderBy:toolCtrl.sortKey:toolCtrl.reverse | filter: q  | itemsPerPage: toolCtrl.pageSize" current-page="toolCtrl.currentPage" >
-                <td><a data-toggle="tooltip" title={{tool.getLink()}} href="{{tool.getLink()}}" target="_blank">{{tool.getName()}}</a><i class="fa fa-external-link"></i></td>
-                <td><a ng-click="toolCtrl.showDetails(tool);" type="button" class="btn btn-info btn-xs" >+ info</a></td>
-                <td ng-if="tool.getInstance().length == 1">
-                    <img class ="table-icons" ng-src="img/{{tool.getInstance()[0].type}}.png" data-toggle="tooltip" title="{{tool.getInstance()[0].type | uppercase}}" alt="{{tool.getInstance()[0].type | uppercase}}"/>
+            <tr dir-paginate="tool in toolCtrl.toolsArray | orderBy:toolCtrl.sortKey:toolCtrl.reverse | filter : { type :  type } | filter : {name : name } | filter : { desc : desc } | filter : all | itemsPerPage: toolCtrl.pageSize" current-page="toolCtrl.currentPage" >
+                <td>
+                    <a data-toggle="tooltip" title={{tool.getLink()}} href="{{tool.getLink()}}" target="_blank">{{tool.getName()}}</a>
                 </td>
-                <td ng-if="tool.getInstance().length != 1">
-                    {{"VARIOS"}}
+                <td>
+                    <a ng-click="toolCtrl.showDetails(tool);" type="button" class="btn btn-info btn-xs" >+ info</a>
+                </td>
+                <td width="auto">
+                    <img class ="table-icons" ng-src="img/{{tool.type}}.png" data-toggle="tooltip" title="{{tool.getInstance.type | uppercase}}" alt="{{tool.type | uppercase}}"/>
                 </td>
                 <td data-toggle="tooltip" title={{tool.getDesc()}} >{{tool.getDesc()}}</td>
+            </tr>
+            <tr>
+                <td>
+                    <input ng-model="name" id="search" type="text" class="form-control" name="search" placeholder="Filter by name">
+                </td>
+                <td>
+                </td>
+                <td>
+                    <input ng-model="type" id="search" type="text" class="form-control" name="search" placeholder="Filter by type">
+                </td>
+                <td>
+                    <input ng-model="desc" id="search" type="text" class="form-control" name="search" placeholder="Filter by description">
+                </td>
             </tr>
         </table>
     </div>
@@ -110,7 +128,7 @@
                 <div  ng-repeat="instance in toolCtrl.basicDetails.getInstance() track by $index">
                     <div class="col-md-6">
                         <h4>Type <small><span class="label label-info">bio tools</span></small></h4>
-                        <p><img class ="table-icons"ng-src="img/{{instance.getType()}}.png" alt="{{instance.getType() | uppercase}}" data-toggle="tooltip" title="{{instance.getType() | uppercase}}"></p>
+                        <img class ="table-icons"ng-src="img/{{toolCtrl.basicDetails.getType()}}.png" alt="{{toolCtrl.basicDetails.getType() | uppercase}}" data-toggle="tooltip" title="{{toolCtrl.basicDetails.getType() | uppercase}}">
 
 
                         <h4>Version <small><span class="label label-info">bio tools</span></small></h4>
@@ -143,6 +161,11 @@
                     </div>
                 </div>
 
+            </div>
+            <div class="col-md-6">
+                <pre>
+                {{toolCtrl.metrics | json}}
+                </pre>
             </div>
 
 
