@@ -1,9 +1,5 @@
 <div ng-controller="toolController as toolCtrl" ng-init="toolCtrl.loadInitData();" class="conatiner-fluid">
 
-    <div ng-show="toolCtrl.loadingDisplay==0" class="col-md-2 col-md-4 col-md-offset-5 col-xs-offset-8">
-        <img src="img/loader.gif" alt="">
-    </div>
-
     <div class="responsive-table" ng-show="toolCtrl.loadingDisplay==1">
         <div class="form-group">
 
@@ -47,41 +43,56 @@
         </div>
 
         <table class="table table-striped" >
+            <col class="">
+            <col class="tdsmall">
+            <col class="tdsmall">
+            <col class="">
             <tr>
 
                 <th ng-click="toolCtrl.sort('tool.getName()')"><b>Name</b>
                      <span class="glyphicon sort-icon" ng-show="toolCtrl.sortKey=='tool.getName()'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                 </th>
+
                 <th><b>More info</b></th>
+
                 <th ng-click="toolCtrl.sort('tool.getInstance()[0].type')"><b>Type</b>
                     <span class="glyphicon sort-icon" ng-show="toolCtrl.sortKey=='tool.getInstance()[0].type'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                 </th>
+
                 <th ng-click="toolCtrl.sort('tool.getDesc()')"><b>Description</b>
                     <span class="glyphicon sort-icon" ng-show="toolCtrl.sortKey=='tool.getDesc()'"
                     ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                 </th>
             </tr>
             <tr dir-paginate="tool in toolCtrl.toolsArray | orderBy:toolCtrl.sortKey:toolCtrl.reverse | filter : { type :  type } | filter : {name : name } | filter : { desc : desc } | filter : all | itemsPerPage: toolCtrl.pageSize" current-page="toolCtrl.currentPage" >
-                <td>
+                <td class="col-md-2;">
                     <a data-toggle="tooltip" title={{tool.getLink()}} href="{{tool.getLink()}}" target="_blank">{{tool.getName()}}</a>
                 </td>
-                <td>
+
+                <td class="col-md-2;">
                     <a ng-click="toolCtrl.showDetails(tool);" type="button" class="btn btn-info btn-xs" >+ info</a>
                 </td>
-                <td width="auto">
+
+                <td class="col-md-2;">
                     <img class ="table-icons" ng-src="img/{{tool.type}}.png" data-toggle="tooltip" title="{{tool.getInstance.type | uppercase}}" alt="{{tool.type | uppercase}}"/>
                 </td>
-                <td data-toggle="tooltip" title={{tool.getDesc()}} >{{tool.getDesc()}}</td>
+
+                <td data-toggle="tooltip" title={{tool.getDesc()}} class="col-md-6;">
+                    {{tool.getDesc()}}
+                </td>
             </tr>
             <tr>
                 <td>
                     <input ng-model="name" id="search" type="text" class="form-control" name="search" placeholder="Filter by name">
                 </td>
+
                 <td>
                 </td>
+
                 <td>
                     <input ng-model="type" id="search" type="text" class="form-control" name="search" placeholder="Filter by type">
                 </td>
+
                 <td>
                     <input ng-model="desc" id="search" type="text" class="form-control" name="search" placeholder="Filter by description">
                 </td>
@@ -97,7 +108,7 @@
         <div class="details-content container-fluid">
             <hr>
             <div class="col-md-12">
-                <h1 class="text-center"><a data-toggle="tooltip" title="{{toolCtrl.basicDetails.getLink()}}" href="{{toolCtrl.basicDetails.getLink()}}">{{toolCtrl.basicDetails.getName()}}  </a><span><img class ="table-icons" ng-src="img/{{toolCtrl.basicDetails.getType()}}.png" alt="" data-toggle="tooltip" title="{{toolCtrl.basicDetails.getType() | uppercase}}"></span></h1>
+                <h1 class="text-center"><a data-toggle="tooltip" title="{{toolCtrl.basicDetails.getLink()}}" href="{{toolCtrl.basicDetails.getLink()}}">{{toolCtrl.basicDetails.getName()}}  </a></h1>
             </div>
 
             <div class="col-md-6">

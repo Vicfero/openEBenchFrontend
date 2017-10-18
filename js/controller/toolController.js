@@ -42,6 +42,7 @@
 			vm.edamTerm = "";
 			vm.sortKey;
 			vm.reverse;
+			vm.chunks=[];
 
 			//if $rootScope.array is empty
 			if(!$rootScope.array){
@@ -49,12 +50,12 @@
 				var url = 'https://elixir.bsc.es/tool'
 
 				vm.loadingDisplay = 0;
-
-				vm.getData(url).then(function(response){
-					vm.loadData(response)
-				}, function(error){
-					vm.createMsg();
-				});
+				vm.getChunks();
+				// vm.getData(url).then(function(response){
+				// 	vm.loadData(response)
+				// }, function(error){
+				// 	vm.createMsg();
+				// });
 
 			} else {
 				//if $rootScope.array is full
@@ -64,6 +65,36 @@
 
 		};
 
+		vm.getChunks = function (){
+			var skip = 0;
+			var limit = 100;
+			var size = 8000;
+			while(skip<size){
+				vm.loopChunks(skip,limit);
+				skip = skip + limit;
+			}
+		}
+
+		vm.loopChunks = function(skip,limit){
+			var url = 'https://elixir.bsc.es/tool?skip='+skip+'&limit='+limit
+			vm.getData(url).then(function(response){
+				vm.pushData(response);
+				if(response.data.length==0){
+					return;
+				}
+				console.log(response.data.length);
+			}, function(error){
+				vm.createMsg();
+			});
+		}
+
+		vm.pushData = function (tool){
+			vm.chunks.push(vm.allData(tool.data))
+			vm.toolsArray = [].concat.apply([], vm.chunks);
+			$rootScope.array = [].concat.apply([], vm.chunks);
+			vm.loadingDisplay = 1
+		}
+
 		vm.sort = function (keyName){
 			vm.sortKey = keyName;
 			vm.reverse = !vm.reverse;
@@ -71,7 +102,6 @@
 
 		vm.loadData = function(response){
 			$rootScope.array = vm.allData(response.data);
-			// vm.toolsArray = vm.removeDuplicates(vm.allData(response.data));
 			vm.toolsArray = vm.allData(response.data);
 			vm.loadingDisplay = 1;
 		}
@@ -132,6 +162,7 @@
 			console.log(url);
 			console.log(tool);
 			vm.getData(url).then(function (response){
+				console.log(url);
 				vm.metrics = response.data;
 			})
 		};
