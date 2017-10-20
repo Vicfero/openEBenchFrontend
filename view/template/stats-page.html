@@ -1,33 +1,24 @@
 <div ng-controller="statsController as statsCtrl" class="container">
-<div>
-    <!-- <c3chart bindto-id="chart1" show-labels="false" class="col-md-6">
+    <div class="col-md-12">
+        <h3>Tools stats</h3>
+        <div class="jumbotron">
 
-        <chart-column column-id="Tools" column-color="green"  column-values="0,7000" column-type="spline"/>
-        <chart-column column-id="Operational tools" column-color="blue"  column-values="0,4000" column-type="spline"/>
-        <chart-column column-id="Not operational tools" column-color="red"  column-values="0,3000" column-type="spline"/>
-        <chart-points point-radius="2" show-point="true" point-expand-enabled="true" point-expand-radius="5"/>
-    </c3chart> -->
+            <h3 class="center-content">{{statsCtrl.type}} tools</h3>
+            <!-- <select  name="type" ng-model="statsCtrl.type" ng-options="type for type in statsCtrl.typeArray"></select> -->
+            <canvas class="chart chart-base" chart-type="statsCtrl.chart1.getType()" chart-data="statsCtrl.chart1.getData()" chart-labels="statsCtrl.chart1.getLabel()" chart-colors="statsCtrl.chart1.getColor()" chart-click="statsCtrl.onClick1" chart-options=statsCtrl.options></canvas>
+        </div>
+        <div class="jumbotron">
+            <canvas class="chart chart-base" chart-type="statsCtrl.chart2.getType()" chart-data="statsCtrl.chart2.getData()" chart-labels="statsCtrl.chart2.getLabel()"  chart-options=statsCtrl.options2></canvas>
+        </div>
 
-    <!-- <c3chart bindto-id="interactivepie1" chart-data="vm.piePoints" chart-columns="vm.pieColumns">
-        <chart-events on-click-data="vm.selectItem(data)"/>
-    </c3chart>
-        <c3chart bindto-id="interactivepie2" chart-data="vm.piePointsSelected" chart-columns="vm.pieColumnsSelected">
-    </c3chart> -->
 
-<!--
-    <c3chart bindto-id="chartGroupDataPoints" chart-data="vm.datapoints" chart-columns="vm.datacolumns"
-             chart-x="vm.datax">
-        <chart-bar ratio="0.5"/>
-        <chart-axes values-x="x"/>
-        <chart-axis>
-            <chart-axis-x axis-position="outer-center"
-                          axis-label="The numbers"
-                          axis-type="category"/>
-        </chart-axis>
-    </c3chart> -->
+        <div class="col-md-4">
+
+        </div>
 
 
 
-</div>
+    </div>
+
 
 </div>

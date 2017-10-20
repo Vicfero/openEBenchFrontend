@@ -9,19 +9,14 @@
 (function (){
 	'use strict';
 
-	angular
-		.module('elixibilitasApp')
-		.controller("toolController", toolController);
 
-
-	toolController.$inject = ['$scope','$http', '$window','$rootScope','$anchorScroll', '$location', '$q']
 	/**
 	@name toolController
 	@description controls the tool-page.html page of the angular app.
 	@version 1.0
 	@author Vicky Sundesha
 	*/
-	function toolController ($scope, $http, $window, $rootScope, $anchorScroll, $location, $q){
+	function toolController ($scope, $http, $window, $rootScope, $anchorScroll, $location, $q, dataservice){
 
 		var vm = this;
 
@@ -46,16 +41,12 @@
 
 			//if $rootScope.array is empty
 			if(!$rootScope.array){
-				// var url = 'http://bsclife010.int.bsc.es/~vsundesh/openEBenchFrontend/json/tool.json'
-				var url = 'https://elixir.bsc.es/tool'
-
-				vm.loadingDisplay = 0;
-				vm.getChunks();
-				// vm.getData(url).then(function(response){
-				// 	vm.loadData(response)
-				// }, function(error){
-				// 	vm.createMsg();
-				// });
+				var url = 'https://elixir.bsc.es/tools/statistics/';
+				dataservice.getData(url)
+					.then(function (response){
+						vm.getChunks(response.data.total);
+						vm.loadingDisplay = 0;
+					});
 
 			} else {
 				//if $rootScope.array is full
@@ -65,29 +56,34 @@
 
 		};
 
-		vm.getChunks = function (){
+		// get api in chunks
+		vm.getChunks = function (size){
 			var skip = 0;
 			var limit = 100;
-			var size = 8000;
+			var size = size;
 			while(skip<size){
 				vm.loopChunks(skip,limit);
 				skip = skip + limit;
 			}
 		}
 
+		//loop chunks
 		vm.loopChunks = function(skip,limit){
 			var url = 'https://elixir.bsc.es/tool?skip='+skip+'&limit='+limit
-			vm.getData(url).then(function(response){
-				vm.pushData(response);
-				if(response.data.length==0){
-					return;
-				}
-				console.log(response.data.length);
-			}, function(error){
-				vm.createMsg();
-			});
+			dataservice.getData(url)
+				.then(function (response){
+					vm.pushData(response);
+					if(response.data.length==0){
+						return;
+					}
+					// console.log(response.data.length);
+				},function(error){
+					vm.createMsg();
+				});
 		}
 
+
+		//the data recived from api in places
 		vm.pushData = function (tool){
 			vm.chunks.push(vm.allData(tool.data))
 			vm.toolsArray = [].concat.apply([], vm.chunks);
@@ -95,42 +91,12 @@
 			vm.loadingDisplay = 1
 		}
 
+		//Sort name
 		vm.sort = function (keyName){
 			vm.sortKey = keyName;
 			vm.reverse = !vm.reverse;
 		}
 
-		vm.loadData = function(response){
-			$rootScope.array = vm.allData(response.data);
-			vm.toolsArray = vm.allData(response.data);
-			vm.loadingDisplay = 1;
-		}
-
-
-		vm.loadingGif = function(){
-
-		}
-
-		/**
-		@name getData
-		@description getData fetches all tools in json format from the api
-		@param url to get
-		@version 1.0
-		@author Vicky Sundesha
-		*/
-		vm.getData = function (url){
-			var def = $q.defer();
-			$http({
-				method: 'GET',
-				url: url,
-				// timeout: 3000,
-			}).then(function successCallback(response){
-					 def.resolve(response);
-			}, function errorCallback(response){
-					def.reject(response);
-			});
-			return def.promise;
-		}
 
 		/**
 		@name createMsg
@@ -159,12 +125,11 @@
 			vm.basicDetails=tool;
 			vm.displayDetailsView = 1;
 			var url = tool._id.replace(/\/tool\//g,"/metrics/").replace("http","https");
-			console.log(url);
-			console.log(tool);
-			vm.getData(url).then(function (response){
-				console.log(url);
-				vm.metrics = response.data;
-			})
+
+			dataservice.getData(url)
+				.then(function (response){
+					vm.metrics = response.data;
+			});
 		};
 
 		vm.allData= function (tool){
@@ -174,24 +139,6 @@
 			}
 			return array
 		}
-
-		// vm.removeDuplicates = function (tool){
-		// 	var noDuplicatesArray = [];
-		// 	for (var i = 0; i < tool.length; i++) {
-		// 		if(i>0){
-		// 			if(vm.checkName(i,tool)){
-		// 				for (var j = 0; j < tool[i].getInstance().length; j++) {
-		// 					noDuplicatesArray[noDuplicatesArray.length-1].setInstance(tool[i].type : tool[i].instance);
-		// 				}
-		// 			} else {
-		// 				noDuplicatesArray.push(tool[i]);
-		// 			}
-		// 		} else {
-		// 			noDuplicatesArray.push(tool[i]);
-		// 		}
-		// 	}
-		// 	return noDuplicatesArray
-		// }
 
 
 		/**
@@ -271,11 +218,12 @@
 		vm.advancedSearch = function (){
 			if(vm.edamTerm){
 				var url = "https://elixir.bsc.es/edam/tool/search?text="+vm.edamTerm;
-				vm.getData(url).then(function (response){
-					vm.searchByEdam(response.data);
-				},function(error){
-					vm.createMsg();
-				});
+				dataservice.getData(url)
+					.then(function (response){
+						vm.searchByEdam(response.data);
+					},function(error){
+						vm.createMsg();
+					});
 			} else {
 				vm.toolsArray = $rootScope.array;
 			}
@@ -299,5 +247,11 @@
 
 	}
 
+
+	toolController.$inject = ['$scope','$http', '$window','$rootScope','$anchorScroll', '$location', '$q', 'dataservice']
+
+	angular
+	.module('elixibilitasApp')
+	.controller("toolController", toolController);
 
 })();
