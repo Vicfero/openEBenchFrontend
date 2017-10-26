@@ -9,7 +9,39 @@
 *{
     text-align: justify;
     font-family: 'Roboto', sans-serif;
+    font
 }
+
+body {
+    padding-top: 65px;
+    background-color: #ffffff;
+    color: #6A6C6F;
+}
+nav li:hover{
+     box-shadow:0px -3px 0px 0px #EF7500 inset;
+     transition: box-shadow 0.2s ease-in-out;
+}
+nav a{
+    font-size: 14px;
+}
+.navbar-default {
+    background: white;
+    border-color: #E7E7E7;
+    /*margin: 10px;*/
+}
+@media (max-width: 208px) {
+    .navbar-brand{
+        display: none;
+    }
+}
+.elevated{
+    /*box-shadow: 0px 5px 10px 0px #FAFAFA;*/
+    box-shadow: 0px 5px 10px 0px #F3F3F3, 0px -5px 10px 0px #F3F3F3;
+    margin-top: 20px;
+    border: 1px solid #e7e7e7e7;
+    /*background-color: #F5F5F5*/
+}
+
 .logo img{
     height: 91px;
 }
@@ -19,32 +51,18 @@
 .center-content{
     text-align: center;
 }
-/*td {
-    table-layout: fixed;
-    white-space: nowrap;
-    max-width: 100vh;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}*/
+
 table {
     table-layout: fixed;
     overflow: hidden;
 
 }
-/*.tdsmall{
-    width : 5%;
-    overflow: visible;
-}
-.tdmedium{
-    width : 15%;
-    overflow: scroll;
-}*/
+
 th, td {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
-
 
 .table-icons{
     height: 30px;

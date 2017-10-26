@@ -174,10 +174,12 @@
 
             </div>
             <div class="col-md-6">
-                <pre>
-                {{toolCtrl.metrics | json}}
-                </pre>
+                {{toolCtrl.metrics}}
+                <!-- <opeb data-widgetService={{toolCtrl.metrics}} ></opeb> -->
+                <opeb data-widgetService="https://elixir.bsc.es/metrics/bio.tools:1000genomes_data_slicer/web/browser.1000genomes.org" ></opeb>
             </div>
+
+
 
 
             <div class="col-md-12">

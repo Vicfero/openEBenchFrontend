@@ -123,13 +123,14 @@
 		*/
 		vm.showDetails = function (tool){
 			vm.basicDetails=tool;
-			vm.displayDetailsView = 1;
 			var url = tool._id.replace(/\/tool\//g,"/metrics/").replace("http","https");
-
-			dataservice.getData(url)
-				.then(function (response){
-					vm.metrics = response.data;
-			});
+			vm.displayDetailsView = 1;
+			// vm.metrics = "<opeb data-widgetService="+url+"></opeb>";
+			vm.metrics = url;
+			// dataservice.getData(url)
+			// 	.then(function (response){
+			// 		vm.metrics = response.data;
+			// });
 		};
 
 		vm.allData= function (tool){
