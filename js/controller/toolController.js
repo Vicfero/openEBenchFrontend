@@ -9,19 +9,14 @@
 (function (){
 	'use strict';
 
-	angular
-		.module('elixibilitasApp')
-		.controller("toolController", toolController);
 
-
-	toolController.$inject = ['$scope','$http', '$window','$rootScope','$anchorScroll', '$location']
 	/**
 	@name toolController
 	@description controls the tool-page.html page of the angular app.
 	@version 1.0
 	@author Vicky Sundesha
 	*/
-	function toolController ($scope, $http, $window, $rootScope, $anchorScroll, $location){
+	function toolController ($scope, $http, $window, $rootScope, $anchorScroll, $location, $q, dataservice){
 
 		var vm = this;
 
@@ -36,52 +31,83 @@
 			vm.currentPage = 1;
 			vm.pageSize = 10;
 			vm.toolsArray = [];
-			vm.edamArray = [];
-			vm.toolDetails;
 			vm.displayDetailsView = 0;
-			vm.detailsToDisplayObjects = [];
 			vm.basicDetails;
-			vm.loadingDisplay;
 			vm.message = "";
-			vm.urlToBioTools = "";
+			vm.edamTerm = "";
+			vm.sortKey;
+			vm.reverse;
+			vm.chunks=[];
+
 			//if $rootScope.array is empty
 			if(!$rootScope.array){
-				vm.loadingDisplay = 0;
-				vm.getData();
+				var url = 'https://elixir.bsc.es/tools/statistics/';
+				dataservice.getData(url)
+					.then(function (response){
+						vm.getChunks(response.data.total);
+						vm.loadingDisplay = 0;
+					});
+
 			} else {
 				//if $rootScope.array is full
-				vm.loadingDisplay = 1;
 				vm.toolsArray = $rootScope.array;
+				vm.loadingDisplay = 1;
 			}
 
 		};
 
-		/**
-		@name getData
-		@description getData fetches all tools in json format from the api and saves it to the $rootScope.array
-		@version 1.0
-		@author Vicky Sundesha
-		*/
-		vm.getData = function (){
-			var url = 'http://bsclife010.int.bsc.es/~vsundesh/openEBenchFrontend/json/tool.json'
-			// var url = 'https://elixir.bsc.es/tool'
-			$http({
-				method: 'GET',
-				url: url,
-				timeout: 3000,
-			}).then(function successCallback(response){
-					vm.toolsArray =  response.data;
-					$rootScope.array = vm.toolsArray;
-					vm.loadingDisplay = 1;
-			}, function errorCallback(response){
-					// console.log(response);
-					var msg = "Sorry our services are not available at this moment. Please try later"
-					vm.createMsg(response,msg);
-			});
+		// get api in chunks
+		vm.getChunks = function (size){
+			var skip = 0;
+			var limit = 100;
+			var size = size;
+			while(skip<size){
+				vm.loopChunks(skip,limit);
+				skip = skip + limit;
+			}
+		}
+
+		//loop chunks
+		vm.loopChunks = function(skip,limit){
+			var url = 'https://elixir.bsc.es/tool?skip='+skip+'&limit='+limit
+			dataservice.getData(url)
+				.then(function (response){
+					vm.pushData(response);
+					if(response.data.length==0){
+						return;
+					}
+					// console.log(response.data.length);
+				},function(error){
+					vm.createMsg();
+				});
 		}
 
 
-		vm.createMsg = function (response,msg){
+		//the data recived from api in places
+		vm.pushData = function (tool){
+			vm.chunks.push(vm.allData(tool.data))
+			vm.toolsArray = [].concat.apply([], vm.chunks);
+			$rootScope.array = [].concat.apply([], vm.chunks);
+			vm.loadingDisplay = 1
+		}
+
+		//Sort name
+		vm.sort = function (keyName){
+			vm.sortKey = keyName;
+			vm.reverse = !vm.reverse;
+		}
+
+
+		/**
+		@name createMsg
+		@description creates div with error message
+		@version 1.0
+		@author Vicky Sundesha
+		@return messageToDisplay this is the the code that is displayed when there is an error
+		*/
+		vm.createMsg = function (){
+			vm.loadingDisplay = 2;
+			var msg = "Sorry our services are not available at this moment. Please try later";
 			var messageToDisplay = "<div class='alert alert-danger text-center' role='alert'>"+msg+"</div>";
             vm.message = messageToDisplay;
 		}
@@ -91,129 +117,141 @@
 		/**
 		@name showDetails
 		@description showDetails is called when details button is clicked for everytool this iterates the semantics and send each semantic to this corisponding function.
+		@param tool for details.
 		@version 1.0
 		@author Vicky Sundesha
 		*/
 		vm.showDetails = function (tool){
-			vm.urlToBioTools = "";
-			vm.detailsToDisplayObjects = [];
-			vm.urlToBioTools = "https://bio.tools/"+tool.name.replace(/[\s]/g,"_");
-			// console.log(vm.urlToBioTools);
-			vm.populateToolDetails(tool);
-			var idSplit = tool['@id'];
-			var pathname = new URL(idSplit).pathname;
-			var url = "https://elixir.bsc.es/edam"+pathname;
-			vm.getDetails(url);
-		};
+			vm.basicDetails=tool;
+			vm.displayDetailsView = 1;
+			var url = tool._id.replace(/\/tool\//g,"/metrics/").replace("http","https");
 
-		vm.getDetails = function (url){
-			console.log(url);
-			$http({
-				method: 'GET',
-				url: url,
-				timeout: 3000,
-			}).then(function successCallback(response){
-					vm.toolDetails = response.data;
-					vm.seperateDetails(vm.toolDetails);
-					$location.hash('bottom');
-					// call $anchorScroll()
-					$anchorScroll();
-			}, function errorCallback(response){
-					var msg = "Sorry our services are not available at this moment. Please try later"
-					vm.createMsg(response,msg);
+			dataservice.getData(url)
+				.then(function (response){
+					vm.metrics = response.data;
 			});
 		};
 
+		vm.allData= function (tool){
+			var array = []
+			for (var i = 0; i < tool.length; i++) {
+				array.push(vm.initTool(tool[i],vm.initInstance(tool[i])));
+			}
+			return array
+		}
 
 
-
-		vm.populateToolDetails=function(tool){
-			console.log(tool);
-			var toolBasicDetails = new Detail();
-			toolBasicDetails.setName(tool.name);
-			toolBasicDetails.setLink(tool.homepage)
-			toolBasicDetails.setType(tool['@type'])
-			toolBasicDetails.setDesc(tool.description)
+		/**
+		@name initInstance
+		@description Creats new instances of a tool and returns the instance
+		@param tool is the response data from the Api
+		@param i is the posistion
+		@version 1.0
+		@author Vicky Sundesha
+		*/
+		vm.initInstance = function (tool){
+			var instance = new Instance();
+			// if(tool['@type']){
+			// 	instance.setType(tool['@type'])
+			// }
 			if(tool.version){
-				toolBasicDetails.setVersion(tool.version)
+				instance.setVersion(tool.version)
 			}
 			if(tool.publications){
-				toolBasicDetails.setPublication(tool.publications)
-			}
-			if(tool.contacts){
-				toolBasicDetails.setContact(tool.contacts)
+				instance.setPublication(tool.publications)
 			}
 			if(tool.repositories){
-				toolBasicDetails.setRepo(tool.repositories)
+				instance.setRepo(tool.repositories)
 			}
 			if(tool.documentation){
-				toolBasicDetails.setDocs(tool.documentation)
+				instance.setDocs(tool.documentation)
 			}
-			vm.basicDetails = toolBasicDetails;
-		}
-
-		vm.seperateDetails = function (toolDetails){
-			var object = toolDetails;
-			var objectKeys = Object.keys(object);
-			var i = 0;
-			for (i = 0; i < objectKeys.length; i++) {
-				switch (objectKeys[i]) {
-					case "inputs" :
-
-					case "operations" :
-
-					case "outputs" :
-
-					case "topics" :
-						var edamArray = object[objectKeys[i]];
-						vm.iterateEdamArray(edamArray,objectKeys[i]);
-						break;
-					default:// TODO: control errors
-
-				};
-			};
-			if(i == objectKeys.length){
-				vm.displayDetailsView = 1;
-			}// TODO: control errors
+			return instance;
 		}
 
 
-		vm.iterateEdamArray = function (edamArray,edamType){
-				var j = 0;
-				for ( j=0; j < edamArray.length; j++){
-					vm.createDetailsView(edamArray[j],edamType)
-				}
-		};
+		/**
+		@name checkName
+		@description checks if the tool name exists
+		@param tool is the response data from the Api
+		@param i is the posistion
+		@version 1.0
+		@author Vicky Sundesha
+		*/
+		vm.checkName = function (i,tool){
+			return tool[i].name != tool[i-1].name ? false : true;
+		}
 
-		vm.createDetailsView = function (edamObject,edamType){
 
-			console.log(edamObject);
-			var toolLabel;
-			var toolComment;
-			var formatLabel;
-			var formatComment;
+		/**
+		@name initTool
+		@description Creats new tool and returns the tool
+		@param tool is the response data from the Api
+		@param i is the posistion
+		@param instance is are the diffrent instances of the tool web,cmd,app etc..
+		@version 1.0
+		@author Vicky Sundesha
+		*/
+		vm.initTool = function (tool,instance){
+			var toolBasicDetails = new Tool();
+			toolBasicDetails.setId(tool['@id']);
+			toolBasicDetails.setType(tool['@type']);
+			toolBasicDetails.setName(tool.name);
+			toolBasicDetails.setDesc(tool.description);
+			toolBasicDetails.setLink(tool.homepage);
+			toolBasicDetails.setContact(tool.contacts);
+			toolBasicDetails.setCredits(tool.credits);
+			var urlToBioTools = "";
+			var urlToBioTools = "https://bio.tools/"+tool.name.replace(/[\s]/g,"_");
+			toolBasicDetails.setLinkToBioTool(urlToBioTools);
+			toolBasicDetails.setInstance(instance);
+			return toolBasicDetails;
+		}
 
-			toolLabel = edamObject.labels;
-			toolComment = edamObject.comments;
+		vm.removeFilter = function () {
+			vm.edamTerm = "";
+			vm.toolsArray = $rootScope.array;
+			// vm.loadingDisplay = 1;
 
-			if(edamObject.formats){
+		}
 
-				if(edamObject.formats[0]){
-					formatLabel = edamObject.formats[0].labels;
-					formatComment = edamObject.formats[0].comments;
+		vm.advancedSearch = function (){
+			if(vm.edamTerm){
+				var url = "https://elixir.bsc.es/edam/tool/search?text="+vm.edamTerm;
+				dataservice.getData(url)
+					.then(function (response){
+						vm.searchByEdam(response.data);
+					},function(error){
+						vm.createMsg();
+					});
+			} else {
+				vm.toolsArray = $rootScope.array;
+			}
+
+
+		}
+
+		vm.searchByEdam = function (data){
+			var toolArray = [];
+			for (var i = 0; i < data.length; i++) {
+				var tool;
+				if($rootScope.array.find(tool => tool['_id'] === data[i]['@id'])){
+					toolArray.push($rootScope.array[i]);
 				}
 			}
-			var edamDetailObject = new EdamDetail();
-			// edamDetailObject.construct(edamType,toolLabel,toolComment,formatLabel,formatComment);
-			edamDetailObject.setEdamType(edamType);
-			edamDetailObject.setToolLabel(toolLabel);
-			edamDetailObject.setToolComment(toolComment);
-			edamDetailObject.setFormatLabel(formatLabel);
-			edamDetailObject.setFormatComment(formatComment);
-			vm.detailsToDisplayObjects.push(edamDetailObject)
+			if(i == data.length){
+				vm.toolsArray = toolArray;
+			}
 
 		}
+
 	}
 
+
+	toolController.$inject = ['$scope','$http', '$window','$rootScope','$anchorScroll', '$location', '$q', 'dataservice']
+
+	angular
+	.module('elixibilitasApp')
+	.controller("toolController", toolController);
 
 })();

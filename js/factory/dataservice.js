@@ -5,39 +5,31 @@
         .module('elixibilitasApp')
         .factory('dataservice', dataservice);
 
-    dataservice.$inject = ['$http'];
+    dataservice.$inject = ['$http','$q'];
 
 
-    function dataservice($http) {
-        var service = {
-            getData: getData
-        };
+        function dataservice($http,$q) {
 
-        return service;
-
-        function getData() {
-            return $http({
-                method: 'GET',
-                url: 'https://elixir.bsc.es/tool'
-                })
-                .then(successCallback)
-                .catch(errorCallback);
-
-
-            function errorCallback(response){
-                console.log(response);
-                console.log('XHR Failed for getAvengers.' + response.data);
-                return response.data;
-            };
-
-            function successCallback(response){
-                    console.log(response.data);
-                    // $scope.toolsArray=response.data;
-                    return response.data;
+            var service = {
+                getData: getData
             }
+
+            return service;
+            
+            function getData(url) {
+                var def = $q.defer();
+                $http({
+                    method: 'GET',
+                    url: url,
+                }).then(function successCallback(response){
+                         def.resolve(response);
+                }, function errorCallback(response){
+                        def.reject(response);
+                });
+                return def.promise;
+            };
         }
 
-    }
-    
+
 
 })();

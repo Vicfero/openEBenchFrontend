@@ -10,8 +10,8 @@
 
     angular
         .module('elixibilitasApp', [
+            'chart.js',
             'angularUtils.directives.dirPagination',
-            'ngAnimate',
             'ngSanitize',
             'ui.bootstrap',
             'ngRoute'

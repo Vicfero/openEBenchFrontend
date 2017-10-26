@@ -19,16 +19,41 @@
 .center-content{
     text-align: center;
 }
-td {
+/*td {
+    table-layout: fixed;
     white-space: nowrap;
     max-width: 100vh;
     overflow: hidden;
     text-overflow: ellipsis;
+}*/
+table {
+    table-layout: fixed;
+    overflow: hidden;
+
 }
+/*.tdsmall{
+    width : 5%;
+    overflow: visible;
+}
+.tdmedium{
+    width : 15%;
+    overflow: scroll;
+}*/
+th, td {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
 .table-icons{
     height: 30px;
     width: auto;
+    display: block;
+    /*margin-left: auto;
+    margin-right: auto;*/
 }
+
 .main-text{
     font-size: 20px;
 }
@@ -68,4 +93,13 @@ a[href^="https://"],a[href^="http://"] {
     height: 1px;
     width: auto;
     padding-right: 13px;
+}
+
+th {
+    cursor:pointer;
+}
+
+.sort-icon {
+    font-size: 9px;
+    margin-left: 5px;
 }

@@ -19,5 +19,8 @@
             .when("/tools", {
                 templateUrl : "view/template/tool-page.html"
             })
+            .when("/stats", {
+                templateUrl : "view/template/stats-page.html"
+            })
     }
 })();

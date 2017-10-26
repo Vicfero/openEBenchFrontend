@@ -10,12 +10,6 @@
 (function() {
     'use strict';
 
-	angular
-		.module('elixibilitasApp')
-
-		.controller("mainController",mainController)
-
-    mainController.$inject = ['$scope','$rootScope']
 	/**
 	@name mainController
 	@description controls the index.html page of the angular app and sets the $rootScope.array
@@ -23,8 +17,15 @@
 	@version 1.0
 	@author Vicky Madan Sundesha
 	*/
-	function mainController ($scope, $rootScope){
+	function mainController ($scope, $rootScope, dataservice){
         $rootScope.array;
-	}
+        $rootScope.allData=[];
+    };
+
+    mainController.$inject = ['$scope','$rootScope','dataservice']
+
+    angular
+    .module('elixibilitasApp')
+    .controller("mainController",mainController)
 
 })();

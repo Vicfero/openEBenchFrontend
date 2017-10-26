@@ -9,7 +9,7 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="96.80687"
+   width="214.093"
    height="72.90947"
    id="svg3873"
    version="1.1"
@@ -28,8 +28,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.979899"
-     inkscape:cx="-79.534041"
-     inkscape:cy="7.9934165"
+     inkscape:cx="-68.450208"
+     inkscape:cy="21.630478"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -58,10 +58,10 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-463.02514,-335.90745)">
+     transform="translate(-302.80752,-349.54451)">
     <g
        id="g3934"
-       transform="translate(-16.162444,-0.50507595)">
+       transform="translate(-42.931485,13.637059)">
       <g
          transform="matrix(1.25,0,0,-1.25,554.35326,335.90745)"
          id="g236">
@@ -72,5 +72,20 @@
            inkscape:connector-curvature="0" />
       </g>
     </g>
-  </g>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4215"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:101.99999809%;font-family:sans-serif;text-align:end;letter-spacing:8.11999989px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       transform="translate(632.73077,306.10795)"><flowRegion
+         id="flowRegion4217"><rect
+           id="rect4219"
+           width="148.99744"
+           height="78.791885"
+           x="-332.84525"
+           y="48.160732"
+           style="line-height:101.99999809%;text-align:end;text-anchor:end" /></flowRegion><flowPara
+         id="flowPara4221"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:101.99999809%;font-family:Laksaman;-inkscape-font-specification:Laksaman;text-align:end;letter-spacing:0.00999494px;text-anchor:end">   Open</flowPara><flowPara
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:101.99999809%;font-family:Laksaman;-inkscape-font-specification:Laksaman;text-align:end;letter-spacing:0.00999494px;text-anchor:end"
+         id="flowPara4223"> EBench</flowPara></flowRoot>  </g>
 </svg>

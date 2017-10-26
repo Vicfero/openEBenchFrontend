@@ -1,0 +1,24 @@
+<div ng-controller="statsController as statsCtrl" class="container">
+    <div class="col-md-12">
+        <h3>Tools stats</h3>
+        <div class="jumbotron">
+
+            <h3 class="center-content">{{statsCtrl.type}} tools</h3>
+            <!-- <select  name="type" ng-model="statsCtrl.type" ng-options="type for type in statsCtrl.typeArray"></select> -->
+            <canvas class="chart chart-base" chart-type="statsCtrl.chart1.getType()" chart-data="statsCtrl.chart1.getData()" chart-labels="statsCtrl.chart1.getLabel()" chart-colors="statsCtrl.chart1.getColor()" chart-click="statsCtrl.onClick1" chart-options=statsCtrl.options></canvas>
+        </div>
+        <div class="jumbotron">
+            <canvas class="chart chart-base" chart-type="statsCtrl.chart2.getType()" chart-data="statsCtrl.chart2.getData()" chart-labels="statsCtrl.chart2.getLabel()"  chart-options=statsCtrl.options2></canvas>
+        </div>
+
+
+        <div class="col-md-4">
+
+        </div>
+
+
+
+    </div>
+
+
+</div>

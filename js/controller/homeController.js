@@ -1,6 +1,6 @@
 /**
 @name homeController.js
-@description home page controller 
+@description home page controller
 @version 1.0
 @date 09/06/2017
 @author Vicky Madan Sundesha
@@ -10,8 +10,6 @@
 (function() {
     'use strict';
 
-	angular.module('elixibilitasApp')
-		.controller("homeController",homeController)
 
 
 		/**
@@ -24,4 +22,6 @@
 
 		}
 
+        angular.module('elixibilitasApp')
+        .controller("homeController",homeController)
 })();

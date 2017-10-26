@@ -6,44 +6,50 @@
         <link rel="stylesheet" href="vendors/css/reset.css">
         <!-- Bootstrap package -->
 
-        <script type="text/javascript" src="vendors/jquery/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="node_modules/jquery/dist/jquery.js"></script>
         <script type="text/javascript" src="vendors/tether/tether.min.js"></script>
         <script type="text/javascript" src="vendors/bootstrap/js/bootstrap.min.js"></script>
 
         <script src="https://code.angularjs.org/1.6.5/angular.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-animate.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-sanitize.js"></script>
-
-        <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-route.js"></script>
-
         <script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
+
+
         <link rel="stylesheet" href="vendors/bootstrap/css/bootstrap.min.css">
+
         <!-- Custom css -->
         <link rel="stylesheet" href="vendors/css/master.css">
 
+        <!--  Charts -->
+        <script type="text/javascript" src="node_modules/chart.js/dist/Chart.js"></script>
+        <script type="text/javascript" src="node_modules/angular-chart.js/dist/angular-chart.js"></script>
+
+
 
         <!-- angular code -->
-
-
 		<script src="js/app.js" type="text/javascript" xml:space="preserve"></script>
-        <!-- module -->
-        <script src="js/model/EdamDetail.js"type="text/javascript"></script>
-        <script src="js/model/Detail.js"type="text/javascript"></script>
 
-        <!-- Controllers-->
+        <!-- module -->
+        <script src="js/model/Tool.js"type="text/javascript"></script>
+        <script src="js/model/Instance.js"type="text/javascript"></script>
+        <script src="js/model/Chart.js"type="text/javascript"></script>
+        <script src="js/model/Statistics.js"type="text/javascript"></script>
+        <!-- Controllers -->
 		<script src="js/controller/mainController.js" type="text/javascript" xml:space="preserve"></script>
         <script src="js/controller/homeController.js" type="text/javascript" xml:space="preserve"></script>
         <script src="js/controller/toolController.js" type="text/javascript" xml:space="preserve"></script>
+        <script src="js/controller/statsController.js" type="text/javascript" xml:space="preserve"></script>
         <!-- config -->
         <script src="js/config/route.js" type="text/javascript"></script>
         <!-- factory -->
         <script src="js/factory/dataservice.js" type="text/javascript"></script>
-        <script src="js/factory/logger.js" type="text/javascript"></script>
+        <!-- <script src="js/factory/logger.js" type="text/javascript"></script> -->
+
         <!-- external -->
         <script src="js/external/dirPagination.js" type="text/javascript" xml:space="preserve"></script>
-        <!-- <script src="js/external/jquery.sparkline.min.js" type="text/javascript" xml:space="preserve"></script> -->
+
+
 
 
         <title>OpenEbench</title>
@@ -58,7 +64,7 @@
                 <span class="icon-bar"></span>
               </button>
               <a class="logo" href="#">
-                  <img src="img/ELIXIR_Dna_white2.svg" alt="">
+                  <img src="img/ELIXIR_Dna_white2_copy.svg" alt="">
               </a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
@@ -68,9 +74,13 @@
                 <li class=""><a href="#!/tools">Tools Monitoring</a></li>
                 <li class=""><a href="#">OpenEbench API</a></li>
                 <li class=""><a href="#">About</a></li>
+                <li class=""><a href="#!/stats">Statistics</a></li>
               </ul>
             </div>
         </nav>
             <ng-view></ng-view>
+
+
+
     </body>
 </html>
