@@ -1,3 +1,85 @@
-<div ng-controller="benchController as benchCtrl" class="container">
-    <h1>hola</h1>
+<div ng-controller="benchController as benchCtrl" class="container-fluid">
+  <div class="col-md-12">
+    <h3>Benchmarking stats</h3>
+    <!-- <div class="jumbotron"> -->
+
+    <h1 class="center-content"> Communities </h1>
+
+    <table style="width:100%" class="table table-striped">
+
+      <thead>
+        <th>             Acronym       </th>
+        <th colspan="3"> Name          </th>
+        <th>             Status        </th>
+        <th colspan="3"> Description   </th>
+        <th colspan="3"> Url           </th>
+      </thead>
+
+      <!-- NOTE: Table bodies where each row is a Commmunity -->
+      <tbody ng-repeat="x in benchCtrl.communities">
+
+        <!-- NOTE: Show or hide the extended community information depending on the state of the Community -->
+        <tr ng-click="benchCtrl.communities[$index].show = !benchCtrl.communities[$index].show; benchCtrl.extendCommunity($index)">
+          <td> {{x._id}} </td>
+          <td colspan="3" style="white-space:pre-wrap ; word-wrap:break-word;"> {{x.name}} </td>
+          <td> {{x.status_id[0]}} </td>
+          <td colspan="3" style="white-space:pre-wrap ; word-wrap:break-word;"> {{x.description}} </td>
+          <td colspan="3" style="white-space:pre-wrap ; word-wrap:break-word;"> <a href="{{x.MainSite}}"> {{x.MainSite}} </a> </td>
+        </tr>
+        <!-- NOTE: Row containing Community details -->
+        <tr ng-show="x.show" >
+          <td colspan="11">
+            <table style="width:100%">
+              <tr>
+                <td>
+                  <table class="table table-striped" style="width:80%">
+                    <th class="center-content">
+                      <b>Datasets</b>
+                    </th>
+                    <tr ng-repeat="z in x._extended['datasets']">
+                      <td>
+                        {{z._id}}
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+                <td>
+                  <table class="table table-striped" style="width:80%">
+                    <th class="center-content">
+                      <b>Metrics</b>
+                    </th>
+                    <tr ng-repeat="z in x._extended['metrics']">
+                      <td>
+                        {{z._id}}
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+                <td>
+                  <table class="table table-striped" style="width:80%">
+                    <th class="center-content">
+                      <b>Benchmarking Events</b>
+                    </th>
+                    <tr ng-repeat="z in x._extended['events']">
+                      <td>
+                        {{z._id}}
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+
+    <div class="col-md-4">
+
+    </div>
+
+
+
+  </div>
 </div>
