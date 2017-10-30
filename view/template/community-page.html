@@ -1,0 +1,140 @@
+<div ng-controller="communityController as ctrller" class="container-fluid">
+  <div >
+
+    <h1 class="center-content" > {{ctrller.community.name}} </h1>
+    <h3 class="center-content" > {{ctrller.community.description}}</h3>
+
+    <canvas class="chart chart-base"
+    chart-type="ctrller.chart.getType()"
+    chart-data="ctrller.chart.getData()"
+    chart-options="ctrller.chart.options"
+    chart-labels="ctrller.chart.labels"
+    width="10"
+    height="10"
+    ></canvas>
+
+
+
+  </div>
+
+  <div ng-if="!ctrller.isObjectEmpty(ctrller.datasets)">
+    <!-- <div ng-repeat="x in ctrller.datasets"> -->
+    <!-- <h2 class="center-content"> <b>Datasets</b></h2> -->
+    <table class="table table-striped" style="width: 100%">
+      <thead>
+        <th style="font-size: 20px" colspan="2">
+          Datasets
+        </th>
+      </thead>
+      <thead>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Creation</th>
+        <th>Modification</th>
+        <th>Link</th>
+      </thead>
+      <tr ng-repeat="x in ctrller.datasets">
+        <td >
+          <div class="" placeholder="{{x.name}}" uib-tooltip="{{x.name}}" tooltip-placement="auto" tooltip-trigger="mouseenter" tooltip-enable="true" >
+          {{x.name}}
+        </div>
+        </td>
+        <td>
+          <div class="" placeholder="{{x.description}}" uib-tooltip="{{x.description}}" tooltip-placement="auto" tooltip-trigger="mouseenter" tooltip-enable="true" >
+          {{x.description}}
+        </div>
+      </td>
+      <td >
+        {{x.dates.creation}}
+      </td>
+      <td  >
+        {{x.dates.modification}}
+      </td>
+      <td >
+        <a href="{{x.datalink}}"> Link </a>
+      </td>
+    </tr>
+  </table>
+  <!-- </div> -->
+</div>
+
+<div ng-if="!ctrller.isObjectEmpty(ctrller.metrics)">
+  <!-- <h2 class="center-content"> <b>Metrics</b></h2> -->
+  <table class="table table-striped" style="width: 100%">
+
+    <thead>
+      <th style="font-size: 20px" colspan="2">
+        Metrics
+      </th>
+    </thead>
+
+    <thead>
+      <th>Title</th>
+      <th colspan="2">Description</th>
+      <th>Links</th>
+    </thead>
+    <tbody>
+      <tr ng-repeat="x in ctrller.metrics">
+        <td >
+          <div class="" placeholder="{{x.title}}" uib-tooltip="{{x.title}}" tooltip-placement="auto" tooltip-trigger="mouseenter" tooltip-enable="true" >
+        {{x.title}}
+      </div>
+    </td>
+        <td  colspan="2">
+          <div class="" placeholder="{{x.description}}" uib-tooltip="{{x.description}}" tooltip-placement="auto" tooltip-trigger="mouseenter" tooltip-enable="true" >
+        {{x.description}}
+      </div>
+    </td>
+        <td>
+          <a href="{{z.uri}}" ng-repeat="z in x.links"> {{z.label}} </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div ng-if="!ctrller.isObjectEmpty(ctrller.testevents)">
+  <!-- <h2 class="center-content"> <b>Test Events</b></h2> -->
+  <table class="table table-striped" style="width: 100%">
+    <thead>
+      <th style="font-size: 20px" colspan="2">
+        Test Events
+      </th>
+    </thead>
+    <thead>
+      <th>Id</th>
+      <th>Creation</th>
+      <th>Reception</th>
+      <th>Dataset</th>
+      <th>Tool</th>
+    </thead>
+    <tbody>
+      <tr ng-repeat="x in ctrller.testevents">
+        <td >
+          {{x.benchmarking_event_id}}
+        </td>
+        <td >
+          {{x.dates.creation}}
+        </td>
+        <td >
+          {{x.dates.reception}}
+        </td>
+        <td >
+          <div class="" placeholder="{{ctrller.datasets[x.input_dataset_id].name}}" uib-tooltip="{{ctrller.datasets[x.input_dataset_id].name}}" tooltip-placement="auto" tooltip-trigger="mouseenter" tooltip-enable="true" >
+          {{ctrller.datasets[x.input_dataset_id].name}}
+        </div>
+
+        </td>
+        <td >
+          <div class="" placeholder="{{ctrller.tools[x.tool_id].name}}: {{ctrller.tools[x.tool_id].description}}" uib-tooltip="{{ctrller.tools[x.tool_id].name}}: {{ctrller.tools[x.tool_id].description}}" tooltip-placement="auto" tooltip-trigger="mouseenter" tooltip-enable="true" >
+          {{ctrller.tools[x.tool_id].name}}
+        </div>
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+</div>
