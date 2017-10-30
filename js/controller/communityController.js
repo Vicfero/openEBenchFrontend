@@ -8,10 +8,6 @@
 	@version 1.0
 	@author Victor Fernández Rodríguez
 	*/
-
-
-
-
 	function communityController ($scope, $http, $window, $rootScope, $anchorScroll, $location, $q , $routeParams, dataservice){
 
 		var vm = this;
@@ -51,22 +47,42 @@
 			datasets.forEach(function(value, index){
 				var url = "https://elixir.bsc.es/benchmarking/Dataset/" + value._id + ".json"
 				dataservice.getData(url).then(function (response){
-					// console.log(response);
+					console.log(response);
 					vm.datasets[response.data._id] = response.data;
 				});
 			})
 		};
+
+		vm.retrieveDataset = function(dataset_id)
+		{
+			if (dataset_id in vm.datasets) return false;
+			vm.datasets[dataset_id] = "NotAvailable"
+			var url = "https://elixir.bsc.es/benchmarking/Dataset/" + dataset_id + ".json"
+			dataservice.getData(url).then(function (response){
+				vm.datasets[response.data._id] = response.data;
+			});
+		}
+
 
 		vm.retrieveMetrics = function(metrics)
 		{
 			metrics.forEach(function(value, index){
 				var url = "https://elixir.bsc.es/benchmarking/Metrics/" + value._id + ".json"
 				dataservice.getData(url).then(function (response){
-					// console.log(response);
 					vm.metrics[response.data._id] = response.data;
 				});
 			})
 		};
+
+		vm.retrieveMetric = function(metric_id)
+		{
+			if (metric_id in vm.metrics) return false;
+			vm.metrics[metric_id] = "NotAvailable"
+			var url = "https://elixir.bsc.es/benchmarking/Metrics/" + metric_id + ".json"
+			dataservice.getData(url).then(function (response){
+				vm.metrics[response.data._id] = response.data;
+			});
+		}
 
 		vm.retrieveTestEvents = function(testevents)
 		{
@@ -79,6 +95,17 @@
 				});
 			})
 		};
+
+		vm.retrieveTestEvent = function(testevent_id)
+		{
+			if (testevent_id in vm.testevents) return false;
+			vm.testevents[testevent_id] = "NotAvailable"
+			var url = "https://elixir.bsc.es/benchmarking/TestEvent/" + metric_id + ".json"
+			dataservice.getData(url).then(function (response){
+				vm.testevents[response.data._id] = response.data;
+				vm.retrieveTool(response.data.tool_id);
+			});
+		}
 
 		vm.retrieveTool = function(tool)
 		{
@@ -94,6 +121,16 @@
 
 		vm.isObjectEmpty = function(card){
 			return Object.keys(card).length === 0;
+		}
+
+		vm.getSizeOf = function(object){
+			return Object.keys(object).length;
+		}
+
+		vm.getArrayFromNumber = function(number)
+		{
+			console.log(number);
+			return new Array(number);
 		}
 	};
 

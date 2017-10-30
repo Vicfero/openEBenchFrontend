@@ -10,52 +10,92 @@
     chart-options="ctrller.chart.options"
     chart-labels="ctrller.chart.labels"
     width="10"
-    height="10"
-    ></canvas>
+    height="10">
 
-
+    </canvas>
 
   </div>
 
-  <div ng-if="!ctrller.isObjectEmpty(ctrller.datasets)">
-    <!-- <div ng-repeat="x in ctrller.datasets"> -->
-    <!-- <h2 class="center-content"> <b>Datasets</b></h2> -->
-    <table class="table table-striped" style="width: 100%">
-      <thead>
-        <th style="font-size: 20px" colspan="2">
-          Datasets
-        </th>
-      </thead>
-      <thead>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Creation</th>
-        <th>Modification</th>
-        <th>Link</th>
-      </thead>
-      <tr ng-repeat="x in ctrller.datasets">
-        <td >
-          <div class="" placeholder="{{x.name}}" uib-tooltip="{{x.name}}" tooltip-placement="auto" tooltip-trigger="mouseenter" tooltip-enable="true" >
-          {{x.name}}
+  <div ng-if="!ctrller.isObjectEmpty(ctrller.datasets)" id="datasets">
+    <h2 class="center-content">Datasets</h2>
+    <div ng-repeat="x in ctrller.datasets" class="col-md-2" >
+      <div class="jumbotron" style="width:90%;padding:5%">
+
+          <h4>
+            <b>Name</b>
+          </h4>
+          <h6 style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"
+              placeholder="{{x.name}}"
+              uib-tooltip="{{x.name}}"
+              tooltip-placement="auto"
+              tooltip-trigger="mouseenter"
+              tooltip-enable="true"
+              viewport="#datasets">
+            {{ x.name }}
+          </h6>
+
+          <h5>
+            <b>Type</b>
+          </h5>
+          <h6 style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"
+              placeholder="{{x.type}}"
+              uib-tooltip="{{x.type}}"
+              tooltip-placement="auto"
+              tooltip-trigger="mouseenter"
+              tooltip-enable="true"
+              viewport="#datasets">
+            {{ x.type }}
+          </h6>
+
+          <h5>
+            <b>Description</b>
+          </h5>
+          <h6 style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"
+              placeholder="{{x.description}}"
+              uib-tooltip="{{x.description}}"
+              tooltip-placement="auto"
+              tooltip-trigger="mouseenter"
+              tooltip-enable="true"
+              viewport="#datasets">
+            {{ x.description }}
+          </h6>
+
+          <h5>
+            <b>Creation</b>
+          </h5>
+          <h6 style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"
+              placeholder="{{x.dates.creation}}"
+              uib-tooltip="{{x.dates.creation}}"
+              tooltip-placement="auto"
+              tooltip-trigger="mouseenter"
+              tooltip-enable="true"
+              viewport="#datasets">
+            {{ x.dates.creation | date : format : timezone }}
+          </h6>
+
+          <h5 ng-if="x.dates.creation != x.dates.modification">
+            <b>Modification</b>
+          </h5>
+          <h6 ng-if="x.dates.creation != x.dates.modification"
+              style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"
+              placeholder="{{x.dates.modification}}"
+              uib-tooltip="{{x.dates.modification}}"
+              tooltip-placement="auto"
+              tooltip-trigger="mouseenter"
+              tooltip-enable="true"
+              viewport="#datasets">
+            {{ x.dates.modification | date : format : timezone }}
+          </h6>
+
+          <h6 style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+              <a href="{{x.datalink}}">
+                More Info
+              </a>
+          </h6>
+          <h6 style="text-align: right;">{{$index}}</h6>
+
         </div>
-        </td>
-        <td>
-          <div class="" placeholder="{{x.description}}" uib-tooltip="{{x.description}}" tooltip-placement="auto" tooltip-trigger="mouseenter" tooltip-enable="true" >
-          {{x.description}}
-        </div>
-      </td>
-      <td >
-        {{x.dates.creation}}
-      </td>
-      <td  >
-        {{x.dates.modification}}
-      </td>
-      <td >
-        <a href="{{x.datalink}}"> Link </a>
-      </td>
-    </tr>
-  </table>
-  <!-- </div> -->
+    </div>
 </div>
 
 <div ng-if="!ctrller.isObjectEmpty(ctrller.metrics)">
@@ -120,13 +160,21 @@
           {{x.dates.reception}}
         </td>
         <td >
-          <div class="" placeholder="{{ctrller.datasets[x.input_dataset_id].name}}" uib-tooltip="{{ctrller.datasets[x.input_dataset_id].name}}" tooltip-placement="auto" tooltip-trigger="mouseenter" tooltip-enable="true" >
+          <div placeholder="{{ctrller.datasets[x.input_dataset_id].name}}"
+          uib-tooltip="{{ctrller.datasets[x.input_dataset_id].name}}"
+          tooltip-placement="auto"
+          tooltip-trigger="mouseenter"
+          tooltip-enable="true" >
           {{ctrller.datasets[x.input_dataset_id].name}}
         </div>
 
         </td>
         <td >
-          <div class="" placeholder="{{ctrller.tools[x.tool_id].name}}: {{ctrller.tools[x.tool_id].description}}" uib-tooltip="{{ctrller.tools[x.tool_id].name}}: {{ctrller.tools[x.tool_id].description}}" tooltip-placement="auto" tooltip-trigger="mouseenter" tooltip-enable="true" >
+          <div placeholder="{{ctrller.tools[x.tool_id].name}}: {{ctrller.tools[x.tool_id].description}}"
+          uib-tooltip="{{ctrller.tools[x.tool_id].name}}: {{ctrller.tools[x.tool_id].description}}"
+          tooltip-placement="auto"
+          tooltip-trigger="mouseenter"
+          tooltip-enable="true" >
           {{ctrller.tools[x.tool_id].name}}
         </div>
 

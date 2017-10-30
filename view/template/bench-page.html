@@ -8,6 +8,7 @@
     <th>             Status        </th>
     <th colspan="3"> Description   </th>
     <th colspan="3"> Url           </th>
+    <th></th>
     <!-- NOTE: Show or hide the extended community information depending on the state of the Community -->
     <tr ng-repeat="x in benchCtrl.communities" ng-click="benchCtrl.communities[$index].show = !benchCtrl.communities[$index].show; benchCtrl.extendCommunity($index)">
       <td>
