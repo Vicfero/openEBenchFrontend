@@ -34,7 +34,6 @@
 
 		vm.orderStats = function (statistics){
 
-			console.log(statistics);
 			for (var stats in statistics) {
 				var tt = new Tooltype();
 				tt.construct(stats,statistics[stats].total,statistics[stats].operational,statistics[stats].total-statistics[stats].operational);
@@ -45,12 +44,12 @@
 
 		vm.do = function () {
 		   	//Chart 1
-			console.log(vm.statistics);
 			vm.chart1 = new Chart();
 			vm.chart1.setType("pie");
 			vm.chart1.setLabel(["Operational","Not operational"]);
-			vm.chart1.setData([vm.statistics[0].operational,vm.statistics[0].notOperational]);
 			vm.chart1.setColor([ '#97BBCD', '#F7464A']);
+
+			//Chart 1
 			vm.chart2 = new Chart();
 			vm.chart2.setType("bar");
 			vm.populateTypeChart(vm.statistics);
@@ -59,7 +58,6 @@
 
 
 		vm.populateTypeChart = function (object){
-			// console.log(object);
 			for (var a of object) {
 				vm.typeArray.push(a.type)
 				if (a.type!="all") {
@@ -72,12 +70,8 @@
 		}
 
 		$scope.$watch(()=>vm.type, function(newValue, oldValue){
-			console.log(oldValue,newValue);
 			if (newValue !== oldValue) {
 				for (var j of vm.statistics) {
-					// if(j.hasOwnProperty("type")){
-					// 	console.log(j);
-					// }
 					Object.keys(j).forEach(function(key) {
 						  if (j[key] == newValue) {
 						    vm.chart1.setData([j.operational,j.notOperational]);

@@ -53,7 +53,7 @@
 					}).catch(function(error){
 						vm.createMsg(error.status);
 					})
-					// .catch(console.log(error));
+
 
 			} else {
 				//if $rootScope.array is full
@@ -74,7 +74,7 @@
 
 		// get api in chunks
 		vm.getChunks = function (size){
-			console.log(size);
+			
 			var skip = 0;
 			var limit = 100;
 			var size = size;
