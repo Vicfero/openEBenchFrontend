@@ -15,71 +15,96 @@
 	@version 1.0
 	@author Vicky Sundesha
 	*/
-	function statsController ($scope, $http, $window, $rootScope, $anchorScroll, $location, $q ,dataservice){
+	function statsController ($scope, $http, $window, $rootScope, $anchorScroll, $location, $q ,dataservice, errorService){
 
 		var vm = this;
 
+		vm.loadingDisplay = 0;
+		vm.typeArray = [];
+		vm.statistics = [];
 
-		vm.typeArray = ["Total"];
-		vm.type=vm.typeArray[0];
 
-
-		vm.statistics = new Statistics ();
 		var url = 'https://elixir.bsc.es/tools/statistics/';
 		dataservice.getData(url)
 			.then(function (response){
-				var res = response.data;
-				vm.statistics.construct(res.total,res.operational,res.cmd,res.web,res.db,res.app,res.lib,res.ontology,res.workflow,res.plugin,res.sparql,res.soap,res.script,res.rest,res.workbench,res.suite);
-				vm.do();
+				vm.orderStats(response.data);
+			}).catch(function(error){
+				vm.createMsg(error.status);
 			});
 
+		vm.orderStats = function (statistics){
+
+			console.log(statistics);
+			for (var stats in statistics) {
+				var tt = new Tooltype();
+				tt.construct(stats,statistics[stats].total,statistics[stats].operational,statistics[stats].total-statistics[stats].operational);
+				vm.statistics.push(tt);
+			}
+			vm.do();
+		}
 
 		vm.do = function () {
 		   	//Chart 1
+			console.log(vm.statistics);
 			vm.chart1 = new Chart();
 			vm.chart1.setType("pie");
 			vm.chart1.setLabel(["Operational","Not operational"]);
-			vm.chart1.setData([vm.statistics.operational,vm.statistics.notOperational]);
+			vm.chart1.setData([vm.statistics[0].operational,vm.statistics[0].notOperational]);
 			vm.chart1.setColor([ '#97BBCD', '#F7464A']);
 			vm.chart2 = new Chart();
 			vm.chart2.setType("bar");
-			vm.populateTypeChart(vm.statistics.type);
+			vm.populateTypeChart(vm.statistics);
+
 		}
 
 
 		vm.populateTypeChart = function (object){
-			for (var a in object) {
-				if (object.hasOwnProperty(a)) {
-					vm.chart2.label.push(a)
-					vm.typeArray.push(a)
-					vm.chart2.data.push(object[a])
+			// console.log(object);
+			for (var a of object) {
+				vm.typeArray.push(a.type)
+				if (a.type!="all") {
+					vm.chart2.label.push(a.type)
+					vm.chart2.data.push(a.operational)
 				}
 			}
+			vm.type=vm.typeArray[0];
+			vm.loadingDisplay=1;
 		}
 
 		$scope.$watch(()=>vm.type, function(newValue, oldValue){
+			console.log(oldValue,newValue);
 			if (newValue !== oldValue) {
-				switch (newValue) {
-					case "Web":
-						vm.chart1.setData([1000,50])
-						break;
-					case "Total":
-						vm.chart1.setData([vm.statistics.operational,vm.statistics.notOperational]);
-						break;
-					default:
-
+				for (var j of vm.statistics) {
+					// if(j.hasOwnProperty("type")){
+					// 	console.log(j);
+					// }
+					Object.keys(j).forEach(function(key) {
+						  if (j[key] == newValue) {
+						    vm.chart1.setData([j.operational,j.notOperational]);
+						  }
+					});
 				}
 			}
 		});
 
 
-		//Default for all charts
 		vm.options = {legend: {display: true, position: 'bottom'}};
-		// vm.option2 = {config: {scales: {xAxes: [{ticks: {maxRotation: 0 }}]}}};
 
+
+		/**
+		@name createMsg
+		@description creates div with error message
+		@version 1.0
+		@author Vicky Sundesha
+		@return messageToDisplay this is the the code that is displayed when there is an error
+		*/
+		vm.createMsg = function (code){
+			vm.loadingDisplay = 2;
+			vm.message = errorService.error(code);
+		}
 	};
 
-	statsController.$inject = ['$scope','$http', '$window','$rootScope','$anchorScroll', '$location', '$q' ,'dataservice']
+	statsController.$inject = ['$scope','$http', '$window','$rootScope','$anchorScroll', '$location', '$q' ,'dataservice', 'errorService']
 
 	angular
 	.module('elixibilitasApp')

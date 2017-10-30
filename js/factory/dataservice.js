@@ -15,10 +15,11 @@
             }
 
             return service;
-            
+
             function getData(url) {
                 var def = $q.defer();
                 $http({
+                    timeout: 5000,
                     method: 'GET',
                     url: url,
                 }).then(function successCallback(response){
