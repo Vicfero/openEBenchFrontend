@@ -8,7 +8,16 @@
 
   <div ng-if="!ctrller.isObjectEmpty(ctrller.datasets)" >
     <h2 class="center-content">Datasets</h2>
-    <div uib-carousel active="active" interval="1000" no-wrap="noWrapSlides" style="height:335px; width:90%;margin: 0 auto;" template-url="view/template/carousel-template.html">
+    <div uib-carousel active="active" interval="1000" no-wrap="noWrapSlides" style="height:335px; width:90%;margin: 0 auto;" template-url="view/template/carousel-template.html" ng-if="ctrller.isMobile()">
+      <div uib-slide ng-repeat="x in ctrller.datasets" active="active" index="$index" style="height:100%">
+        <div dataset-directive
+        index="$index"
+        length="ctrller.getSizeOf(ctrller.datasets)"
+        element="ctrller.datasets[ctrller.getKeys(ctrller.datasets)[$index]]"
+        style="position:absolute;left:0%;width:100%;height:100%"> </div>
+      </div>
+    </div>
+    <div uib-carousel active="active" interval="1000" no-wrap="noWrapSlides" style="height:335px; width:90%;margin: 0 auto;" template-url="view/template/carousel-template.html" ng-if="!ctrller.isMobile()">
       <div uib-slide ng-repeat="x in ctrller.datasets" ng-if="ctrller.getSizeOf(ctrller.datasets) > 6" active="active" index="$index" style="height:100%">
         <div dataset-directive
         index="$index"

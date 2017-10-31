@@ -147,6 +147,11 @@
 				return index;
 			}
 		}
+
+		vm.isMobile = function()
+		{
+			return $window.innerWidth < 700;
+		}
 	};
 
 
