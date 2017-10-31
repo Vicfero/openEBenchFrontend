@@ -9,7 +9,7 @@
   <div ng-if="!ctrller.isObjectEmpty(ctrller.datasets)" >
     <h2 class="center-content">Datasets</h2>
     <div uib-carousel active="active" interval="1000" no-wrap="noWrapSlides" style="height:335px; width:90%;margin: 0 auto;" template-url="view/template/carousel-template.html">
-      <div uib-slide ng-repeat="x in ctrller.datasets" ng-if="ctrller.getSizeOf(ctrller.datasets) > 6" active="active" index="$index" template-url="view/template/slide-template.html" style="height:100%">
+      <div uib-slide ng-repeat="x in ctrller.datasets" ng-if="ctrller.getSizeOf(ctrller.datasets) > 6" active="active" index="$index" style="height:100%">
         <div dataset-directive
         index="$index"
         length="ctrller.getSizeOf(ctrller.datasets)"
@@ -47,7 +47,7 @@
         style="position:absolute;left:83.33%;width:16%;height:100%"> </div>
 
       </div>
-      <div uib-slide ng-if="ctrller.getSizeOf(ctrller.datasets) < 7" active="active" index="0" template-url="view/template/slide-template.html" style="height:100%">
+      <div uib-slide ng-if="ctrller.getSizeOf(ctrller.datasets) < 7" active="active" index="0" style="height:100%">
         <div dataset-directive
         ng-if="ctrller.getSizeOf(ctrller.datasets) > 0"
         index="0"
