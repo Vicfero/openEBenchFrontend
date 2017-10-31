@@ -15,15 +15,16 @@
             }
 
             return service;
-            
+
             function getData(url) {
                 var def = $q.defer();
                 $http({
+                    
                     method: 'GET',
                     url: url,
                 }).then(function successCallback(response){
                          def.resolve(response);
-                }, function errorCallback(response){
+                }).catch(function errorCallback(response){
                         def.reject(response);
                 });
                 return def.promise;

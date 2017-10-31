@@ -20,6 +20,8 @@
 	function mainController ($scope, $rootScope, dataservice){
         $rootScope.array;
         $rootScope.allData=[];
+        $rootScope.typeArray=[];
+
     };
 
     mainController.$inject = ['$scope','$rootScope','dataservice']

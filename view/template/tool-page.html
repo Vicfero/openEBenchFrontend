@@ -3,11 +3,11 @@
     <div class="responsive-table" ng-show="toolCtrl.loadingDisplay==1">
         <div class="form-group">
 
-            <div class="input-group col-md-2 col-md-4 col-md-offset-5 col-xs-offset-8">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-                <input ng-model="all" id="search" type="text" class="form-control" name="search" placeholder="Filter">
+            <div class="input-group col-md-4 col-md-offset-4 ">
+                <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span> -->
+                <input class="advanced-search-input" ng-model="all" id="search" type="text" name="search" placeholder="Filter">
             </div>
-            <div class="input-group col-md-2 col-md-4 col-md-offset-5 col-xs-offset-8">
+            <div class="input-group col-md-4 col-md-offset-4">
                 <small><a  href=""data-toggle="modal" data-target="#advancedSearch">Advanced search</a></small>
                 <div class="input-group">
                     <button ng-if="toolCtrl.edamTerm!=''" type="button" class="btn btn-success btn-xs" name="button" ng-click="toolCtrl.removeFilter()">x {{toolCtrl.edamTerm}}</button>
@@ -25,9 +25,9 @@
                             </div>
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-                                        <input ng-model="toolCtrl.edamTerm" id="search" type="text" class="form-control" name="search" placeholder="Search by EDAM terminology">
+                                    <div class="">
+                                        <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span> -->
+                                        <input ng-model="toolCtrl.edamTerm" id="search" type="text" class="advanced-search-input" name="search" placeholder="Search by EDAM terminology">
                                     </div>
                                 </div>
                             </div>
@@ -43,10 +43,6 @@
         </div>
 
         <table class="table table-striped" >
-            <col class="">
-            <col class="tdsmall">
-            <col class="tdsmall">
-            <col class="">
             <tr>
 
                 <th ng-click="toolCtrl.sort('tool.getName()')"><b>Name</b>
@@ -64,7 +60,8 @@
                     ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                 </th>
             </tr>
-            <tr dir-paginate="tool in toolCtrl.toolsArray | orderBy:toolCtrl.sortKey:toolCtrl.reverse | filter : { type :  type } | filter : {name : name } | filter : { desc : desc } | filter : all | itemsPerPage: toolCtrl.pageSize" current-page="toolCtrl.currentPage" >
+            <!-- (shouldFilter ? filterExpression : '') -->
+            <tr dir-paginate="tool in toolCtrl.toolsArray | orderBy:toolCtrl.sortKey:toolCtrl.reverse | filter : ((type != 'all') ? {type: type} : '' )| filter : {name : name } | filter : { desc : desc } | filter : all | itemsPerPage: toolCtrl.pageSize" current-page="toolCtrl.currentPage" >
                 <td class="col-md-2;">
                     <a data-toggle="tooltip" title={{tool.getLink()}} href="{{tool.getLink()}}" target="_blank">{{tool.getName()}}</a>
                 </td>
@@ -83,18 +80,21 @@
             </tr>
             <tr>
                 <td>
-                    <input ng-model="name" id="search" type="text" class="form-control" name="search" placeholder="Filter by name">
+                    <input class="advanced-search-input" ng-model="name" id="search" type="text" name="search" placeholder="Filter by name">
                 </td>
 
                 <td>
                 </td>
 
                 <td>
-                    <input ng-model="type" id="search" type="text" class="form-control" name="search" placeholder="Filter by type">
+                    <select  name="type" ng-model="type"
+                        ng-options="type | uppercase for type  in typeArray" placeholder="Filter by type">
+                        <option value="" disabled selected>Select tool type</option>
+                    </select>
                 </td>
 
                 <td>
-                    <input ng-model="desc" id="search" type="text" class="form-control" name="search" placeholder="Filter by description">
+                    <input class="advanced-search-input" ng-model="desc" id="search" type="text"  name="search" placeholder="Filter by description">
                 </td>
             </tr>
         </table>
@@ -174,10 +174,12 @@
 
             </div>
             <div class="col-md-6">
-                <pre>
-                {{toolCtrl.metrics | json}}
-                </pre>
+                {{toolCtrl.metrics}}
+                <!-- <opeb data-widgetService={{toolCtrl.metrics}} ></opeb> -->
+                <opeb data-widgetService="https://elixir.bsc.es/metrics/bio.tools:1000genomes_data_slicer/web/browser.1000genomes.org" ></opeb>
             </div>
+
+
 
 
             <div class="col-md-12">

@@ -16,7 +16,7 @@
 	@version 1.0
 	@author Vicky Sundesha
 	*/
-	function toolController ($scope, $http, $window, $rootScope, $anchorScroll, $location, $q, dataservice){
+	function toolController ($scope, $http, $window, $rootScope, $anchorScroll, $location, $q, dataservice, errorService){
 
 		var vm = this;
 
@@ -44,9 +44,14 @@
 				var url = 'https://elixir.bsc.es/tools/statistics/';
 				dataservice.getData(url)
 					.then(function (response){
-						vm.getChunks(response.data.total);
+						vm.statsData = response.data;
+						vm.getChunks(response.data.all.total);
+						$rootScope.typeArray = Object.keys(response.data);
 						vm.loadingDisplay = 0;
-					});
+					}).catch(function(error){
+						vm.createMsg(error.status);
+					})
+
 
 			} else {
 				//if $rootScope.array is full
@@ -56,6 +61,15 @@
 
 		};
 
+
+		$('input').hover(elevated);
+		// $('.elevate').hover(elevated);
+
+
+		function elevated(){
+			$(this).toggleClass("elevated");
+		}
+
 		// get api in chunks
 		vm.getChunks = function (size){
 			var skip = 0;
@@ -64,8 +78,12 @@
 			while(skip<size){
 				vm.loopChunks(skip,limit);
 				skip = skip + limit;
+
 			}
 		}
+
+
+		
 
 		//loop chunks
 		vm.loopChunks = function(skip,limit){
@@ -73,13 +91,9 @@
 			dataservice.getData(url)
 				.then(function (response){
 					vm.pushData(response);
-					if(response.data.length==0){
-						return;
-					}
-					// console.log(response.data.length);
-				},function(error){
-					vm.createMsg();
-				});
+				}).catch(function(error){
+					vm.createMsg(error.status);
+				})
 		}
 
 
@@ -88,6 +102,7 @@
 			vm.chunks.push(vm.allData(tool.data))
 			vm.toolsArray = [].concat.apply([], vm.chunks);
 			$rootScope.array = [].concat.apply([], vm.chunks);
+
 			vm.loadingDisplay = 1
 		}
 
@@ -105,10 +120,9 @@
 		@author Vicky Sundesha
 		@return messageToDisplay this is the the code that is displayed when there is an error
 		*/
-		vm.createMsg = function (){
+		vm.createMsg = function (code){
 			vm.loadingDisplay = 2;
-			var msg = "Sorry our services are not available at this moment. Please try later";
-			var messageToDisplay = "<div class='alert alert-danger text-center' role='alert'>"+msg+"</div>";
+			var messageToDisplay = errorService.error(code)
             vm.message = messageToDisplay;
 		}
 
@@ -123,13 +137,14 @@
 		*/
 		vm.showDetails = function (tool){
 			vm.basicDetails=tool;
-			vm.displayDetailsView = 1;
 			var url = tool._id.replace(/\/tool\//g,"/metrics/").replace("http","https");
-
-			dataservice.getData(url)
-				.then(function (response){
-					vm.metrics = response.data;
-			});
+			vm.displayDetailsView = 1;
+			// vm.metrics = "<opeb data-widgetService="+url+"></opeb>";
+			vm.metrics = url;
+			// dataservice.getData(url)
+			// 	.then(function (response){
+			// 		vm.metrics = response.data;
+			// });
 		};
 
 		vm.allData= function (tool){
@@ -221,9 +236,9 @@
 				dataservice.getData(url)
 					.then(function (response){
 						vm.searchByEdam(response.data);
-					},function(error){
-						vm.createMsg();
-					});
+					}).catch(function(error){
+						vm.createMsg(error.status);
+					})
 			} else {
 				vm.toolsArray = $rootScope.array;
 			}
@@ -248,7 +263,7 @@
 	}
 
 
-	toolController.$inject = ['$scope','$http', '$window','$rootScope','$anchorScroll', '$location', '$q', 'dataservice']
+	toolController.$inject = ['$scope','$http', '$window','$rootScope','$anchorScroll', '$location', '$q', 'dataservice', 'errorService']
 
 	angular
 	.module('elixibilitasApp')

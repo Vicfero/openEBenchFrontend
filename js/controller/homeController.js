@@ -19,8 +19,14 @@
 		@author Vicky Sundesha
 		*/
 		function homeController ($scope){
+            $('input').hover(elevated);
+            $('.elevate').hover(elevated);
 
-		}
+
+            function elevated(){
+                $(this).toggleClass("elevated");
+            }
+		 }
 
         angular.module('elixibilitasApp')
         .controller("homeController",homeController)
