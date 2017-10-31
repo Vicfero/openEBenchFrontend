@@ -6,10 +6,10 @@
         <h3>Tools stats</h3>
         <div class="jumbotron">
 
-            <h3 class="center-content">{{statsCtrl.type}} tools</h3>
+            <h3 class="center-content">{{statsCtrl.type | uppercase }} tools</h3>
 
             <select  name="type" ng-model="statsCtrl.type"
-                ng-options="type for type  in statsCtrl.typeArray" >
+                ng-options="type | uppercase for type  in statsCtrl.typeArray" >
             </select>
 
             <canvas class="chart chart-base"

@@ -38,8 +38,6 @@
 			vm.sortKey;
 			vm.reverse;
 			vm.chunks=[];
-			vm.typeArray = [];
-			$scope.type = vm.typeArray[0];
 
 			//if $rootScope.array is empty
 			if(!$rootScope.array){
@@ -48,7 +46,7 @@
 					.then(function (response){
 						vm.statsData = response.data;
 						vm.getChunks(response.data.all.total);
-						vm.typeArray = Object.keys(response.data);
+						$rootScope.typeArray = Object.keys(response.data);
 						vm.loadingDisplay = 0;
 					}).catch(function(error){
 						vm.createMsg(error.status);
@@ -74,7 +72,6 @@
 
 		// get api in chunks
 		vm.getChunks = function (size){
-			
 			var skip = 0;
 			var limit = 100;
 			var size = size;
@@ -84,6 +81,9 @@
 
 			}
 		}
+
+
+		
 
 		//loop chunks
 		vm.loopChunks = function(skip,limit){

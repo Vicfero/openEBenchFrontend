@@ -87,9 +87,8 @@
                 </td>
 
                 <td>
-                    <!-- <input class="advanced-search-input" ng-model="type" id="search" type="text"  name="search" placeholder="Filter by type"> -->
                     <select  name="type" ng-model="type"
-                        ng-options="type for type  in toolCtrl.typeArray" placeholder="Filter by type">
+                        ng-options="type | uppercase for type  in typeArray" placeholder="Filter by type">
                         <option value="" disabled selected>Select tool type</option>
                     </select>
                 </td>
