@@ -1,102 +1,99 @@
-<div ng-controller="communityController as ctrller" class="container-fluid">
+<div ng-controller="communityController as ctrller" class="container-fluid" id="container">
   <div >
-
+    <!-- <div dataset-directive></div> -->
     <h1 class="center-content" > {{ctrller.community.name}} </h1>
     <h3 class="center-content" > {{ctrller.community.description}}</h3>
 
-    <canvas class="chart chart-base"
-    chart-type="ctrller.chart.getType()"
-    chart-data="ctrller.chart.getData()"
-    chart-options="ctrller.chart.options"
-    chart-labels="ctrller.chart.labels"
-    width="10"
-    height="10">
-
-    </canvas>
-
   </div>
 
-  <div ng-if="!ctrller.isObjectEmpty(ctrller.datasets)" id="datasets">
+  <div ng-if="!ctrller.isObjectEmpty(ctrller.datasets)" >
     <h2 class="center-content">Datasets</h2>
-    <div ng-repeat="x in ctrller.datasets" class="col-md-2" >
-      <div class="jumbotron" style="width:90%;padding:5%">
+    <div uib-carousel active="active" interval="1000" no-wrap="noWrapSlides" style="height:335px; width:90%;margin: 0 auto;" template-url="view/template/carousel-template.html">
+      <div uib-slide ng-repeat="x in ctrller.datasets" ng-if="ctrller.getSizeOf(ctrller.datasets) > 6" active="active" index="$index" template-url="view/template/slide-template.html" style="height:100%">
+        <div dataset-directive
+        index="$index"
+        length="ctrller.getSizeOf(ctrller.datasets)"
+        element="ctrller.datasets[ctrller.getKeys(ctrller.datasets)[$index]]"
+        style="position:absolute;left:0%;width:16%;height:100%"> </div>
 
-          <h4>
-            <b>Name</b>
-          </h4>
-          <h6 style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"
-              placeholder="{{x.name}}"
-              uib-tooltip="{{x.name}}"
-              tooltip-placement="auto"
-              tooltip-trigger="mouseenter"
-              tooltip-enable="true"
-              viewport="#datasets">
-            {{ x.name }}
-          </h6>
+        <div dataset-directive
+        index="ctrller.getIndex($index + 1, ctrller.getSizeOf(ctrller.datasets))"
+        length="ctrller.getSizeOf(ctrller.datasets)"
+        element="ctrller.datasets[ctrller.getKeys(ctrller.datasets)[ctrller.getIndex($index + 1, ctrller.getSizeOf(ctrller.datasets))]]"
+        style="position:absolute;left:16.66%;width:16%;height:100%"> </div>
 
-          <h5>
-            <b>Type</b>
-          </h5>
-          <h6 style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"
-              placeholder="{{x.type}}"
-              uib-tooltip="{{x.type}}"
-              tooltip-placement="auto"
-              tooltip-trigger="mouseenter"
-              tooltip-enable="true"
-              viewport="#datasets">
-            {{ x.type }}
-          </h6>
+        <div dataset-directive
+        index="ctrller.getIndex($index + 2, ctrller.getSizeOf(ctrller.datasets))"
+        length="ctrller.getSizeOf(ctrller.datasets)"
+        element="ctrller.datasets[ctrller.getKeys(ctrller.datasets)[ctrller.getIndex($index + 2, ctrller.getSizeOf(ctrller.datasets))]]"
+        style="position:absolute;left:33.33%;width:16%;height:100%"> </div>
 
-          <h5>
-            <b>Description</b>
-          </h5>
-          <h6 style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"
-              placeholder="{{x.description}}"
-              uib-tooltip="{{x.description}}"
-              tooltip-placement="auto"
-              tooltip-trigger="mouseenter"
-              tooltip-enable="true"
-              viewport="#datasets">
-            {{ x.description }}
-          </h6>
+        <div dataset-directive
+        index="ctrller.getIndex($index + 3, ctrller.getSizeOf(ctrller.datasets))"
+        length="ctrller.getSizeOf(ctrller.datasets)"
+        element="ctrller.datasets[ctrller.getKeys(ctrller.datasets)[ctrller.getIndex($index + 3, ctrller.getSizeOf(ctrller.datasets))]]"
+        style="position:absolute;left:50%;width:16%;height:100%"> </div>
 
-          <h5>
-            <b>Creation</b>
-          </h5>
-          <h6 style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"
-              placeholder="{{x.dates.creation}}"
-              uib-tooltip="{{x.dates.creation}}"
-              tooltip-placement="auto"
-              tooltip-trigger="mouseenter"
-              tooltip-enable="true"
-              viewport="#datasets">
-            {{ x.dates.creation | date : format : timezone }}
-          </h6>
+        <div dataset-directive
+        index="ctrller.getIndex($index + 4, ctrller.getSizeOf(ctrller.datasets))"
+        length="ctrller.getSizeOf(ctrller.datasets)"
+        element="ctrller.datasets[ctrller.getKeys(ctrller.datasets)[ctrller.getIndex($index + 4, ctrller.getSizeOf(ctrller.datasets))]]"
+        style="position:absolute;left:66.66%;width:16%;height:100%"> </div>
 
-          <h5 ng-if="x.dates.creation != x.dates.modification">
-            <b>Modification</b>
-          </h5>
-          <h6 ng-if="x.dates.creation != x.dates.modification"
-              style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"
-              placeholder="{{x.dates.modification}}"
-              uib-tooltip="{{x.dates.modification}}"
-              tooltip-placement="auto"
-              tooltip-trigger="mouseenter"
-              tooltip-enable="true"
-              viewport="#datasets">
-            {{ x.dates.modification | date : format : timezone }}
-          </h6>
+        <div dataset-directive
+        index="ctrller.getIndex($index + 5, ctrller.getSizeOf(ctrller.datasets))"
+        length="ctrller.getSizeOf(ctrller.datasets)"
+        element="ctrller.datasets[ctrller.getKeys(ctrller.datasets)[ctrller.getIndex($index + 5, ctrller.getSizeOf(ctrller.datasets))]]"
+        style="position:absolute;left:83.33%;width:16%;height:100%"> </div>
 
-          <h6 style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
-              <a href="{{x.datalink}}">
-                More Info
-              </a>
-          </h6>
-          <h6 style="text-align: right;">{{$index}}</h6>
+      </div>
+      <div uib-slide ng-if="ctrller.getSizeOf(ctrller.datasets) < 7" active="active" index="0" template-url="view/template/slide-template.html" style="height:100%">
+        <div dataset-directive
+        ng-if="ctrller.getSizeOf(ctrller.datasets) > 0"
+        index="0"
+        length="ctrller.getSizeOf(ctrller.datasets)"
+        element="ctrller.datasets[ctrller.getKeys(ctrller.datasets)[0]]"
+        style="position:absolute;left:0%;width:16%;height:100%"> </div>
 
-        </div>
+        <div dataset-directive
+        ng-if="ctrller.getSizeOf(ctrller.datasets) > 1"
+        index="1"
+        length="ctrller.getSizeOf(ctrller.datasets)"
+        element="ctrller.datasets[ctrller.getKeys(ctrller.datasets)[1]]"
+        style="position:absolute;left:16.66%;width:16%;height:100%"> </div>
+
+        <div dataset-directive
+        ng-if="ctrller.getSizeOf(ctrller.datasets) > 2"
+        index="2"
+        length="ctrller.getSizeOf(ctrller.datasets)"
+        element="ctrller.datasets[ctrller.getKeys(ctrller.datasets)[2]]"
+        style="position:absolute;left:33.33%;width:16%;height:100%"> </div>
+
+        <div dataset-directive
+        ng-if="ctrller.getSizeOf(ctrller.datasets) > 3"
+        index="3"
+        length="ctrller.getSizeOf(ctrller.datasets)"
+        element="ctrller.datasets[ctrller.getKeys(ctrller.datasets)[3]]"
+        style="position:absolute;left:50%;width:16%;height:100%"> </div>
+
+        <div dataset-directive
+        ng-if="ctrller.getSizeOf(ctrller.datasets) > 4"
+        index="4"
+        length="ctrller.getSizeOf(ctrller.datasets)"
+        element="ctrller.datasets[ctrller.getKeys(ctrller.datasets)[4]]"
+        style="position:absolute;left:66.66%;width:16%;height:100%"> </div>
+
+        <div dataset-directive
+        ng-if="ctrller.getSizeOf(ctrller.datasets) > 5"
+        index="5"
+        length="ctrller.getSizeOf(ctrller.datasets)"
+        element="ctrller.datasets[ctrller.getKeys(ctrller.datasets)[5]]"
+        style="position:absolute;left:83.33%;width:16%;height:100%"> </div>
+
+      </div>
+
     </div>
-</div>
+  </div>
 
 <div ng-if="!ctrller.isObjectEmpty(ctrller.metrics)">
   <!-- <h2 class="center-content"> <b>Metrics</b></h2> -->
@@ -117,14 +114,14 @@
       <tr ng-repeat="x in ctrller.metrics">
         <td >
           <div class="" placeholder="{{x.title}}" uib-tooltip="{{x.title}}" tooltip-placement="auto" tooltip-trigger="mouseenter" tooltip-enable="true" >
-        {{x.title}}
-      </div>
-    </td>
+            {{x.title}}
+          </div>
+        </td>
         <td  colspan="2">
           <div class="" placeholder="{{x.description}}" uib-tooltip="{{x.description}}" tooltip-placement="auto" tooltip-trigger="mouseenter" tooltip-enable="true" >
-        {{x.description}}
-      </div>
-    </td>
+            {{x.description}}
+          </div>
+        </td>
         <td>
           <a href="{{z.uri}}" ng-repeat="z in x.links"> {{z.label}} </a>
         </td>
@@ -168,21 +165,20 @@
           {{ctrller.datasets[x.input_dataset_id].name}}
         </div>
 
-        </td>
-        <td >
-          <div placeholder="{{ctrller.tools[x.tool_id].name}}: {{ctrller.tools[x.tool_id].description}}"
-          uib-tooltip="{{ctrller.tools[x.tool_id].name}}: {{ctrller.tools[x.tool_id].description}}"
-          tooltip-placement="auto"
-          tooltip-trigger="mouseenter"
-          tooltip-enable="true" >
-          {{ctrller.tools[x.tool_id].name}}
-        </div>
+      </td>
+      <td >
+        <div placeholder="{{ctrller.tools[x.tool_id].name}}: {{ctrller.tools[x.tool_id].description}}"
+        uib-tooltip="{{ctrller.tools[x.tool_id].name}}: {{ctrller.tools[x.tool_id].description}}"
+        tooltip-placement="auto"
+        tooltip-trigger="mouseenter"
+        tooltip-enable="true" >
+        {{ctrller.tools[x.tool_id].name}}
+      </div>
 
-        </td>
-      </tr>
-    </tbody>
-  </table>
+    </td>
+  </tr>
+</tbody>
+</table>
 </div>
-
 
 </div>

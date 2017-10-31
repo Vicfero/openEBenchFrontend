@@ -12,6 +12,9 @@
 
 		var vm = this;
 
+		if ($window.innerWidth > 700) vm.slickPanels = 6;
+		else vm.slickPanels = 1;
+
 		vm.community = {}
 		vm.community.name = $routeParams.community;
 
@@ -25,7 +28,6 @@
 		{
 			var url = "https://elixir.bsc.es/benchmarking/Community/" + $routeParams.community + ".json"
 			dataservice.getData(url).then(function (response){
-				// console.log(response);
 				vm.community.description = response.data.description;
 				if ("Dataset" in response.data)
 				{
@@ -47,7 +49,6 @@
 			datasets.forEach(function(value, index){
 				var url = "https://elixir.bsc.es/benchmarking/Dataset/" + value._id + ".json"
 				dataservice.getData(url).then(function (response){
-					console.log(response);
 					vm.datasets[response.data._id] = response.data;
 				});
 			})
@@ -89,7 +90,6 @@
 			testevents.forEach(function(value, index){
 				var url = "https://elixir.bsc.es/benchmarking/TestEvent/" + value._id + ".json"
 				dataservice.getData(url).then(function (response){
-					// console.log(response);
 					vm.testevents[response.data._id] = response.data;
 					vm.retrieveTool(response.data.tool_id);
 				});
@@ -110,11 +110,9 @@
 		vm.retrieveTool = function(tool)
 		{
 			if (tool in vm.tools) return false;
-			// console.log(tool);
 			vm.tools[tool] = "NotAvailable"
 			var url = "https://elixir.bsc.es/benchmarking/Tool/" + tool + ".json"
 			dataservice.getData(url).then(function (response){
-				// console.log(response);
 				vm.tools[response.data._id] = response.data;
 			});
 		}
@@ -131,6 +129,23 @@
 		{
 			console.log(number);
 			return new Array(number);
+		}
+
+		vm.getKeys = function(object)
+		{
+			return Object.keys(object)
+		}
+
+		vm.getIndex = function(index, max)
+		{
+			if ((index) >= max){
+			// console.log(index, max - index);
+				return index - max;
+			}
+			else {
+				// console.log(index, index);
+				return index;
+			}
 		}
 	};
 
@@ -151,7 +166,16 @@
 	// Controller creation inside the module elixibilitasApp
 	angular
 	.module('elixibilitasApp')
-	.controller("communityController", communityController);
-
+	.controller("communityController", communityController)
+	.directive('datasetDirective', function() {
+	  return {
+			scope: {
+			      element: '=',
+						index: '=',
+						length: '='
+			    },
+	    templateUrl: 'view/template/dataset-template.html'
+	  };
+	});
 
 })();

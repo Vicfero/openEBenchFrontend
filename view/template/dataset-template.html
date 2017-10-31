@@ -1,0 +1,43 @@
+<div class="jumbotron" style="width:100%; height:100%; padding:1%;margin: 0 auto;" ng-if="element">
+  <h4 class="center-content">
+    <b>Name</b>
+  </h4>
+  <h6 class="center-content" style=" word-wrap: break-word;" placeholder="{{x.name}}" uib-tooltip="{{x.name}}" tooltip-placement="auto" tooltip-trigger="mouseenter" tooltip-enable="true" viewport="#container">
+    {{ element.name }}
+  </h6>
+
+  <h5 class="center-content">
+    <b>Type</b>
+  </h5>
+  <h6 class="center-content" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;" placeholder="{{x.type}}" uib-tooltip="{{x.type}}" tooltip-placement="auto" tooltip-trigger="mouseenter" tooltip-enable="true" viewport="#container">
+    {{ element.type }}
+  </h6>
+
+  <h5 class="center-content">
+    <b>Description</b>
+  </h5>
+  <h6 class="center-content" style="overflow: hidden; word-wrap: break-word; text-overflow: ellipsis;" placeholder="{{x.description}}" uib-tooltip="{{x.description}}" tooltip-placement="auto" tooltip-trigger="mouseenter" tooltip-enable="true" viewport="#container">
+    {{ element.description }}
+  </h6>
+
+  <h5 class="center-content">
+    <b>Creation</b>
+  </h5>
+  <h6 class="center-content" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;" placeholder="{{x.dates.creation}}" uib-tooltip="{{x.dates.creation}}" tooltip-placement="auto" tooltip-trigger="mouseenter" tooltip-enable="true" viewport="#container">
+    {{ element.dates.creation | date : format : timezone }}
+  </h6>
+
+  <h5 ng-if="x.dates.creation != x.dates.modification" class="center-content">
+    <b>Modification</b>
+  </h5>
+  <h6 class="center-content" ng-if="x.dates.creation != x.dates.modification" style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;" placeholder="{{x.dates.modification}}" uib-tooltip="{{x.dates.modification}}" tooltip-placement="auto" tooltip-trigger="mouseenter" tooltip-enable="true" viewport="#container">
+    {{ element.dates.modification | date : format : timezone }}
+  </h6>
+
+  <h6 style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;" class="center-content">
+    <a href="{{x.datalink}}" class="center-content">
+      More Info
+    </a>
+  </h6>
+  <h6 style="position: absolute; bottom: 0; right:0">{{index + 1}}/{{length}}  </h6>
+</div>
