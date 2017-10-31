@@ -13,7 +13,7 @@
             'chart.js',
             'angularUtils.directives.dirPagination',
             'ngSanitize',
-            // 'ui.bootstrap',
+            'ui.bootstrap',
             'ngRoute'
         ]);
 })();
