@@ -8,7 +8,7 @@
 	@version 1.0
 	@author Victor Fernández Rodríguez
 	*/
-	function communityController ($scope, $http, $window, $rootScope, $anchorScroll, $location, $q , $routeParams, dataservice){
+	function communityController ($scope, $http, $window, $rootScope, $anchorScroll, $location, $q , $routeParams, $swipe, dataservice){
 
 		var vm = this;
 
@@ -165,6 +165,7 @@
 		'$location',
 		'$q',
 		"$routeParams",
+		"$swipe",
 		'dataservice'
 	]
 

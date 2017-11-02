@@ -14,6 +14,7 @@
             'angularUtils.directives.dirPagination',
             'ngSanitize',
             'ui.bootstrap',
-            'ngRoute'
+            'ngRoute',
+            'ngTouch'
         ]);
 })();
