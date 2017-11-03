@@ -1,0 +1,13 @@
+.dataset-show-hide.ng-enter,
+.dataset-show-hide.ng-leave,
+.dataset-show-hide {
+  transition: all linear 0.8s;
+}
+
+.dataset-show-hide.ng-hide {
+  opacity: 0;
+}
+
+.dataset-show-hide.ng-show {
+  opacity: 1;
+}

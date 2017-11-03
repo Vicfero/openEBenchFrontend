@@ -8,136 +8,129 @@
 	@version 1.0
 	@author Victor Fernández Rodríguez
 	*/
-	function communityController ($scope, $http, $window, $rootScope, $anchorScroll, $location, $q , $routeParams, $swipe, dataservice){
+	function communityController ($scope, $http, $window, $rootScope, $anchorScroll, $location, $q , $routeParams, $swipe, dataservice) {
 
-		var vm = this;
+		var self = this;
 
-		if ($window.innerWidth > 700) vm.slickPanels = 6;
-		else vm.slickPanels = 1;
+		// Constructor and initializer
+		self.init 								= function() {
+			self.community = {}
+			self.community.name = $routeParams.community;
 
-		vm.community = {}
-		vm.community.name = $routeParams.community;
+			self.data = {}
+			self.datasets = {}
+			self.metrics = {}
+			self.testevents = {}
+			self.tools = {}
 
-		vm.data = {}
-		vm.datasets = {}
-		vm.metrics = {}
-		vm.testevents = {}
-		vm.tools = {}
-
-		vm.retrieveInfo = function()
-		{
-			var url = "https://elixir.bsc.es/benchmarking/Community/" + $routeParams.community + ".json"
-			dataservice.getData(url).then(function (response){
-				vm.community.description = response.data.description;
-				if ("Dataset" in response.data)
-				{
-					vm.retrieveDatasets(response.data.Dataset);
-				}
-				if ("Metrics" in response.data)
-				{
-					vm.retrieveMetrics(response.data.Metrics);
-				}
-				if ("TestEvent" in response.data)
-				{
-					vm.retrieveTestEvents(response.data.TestEvent);
-				}
-			});
+			self.retrieveInfo();
 		}();
 
-		vm.retrieveDatasets = function(datasets)
-		{
-			datasets.forEach(function(value, index){
+		// Main retrieve function
+		self.retrieveInfo 				= function() {
+			var url = "https://elixir.bsc.es/benchmarking/Community/" + $routeParams.community + ".json"
+			dataservice.getData(url).then(function (response){
+					self.community.description = response.data.description;
+					if ("Dataset" in response.data)
+					{
+						self.retrieveDatasets(response.data.Dataset);
+					}
+					if ("Metrics" in response.data)
+					{
+						self.retrieveMetrics(response.data.Metrics);
+					}
+					if ("TestEvent" in response.data)
+					{
+						self.retrieveTestEvents(response.data.TestEvent);
+					}
+			});
+		};
+
+		// Secondary retrieve functions
+		self.retrieveDatasets 		= function(datasets) {
+			datasets.forEach( function(value, index){
 				var url = "https://elixir.bsc.es/benchmarking/Dataset/" + value._id + ".json"
 				dataservice.getData(url).then(function (response){
-					vm.datasets[response.data._id] = response.data;
+					self.datasets[response.data._id] = response.data;
 				});
 			})
 		};
 
-		vm.retrieveDataset = function(dataset_id)
-		{
-			if (dataset_id in vm.datasets) return false;
-			vm.datasets[dataset_id] = "NotAvailable"
+		self.retrieveDataset 			= function(dataset_id) {
+			if (dataset_id in self.datasets) return false;
+			self.datasets[dataset_id] = "NotAvailable"
 			var url = "https://elixir.bsc.es/benchmarking/Dataset/" + dataset_id + ".json"
 			dataservice.getData(url).then(function (response){
-				vm.datasets[response.data._id] = response.data;
+				self.datasets[response.data._id] = response.data;
 			});
 		}
 
-
-		vm.retrieveMetrics = function(metrics)
-		{
+		self.retrieveMetrics 			= function(metrics) {
 			metrics.forEach(function(value, index){
 				var url = "https://elixir.bsc.es/benchmarking/Metrics/" + value._id + ".json"
 				dataservice.getData(url).then(function (response){
-					vm.metrics[response.data._id] = response.data;
+					self.metrics[response.data._id] = response.data;
 				});
 			})
 		};
 
-		vm.retrieveMetric = function(metric_id)
-		{
-			if (metric_id in vm.metrics) return false;
-			vm.metrics[metric_id] = "NotAvailable"
+		self.retrieveMetric 			= function(metric_id) {
+			if (metric_id in self.metrics) return false;
+			self.metrics[metric_id] = "NotAvailable"
 			var url = "https://elixir.bsc.es/benchmarking/Metrics/" + metric_id + ".json"
 			dataservice.getData(url).then(function (response){
-				vm.metrics[response.data._id] = response.data;
+				self.metrics[response.data._id] = response.data;
 			});
 		}
 
-		vm.retrieveTestEvents = function(testevents)
-		{
+		self.retrieveTestEvents 	= function(testevents) {
 			testevents.forEach(function(value, index){
 				var url = "https://elixir.bsc.es/benchmarking/TestEvent/" + value._id + ".json"
 				dataservice.getData(url).then(function (response){
-					vm.testevents[response.data._id] = response.data;
-					vm.retrieveTool(response.data.tool_id);
+					self.testevents[response.data._id] = response.data;
+					self.retrieveTool(response.data.tool_id);
 				});
 			})
 		};
 
-		vm.retrieveTestEvent = function(testevent_id)
-		{
-			if (testevent_id in vm.testevents) return false;
-			vm.testevents[testevent_id] = "NotAvailable"
+		self.retrieveTestEvent 		= function(testevent_id) {
+			if (testevent_id in self.testevents) return false;
+			self.testevents[testevent_id] = "NotAvailable"
 			var url = "https://elixir.bsc.es/benchmarking/TestEvent/" + metric_id + ".json"
 			dataservice.getData(url).then(function (response){
-				vm.testevents[response.data._id] = response.data;
-				vm.retrieveTool(response.data.tool_id);
+				self.testevents[response.data._id] = response.data;
+				self.retrieveTool(response.data.tool_id);
 			});
 		}
 
-		vm.retrieveTool = function(tool)
-		{
-			if (tool in vm.tools) return false;
-			vm.tools[tool] = "NotAvailable"
+		self.retrieveTool 				= function(tool) {
+			if (tool in self.tools) return false;
+			self.tools[tool] = "NotAvailable"
 			var url = "https://elixir.bsc.es/benchmarking/Tool/" + tool + ".json"
 			dataservice.getData(url).then(function (response){
-				vm.tools[response.data._id] = response.data;
+				self.tools[response.data._id] = response.data;
 			});
 		}
 
-		vm.isObjectEmpty = function(card){
+		// Auxiliary functions
+		self.isObjectEmpty 				= function(card) {
 			return Object.keys(card).length === 0;
 		}
 
-		vm.getSizeOf = function(object){
+		self.getSizeOf 						= function(object) {
 			return Object.keys(object).length;
 		}
 
-		vm.getArrayFromNumber = function(number)
-		{
+		self.getArrayFromNumber 	= function(number) {
 			console.log(number);
 			return new Array(number);
 		}
 
-		vm.getKeys = function(object)
-		{
+		self.getKeys 							= function(object) {
 			return Object.keys(object)
 		}
 
-		vm.getIndex = function(index, max)
-		{
+		self.getIndex 						= function(index, max) {
 			if ((index) >= max){
 			// console.log(index, max - index);
 				return index - max;
@@ -148,13 +141,12 @@
 			}
 		}
 
-		vm.isMobile = function()
-		{
+		self.isMobile 						= function() {
 			return $window.innerWidth < 700;
 		}
 	};
 
-
+	// Dependecy injection
 	communityController.$inject =
 	[
 		'$scope',
@@ -173,6 +165,9 @@
 	angular
 	.module('elixibilitasApp')
 	.controller("communityController", communityController)
+
+
+	// Directives
 	.directive('datasetDirective', function() {
 	  return {
 			scope: {
@@ -182,6 +177,14 @@
 			    },
 	    templateUrl: 'view/template/dataset-template.html'
 	  };
-	});
+	})
+
+
+
+
+
+
+
+;
 
 })();

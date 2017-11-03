@@ -1,12 +1,12 @@
 <div ng-controller="communityController as ctrller" class="container-fluid" id="container">
   <div >
     <!-- <div dataset-directive></div> -->
-    <h1 class="center-content" > {{ctrller.community.name}} </h1>
-    <h3 class="center-content" > {{ctrller.community.description}}</h3>
+    <h1 class="center-content" class="dataset-show-hide" ng-show="ctrller.community.name"> {{ctrller.community.name}} </h1>
+    <h3 class="center-content" class="dataset-show-hide" ng-show="ctrller.community.description"> {{ctrller.community.description}}</h3>
 
   </div>
 
-  <div ng-if="!ctrller.isObjectEmpty(ctrller.datasets)" >
+  <div ng-show="!ctrller.isObjectEmpty(ctrller.datasets)" class="dataset-show-hide">
     <h2 class="center-content">Datasets</h2>
     <!-- Mobile Carousel -->
     <div uib-carousel active="active" interval="5000" no-wrap="noWrapSlides" style="height:335px; width:90%;margin: 0 auto;" template-url="view/template/carousel-template.html" ng-if="ctrller.isMobile()">
